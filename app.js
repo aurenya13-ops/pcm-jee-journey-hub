@@ -1,4 +1,4 @@
-// Theme Management
+// ==================== THEME MANAGEMENT ====================
 const themes = [
   { name: 'Cosmic Blue', primary: '#667eea', secondary: '#764ba2', accent: '#f093fb', bg1: '#0f0c29', bg2: '#302b63', bg3: '#24243e' },
   { name: 'Sunset Vibes', primary: '#f857a6', secondary: '#ff5858', accent: '#ffd89b', bg1: '#1a0a2e', bg2: '#3d2c5e', bg3: '#5a3d7a' },
@@ -40,663 +40,704 @@ function updateThemeCountdown() {
 applyTheme(themes[currentThemeIndex]);
 setInterval(updateThemeCountdown, 1000);
 
-// Navigation
-function showSection(sectionId) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById(sectionId).classList.add('active');
-  event.target.classList.add('active');
+// ==================== NAVIGATION ====================
+const mainContent = document.getElementById('main-content');
+const navBtns = document.querySelectorAll('.nav-btn');
+
+navBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const page = btn.dataset.page;
+    navBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    loadPage(page);
+  });
+});
+
+function loadPage(page) {
+  mainContent.style.opacity = '0';
+  setTimeout(() => {
+    switch(page) {
+      case 'home': renderHome(); break;
+      case 'dashboard': renderDashboard(); break;
+      case 'music': renderMusic(); break;
+      case 'physics': renderPhysics(); break;
+      case 'chemistry': renderChemistry(); break;
+      case 'maths': renderMaths(); break;
+      case 'tech': renderTech(); break;
+    }
+    mainContent.style.opacity = '1';
+  }, 200);
 }
 
-// Music Player
-const songs = [
-  { title: 'Pal Pal', artist: 'Talwinder, Afusic', duration: '3:45', category: 'hindi' },
-  { title: 'Paaro', artist: 'Shubh', duration: '3:20', category: 'hindi' },
-  { title: 'See You Again', artist: 'Wiz Khalifa ft. Charlie Puth', duration: '3:49', category: 'english' },
-  { title: 'Night Changes', artist: 'One Direction', duration: '3:46', category: 'english' },
-  { title: 'What Makes You Beautiful', artist: 'One Direction', duration: '3:19', category: 'english' },
-  { title: 'Tum Hi Ho', artist: 'Arijit Singh', duration: '4:22', category: 'hindi' },
-  { title: 'Kesariya', artist: 'Arijit Singh', duration: '4:28', category: 'hindi' },
-  { title: 'Perfect', artist: 'Ed Sheeran', duration: '4:23', category: 'english' },
-  { title: 'Shape of You', artist: 'Ed Sheeran', duration: '3:53', category: 'english' },
-  { title: 'Believer', artist: 'Imagine Dragons', duration: '3:24', category: 'motivation' },
-  { title: 'Unstoppable', artist: 'Sia', duration: '3:37', category: 'motivation' },
-  { title: 'Hall of Fame', artist: 'The Script ft. will.i.am', duration: '3:23', category: 'motivation' },
-  { title: 'Apna Time Aayega', artist: 'Ranveer Singh', duration: '3:01', category: 'motivation' },
-  { title: 'Zinda', artist: 'Siddharth Mahadevan', duration: '5:07', category: 'motivation' },
-  { title: 'Channa Mereya', artist: 'Arijit Singh', duration: '4:49', category: 'hindi' },
-  { title: 'Raabta', artist: 'Arijit Singh', duration: '4:03', category: 'hindi' },
-  { title: 'Someone Like You', artist: 'Adele', duration: '4:45', category: 'english' },
-  { title: 'Let Her Go', artist: 'Passenger', duration: '4:12', category: 'english' },
-  { title: 'Counting Stars', artist: 'OneRepublic', duration: '4:17', category: 'english' },
-  { title: 'Photograph', artist: 'Ed Sheeran', duration: '4:18', category: 'english' },
-  { title: 'Dil Diyan Gallan', artist: 'Atif Aslam', duration: '3:56', category: 'hindi' },
-  { title: 'Tera Ban Jaunga', artist: 'Akhil Sachdeva', duration: '3:56', category: 'hindi' },
-  { title: 'Memories', artist: 'Maroon 5', duration: '3:09', category: 'english' },
-  { title: 'Faded', artist: 'Alan Walker', duration: '3:32', category: 'english' },
-  { title: 'Closer', artist: 'The Chainsmokers', duration: '4:04', category: 'english' },
-  { title: 'Senorita', artist: 'Shawn Mendes', duration: '3:11', category: 'english' },
-  { title: 'Blinding Lights', artist: 'The Weeknd', duration: '3:20', category: 'english' },
-  { title: 'Levitating', artist: 'Dua Lipa', duration: '3:23', category: 'english' },
-  { title: 'Peaches', artist: 'Justin Bieber', duration: '3:18', category: 'english' },
-  { title: 'Stay', artist: 'The Kid LAROI', duration: '2:21', category: 'english' },
-  { title: 'Kahani Suno', artist: 'Kaifi Khalil', duration: '4:35', category: 'hindi' },
-  { title: 'Excuses', artist: 'AP Dhillon', duration: '2:54', category: 'hindi' },
-  { title: 'Brown Munde', artist: 'AP Dhillon', duration: '3:08', category: 'hindi' },
-  { title: 'Baller', artist: 'Shubh', duration: '2:47', category: 'hindi' },
-  { title: 'No Love', artist: 'Shubh', duration: '2:39', category: 'hindi' },
-  { title: 'Levels', artist: 'Sidhu Moose Wala', duration: '3:17', category: 'hindi' },
-  { title: 'Goat', artist: 'Sidhu Moose Wala', duration: '3:09', category: 'hindi' },
-  { title: 'Titanium', artist: 'David Guetta ft. Sia', duration: '4:05', category: 'motivation' },
-  { title: 'Stronger', artist: 'Kanye West', duration: '5:12', category: 'motivation' },
-  { title: 'Eye of the Tiger', artist: 'Survivor', duration: '4:04', category: 'motivation' },
-  { title: 'Lose Yourself', artist: 'Eminem', duration: '5:26', category: 'motivation' },
-  { title: "Can't Hold Us", artist: 'Macklemore', duration: '4:18', category: 'motivation' },
-  { title: 'Thunder', artist: 'Imagine Dragons', duration: '3:07', category: 'motivation' },
-  { title: 'Radioactive', artist: 'Imagine Dragons', duration: '3:06', category: 'motivation' },
-  { title: 'Warriors', artist: 'Imagine Dragons', duration: '2:50', category: 'motivation' },
-  { title: 'The Nights', artist: 'Avicii', duration: '2:56', category: 'motivation' },
-  { title: 'Wake Me Up', artist: 'Avicii', duration: '4:09', category: 'motivation' },
-  { title: 'Jai Ho', artist: 'A.R. Rahman', duration: '5:25', category: 'motivation' },
-  { title: 'Chak De India', artist: 'Sukhwinder Singh', duration: '4:15', category: 'motivation' }
+// ==================== DATA ====================
+const musicData = [
+  { id: 1, title: 'Pal Pal', artist: 'Talwinder, Afusic', videoId: 'Uj3_xjoTfLQ', category: 'hindi' },
+  { id: 2, title: 'Paaro', artist: 'Shubh', videoId: 'Uj3_xjoTfLQ', category: 'hindi' },
+  { id: 3, title: 'See You Again', artist: 'Wiz Khalifa ft. Charlie Puth', videoId: 'RgKAFK5djSk', category: 'english' },
+  { id: 4, title: 'Night Changes', artist: 'One Direction', videoId: 'syFZfO_wfMQ', category: 'english' },
+  { id: 5, title: 'Believer', artist: 'Imagine Dragons', videoId: '7wtfhZwyrcc', category: 'motivation' },
+  { id: 6, title: 'Unstoppable', artist: 'Sia', videoId: 'cxorfhKPRJI', category: 'motivation' },
+  { id: 7, title: 'Kesariya', artist: 'Arijit Singh', videoId: 'Uj3_xjoTfLQ', category: 'hindi' },
+  { id: 8, title: 'Perfect', artist: 'Ed Sheeran', videoId: '2Vv-BfVoq4g', category: 'english' },
+  { id: 9, title: 'Apna Time Aayega', artist: 'Ranveer Singh', videoId: 'jFGKtPODZ6k', category: 'motivation' },
+  { id: 10, title: 'Channa Mereya', artist: 'Arijit Singh', videoId: 'bzSTpdcs-EI', category: 'hindi' }
 ];
 
-let currentSongIndex = 0;
-let isPlaying = false;
-let currentFilter = 'all';
-let progressInterval;
+const physicsData = [
+  {
+    id: 1,
+    title: 'Units & Measurements',
+    class: 11,
+    description: 'Master SI units, dimensional analysis, and measurement techniques',
+    videoId: 'Uj3_xjoTfLQ',
+    notes: [
+      'SI Units: 7 fundamental units (m, kg, s, A, K, mol, cd)',
+      'Dimensional Formula: [M^a L^b T^c]',
+      'Significant Figures: Rules for counting and calculations',
+      'Error Analysis: Absolute, relative, and percentage errors'
+    ],
+    quiz: [
+      {
+        question: 'What is the dimensional formula of Force?',
+        options: ['[MLT⁻²]', '[ML²T⁻²]', '[MLT⁻¹]', '[ML²T⁻¹]'],
+        correct: 0,
+        explanation: 'Force = mass × acceleration = M × LT⁻² = [MLT⁻²]'
+      },
+      {
+        question: 'Which of these is a fundamental unit?',
+        options: ['Newton', 'Joule', 'Kilogram', 'Watt'],
+        correct: 2,
+        explanation: 'Kilogram is a fundamental unit of mass in SI system'
+      },
+      {
+        question: 'If length = 5.00 cm and breadth = 2.0 cm, what is the area with correct significant figures?',
+        options: ['10 cm²', '10.0 cm²', '10.00 cm²', '1.0 × 10¹ cm²'],
+        correct: 3,
+        explanation: 'Result should have 2 significant figures (least in given data): 5.00 × 2.0 = 10 = 1.0 × 10¹ cm²'
+      },
+      {
+        question: 'What is the SI unit of luminous intensity?',
+        options: ['Lumen', 'Candela', 'Lux', 'Watt'],
+        correct: 1,
+        explanation: 'Candela (cd) is the SI unit of luminous intensity'
+      },
+      {
+        question: 'Dimensional formula of energy is:',
+        options: ['[ML²T⁻²]', '[MLT⁻²]', '[ML²T⁻¹]', '[MLT⁻¹]'],
+        correct: 0,
+        explanation: 'Energy = Force × Distance = [MLT⁻²][L] = [ML²T⁻²]'
+      }
+    ]
+  },
+  {
+    id: 2,
+    title: 'Motion in a Straight Line',
+    class: 11,
+    description: 'Understand kinematics, velocity, acceleration, and equations of motion',
+    videoId: 'Uj3_xjoTfLQ',
+    notes: [
+      'Displacement: Shortest distance between initial and final position',
+      'Velocity: Rate of change of displacement (vector)',
+      'Acceleration: Rate of change of velocity',
+      'Equations: v = u + at, s = ut + ½at², v² = u² + 2as'
+    ],
+    quiz: [
+      {
+        question: 'A car accelerates from rest at 2 m/s². What is its velocity after 5 seconds?',
+        options: ['5 m/s', '10 m/s', '15 m/s', '20 m/s'],
+        correct: 1,
+        explanation: 'v = u + at = 0 + 2×5 = 10 m/s'
+      },
+      {
+        question: 'Which equation relates velocity, acceleration, and displacement?',
+        options: ['v = u + at', 's = ut + ½at²', 'v² = u² + 2as', 's = (u+v)t/2'],
+        correct: 2,
+        explanation: 'v² = u² + 2as is the equation that relates velocity, acceleration, and displacement'
+      },
+      {
+        question: 'A ball is thrown upward with velocity 20 m/s. What is the maximum height? (g = 10 m/s²)',
+        options: ['10 m', '20 m', '30 m', '40 m'],
+        correct: 1,
+        explanation: 'At max height, v = 0. Using v² = u² - 2gh: 0 = 400 - 20h, h = 20 m'
+      },
+      {
+        question: 'What is the nature of displacement-time graph for uniform motion?',
+        options: ['Straight line', 'Parabola', 'Hyperbola', 'Circle'],
+        correct: 0,
+        explanation: 'For uniform motion, displacement-time graph is a straight line'
+      },
+      {
+        question: 'If a body starts from rest and moves with constant acceleration, distance covered in nth second is:',
+        options: ['u + a(2n-1)/2', 'u + an', 'a(2n-1)/2', 'an²/2'],
+        correct: 2,
+        explanation: 'Distance in nth second = u + a(2n-1)/2. For u=0, it becomes a(2n-1)/2'
+      }
+    ]
+  },
+  {
+    id: 3,
+    title: 'Electric Charges and Fields',
+    class: 12,
+    description: 'Understand electrostatics, Coulomb\'s law, and electric fields',
+    videoId: 'Uj3_xjoTfLQ',
+    notes: [
+      'Coulomb\'s Law: F = kq₁q₂/r²',
+      'Electric Field: E = F/q (N/C or V/m)',
+      'Gauss\'s Law: Φ = q/ε₀',
+      'Electric Potential: V = kq/r'
+    ],
+    quiz: [
+      {
+        question: 'What is the SI unit of electric field?',
+        options: ['N/C', 'C/N', 'V/m', 'Both A and C'],
+        correct: 3,
+        explanation: 'Electric field can be expressed as N/C or V/m, both are equivalent'
+      },
+      {
+        question: 'Two charges +q and -q separated by distance d form a:',
+        options: ['Monopole', 'Dipole', 'Quadrupole', 'Octupole'],
+        correct: 1,
+        explanation: 'Two equal and opposite charges form an electric dipole'
+      },
+      {
+        question: 'Electric field inside a conductor is:',
+        options: ['Maximum', 'Minimum', 'Zero', 'Infinite'],
+        correct: 2,
+        explanation: 'In electrostatic equilibrium, electric field inside a conductor is zero'
+      },
+      {
+        question: 'Value of permittivity of free space (ε₀) is approximately:',
+        options: ['8.85 × 10⁻¹² C²/Nm²', '9 × 10⁹ Nm²/C²', '1.6 × 10⁻¹⁹ C', '6.67 × 10⁻¹¹ Nm²/kg²'],
+        correct: 0,
+        explanation: 'ε₀ = 8.85 × 10⁻¹² C²/Nm² is the permittivity of free space'
+      },
+      {
+        question: 'Electric field lines never:',
+        options: ['Start from positive charge', 'End at negative charge', 'Intersect each other', 'Form closed loops'],
+        correct: 2,
+        explanation: 'Electric field lines never intersect because field has unique direction at each point'
+      }
+    ]
+  }
+];
 
-function renderPlaylist(filter = 'all') {
-  const playlistEl = document.getElementById('playlist');
-  const filteredSongs = filter === 'all' ? songs : songs.filter(s => s.category === filter);
+const chemistryData = [
+  {
+    id: 1,
+    title: 'Atomic Structure',
+    class: 11,
+    description: 'Explore atoms, quantum numbers, and electronic configuration',
+    videoId: 'Uj3_xjoTfLQ',
+    notes: [
+      'Bohr Model: Electrons in fixed orbits, E = -13.6/n² eV',
+      'Quantum Numbers: n (principal), l (azimuthal), m (magnetic), s (spin)',
+      'Orbitals: s (2e⁻), p (6e⁻), d (10e⁻), f (14e⁻)',
+      'Aufbau Principle: Fill lower energy orbitals first'
+    ],
+    quiz: [
+      {
+        question: 'What is the maximum number of electrons in d orbital?',
+        options: ['2', '6', '10', '14'],
+        correct: 2,
+        explanation: 'd orbital has 5 sub-orbitals, each can hold 2 electrons: 5×2 = 10'
+      },
+      {
+        question: 'Which quantum number determines the shape of orbital?',
+        options: ['n', 'l', 'm', 's'],
+        correct: 1,
+        explanation: 'Azimuthal quantum number (l) determines the shape of orbital'
+      },
+      {
+        question: 'Electronic configuration of Cr (Z=24) is:',
+        options: ['[Ar] 3d⁴ 4s²', '[Ar] 3d⁵ 4s¹', '[Ar] 3d⁶ 4s⁰', '[Ar] 3d³ 4s³'],
+        correct: 1,
+        explanation: 'Cr has exceptional configuration [Ar] 3d⁵ 4s¹ for half-filled stability'
+      },
+      {
+        question: 'Energy of electron in nth orbit of hydrogen atom is:',
+        options: ['-13.6/n eV', '-13.6/n² eV', '-13.6n eV', '-13.6n² eV'],
+        correct: 1,
+        explanation: 'Energy in nth orbit: E = -13.6/n² eV'
+      },
+      {
+        question: 'Which orbital has dumbbell shape?',
+        options: ['s', 'p', 'd', 'f'],
+        correct: 1,
+        explanation: 'p orbital has dumbbell shape'
+      }
+    ]
+  }
+];
+
+const mathsData = [
+  {
+    id: 1,
+    title: 'Sets and Relations',
+    class: 11,
+    description: 'Master set theory, operations, and relations',
+    videoId: 'Uj3_xjoTfLQ',
+    notes: [
+      'Set Operations: Union (∪), Intersection (∩), Difference (-)',
+      'Venn Diagrams: Visual representation of sets',
+      'Relations: Reflexive, Symmetric, Transitive',
+      'Functions: One-one, Onto, Bijective'
+    ],
+    quiz: [
+      {
+        question: 'If A = {1,2,3} and B = {2,3,4}, what is A ∩ B?',
+        options: ['{1,2,3,4}', '{2,3}', '{1,4}', '{}'],
+        correct: 1,
+        explanation: 'Intersection contains common elements: {2,3}'
+      },
+      {
+        question: 'Which is a reflexive relation on set A?',
+        options: ['(a,a) for all a∈A', '(a,b) implies (b,a)', '(a,b) and (b,c) implies (a,c)', 'None'],
+        correct: 0,
+        explanation: 'Reflexive relation: every element is related to itself'
+      },
+      {
+        question: 'If n(A) = 5 and n(B) = 3, maximum value of n(A∪B) is:',
+        options: ['5', '8', '15', '3'],
+        correct: 1,
+        explanation: 'Maximum when A and B are disjoint: n(A∪B) = 5 + 3 = 8'
+      },
+      {
+        question: 'Empty set is denoted by:',
+        options: ['{0}', '{}', 'φ', 'Both B and C'],
+        correct: 3,
+        explanation: 'Empty set is denoted by {} or φ'
+      },
+      {
+        question: 'If A ⊆ B, then A ∩ B equals:',
+        options: ['A', 'B', 'A ∪ B', 'φ'],
+        correct: 0,
+        explanation: 'If A is subset of B, then A ∩ B = A'
+      }
+    ]
+  }
+];
+
+const techData = [
+  {
+    id: 1,
+    title: 'Introduction to Programming',
+    level: 'basics',
+    description: 'Learn basic programming concepts and logic',
+    videoId: 'Uj3_xjoTfLQ',
+    notes: [
+      'Variables: Store data values',
+      'Data Types: int, float, string, boolean',
+      'Operators: Arithmetic, Logical, Relational',
+      'Control Flow: if-else, loops (for, while)'
+    ],
+    quiz: [
+      {
+        question: 'Which data type stores decimal numbers?',
+        options: ['int', 'float', 'char', 'boolean'],
+        correct: 1,
+        explanation: 'float (floating-point) stores decimal numbers'
+      },
+      {
+        question: 'What does "if-else" statement do?',
+        options: ['Loop', 'Decision making', 'Function call', 'Variable declaration'],
+        correct: 1,
+        explanation: 'if-else is used for conditional decision making'
+      },
+      {
+        question: 'Which loop runs at least once?',
+        options: ['for', 'while', 'do-while', 'foreach'],
+        correct: 2,
+        explanation: 'do-while loop executes at least once before checking condition'
+      },
+      {
+        question: 'What is the output of: 5 % 2?',
+        options: ['2', '2.5', '1', '0'],
+        correct: 2,
+        explanation: '% is modulus operator, 5 % 2 gives remainder 1'
+      },
+      {
+        question: 'Which is a valid variable name?',
+        options: ['2variable', 'variable-name', 'variable_name', 'variable name'],
+        correct: 2,
+        explanation: 'variable_name is valid. Cannot start with number or contain spaces/hyphens'
+      }
+    ]
+  }
+];
+
+// ==================== RENDER FUNCTIONS ====================
+function renderHome() {
+  const progress = getProgress();
+  const totalCompleted = Object.values(progress).filter(v => v).length;
   
-  playlistEl.innerHTML = filteredSongs.map((song, index) => `
-    <div class="song-item" onclick="playSong(${songs.indexOf(song)})">
-      <div class="song-info">
-        <h4>${song.title}</h4>
-        <p>${song.artist}</p>
+  mainContent.innerHTML = `
+    <div style="text-align: center; padding: 3rem 0;">
+      <h1 style="font-size: 3.5rem; background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 1rem;">
+        Welcome to Your Journey
+      </h1>
+      <p style="font-size: 1.3rem; color: var(--text-secondary); margin-bottom: 3rem;">
+        Master PCM & Technology - One Level at a Time
+      </p>
+      
+      <div class="grid-4" style="max-width: 1000px; margin: 0 auto 3rem;">
+        <div class="stat-card">
+          <div class="stat-number">${totalCompleted}</div>
+          <div class="stat-label">Levels Completed</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">${musicData.length}</div>
+          <div class="stat-label">Songs</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">${physicsData.length + chemistryData.length + mathsData.length + techData.length}</div>
+          <div class="stat-label">Total Levels</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">∞</div>
+          <div class="stat-label">Possibilities</div>
+        </div>
       </div>
-      <div class="song-duration">${song.duration}</div>
+      
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <button class="btn btn-primary" onclick="loadPage('physics')">📚 Start Learning</button>
+        <button class="btn btn-secondary" onclick="loadPage('music')">🎵 Music</button>
+      </div>
+    </div>
+  `;
+}
+
+function renderDashboard() {
+  const progress = getProgress();
+  const physicsCompleted = physicsData.filter(l => progress[`physics-${l.id}`]).length;
+  const chemistryCompleted = chemistryData.filter(l => progress[`chemistry-${l.id}`]).length;
+  const mathsCompleted = mathsData.filter(l => progress[`maths-${l.id}`]).length;
+  const techCompleted = techData.filter(l => progress[`tech-${l.id}`]).length;
+  
+  mainContent.innerHTML = `
+    <h2 style="margin-bottom: 2rem;">📊 Your Progress Dashboard</h2>
+    
+    <div class="grid-2">
+      <div class="card">
+        <h3 style="color: var(--accent); margin-bottom: 1rem;">⚛️ Physics</h3>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: ${(physicsCompleted/physicsData.length)*100}%"></div>
+        </div>
+        <p style="margin-top: 0.5rem; color: var(--text-secondary);">${physicsCompleted}/${physicsData.length} Levels Completed</p>
+      </div>
+      
+      <div class="card">
+        <h3 style="color: var(--accent); margin-bottom: 1rem;">🧪 Chemistry</h3>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: ${(chemistryCompleted/chemistryData.length)*100}%"></div>
+        </div>
+        <p style="margin-top: 0.5rem; color: var(--text-secondary);">${chemistryCompleted}/${chemistryData.length} Levels Completed</p>
+      </div>
+      
+      <div class="card">
+        <h3 style="color: var(--accent); margin-bottom: 1rem;">📐 Mathematics</h3>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: ${(mathsCompleted/mathsData.length)*100}%"></div>
+        </div>
+        <p style="margin-top: 0.5rem; color: var(--text-secondary);">${mathsCompleted}/${mathsData.length} Levels Completed</p>
+      </div>
+      
+      <div class="card">
+        <h3 style="color: var(--accent); margin-bottom: 1rem;">💻 Technology</h3>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: ${(techCompleted/techData.length)*100}%"></div>
+        </div>
+        <p style="margin-top: 0.5rem; color: var(--text-secondary);">${techCompleted}/${techData.length} Levels Completed</p>
+      </div>
+    </div>
+  `;
+}
+
+function renderMusic() {
+  mainContent.innerHTML = `
+    <h2 style="margin-bottom: 2rem;">🎵 Music Sanctuary</h2>
+    
+    <div class="music-player">
+      <div class="player-main">
+        <div class="album-art">
+          <div class="vinyl-record" id="vinyl"></div>
+          <div class="album-cover" id="album-cover">🎵</div>
+        </div>
+        <div style="text-align: center; width: 100%;">
+          <h3 id="current-song" style="margin-bottom: 0.5rem;">Select a song</h3>
+          <p id="current-artist" style="color: var(--text-secondary);">Artist</p>
+        </div>
+        <div class="player-controls">
+          <button class="control-btn" id="prev-btn">⏮️</button>
+          <button class="control-btn play-btn" id="play-btn">▶️</button>
+          <button class="control-btn" id="next-btn">⏭️</button>
+        </div>
+      </div>
+      
+      <div id="video-player" style="margin-top: 2rem;"></div>
+    </div>
+    
+    <div class="card">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+        <h3>📻 Playlist</h3>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+          <button class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.9rem;" onclick="filterMusic('all')">All</button>
+          <button class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.9rem;" onclick="filterMusic('hindi')">Hindi</button>
+          <button class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.9rem;" onclick="filterMusic('english')">English</button>
+          <button class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.9rem;" onclick="filterMusic('motivation')">Motivation</button>
+        </div>
+      </div>
+      <div class="playlist" id="playlist"></div>
+    </div>
+  `;
+  
+  renderPlaylist('all');
+  initMusicPlayer();
+}
+
+let currentSongIndex = 0;
+let currentFilter = 'all';
+let player = null;
+
+function renderPlaylist(filter) {
+  currentFilter = filter;
+  const filtered = filter === 'all' ? musicData : musicData.filter(s => s.category === filter);
+  
+  document.getElementById('playlist').innerHTML = filtered.map((song, index) => `
+    <div class="song-item" onclick="playSong(${musicData.indexOf(song)})">
+      <div>
+        <h4>${song.title}</h4>
+        <p style="color: var(--text-secondary); font-size: 0.9rem;">${song.artist}</p>
+      </div>
+      <div style="color: var(--accent);">▶️</div>
     </div>
   `).join('');
 }
 
+function filterMusic(category) {
+  renderPlaylist(category);
+}
+
+function initMusicPlayer() {
+  document.getElementById('play-btn').addEventListener('click', togglePlay);
+  document.getElementById('next-btn').addEventListener('click', nextSong);
+  document.getElementById('prev-btn').addEventListener('click', prevSong);
+}
+
 function playSong(index) {
   currentSongIndex = index;
-  const song = songs[index];
+  const song = musicData[index];
   
   document.getElementById('current-song').textContent = song.title;
   document.getElementById('current-artist').textContent = song.artist;
-  document.getElementById('total-time').textContent = song.duration;
-  document.getElementById('play-btn').textContent = '⏸️';
   document.getElementById('vinyl').classList.add('playing');
   
-  isPlaying = true;
+  document.getElementById('video-player').innerHTML = `
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/${song.videoId}?autoplay=1" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen></iframe>
+    </div>
+  `;
   
   document.querySelectorAll('.song-item').forEach((item, i) => {
     item.classList.remove('active');
   });
   document.querySelectorAll('.song-item')[index]?.classList.add('active');
-  
-  simulateProgress();
-}
-
-function simulateProgress() {
-  if (progressInterval) clearInterval(progressInterval);
-  
-  const song = songs[currentSongIndex];
-  const [mins, secs] = song.duration.split(':').map(Number);
-  const totalSeconds = mins * 60 + secs;
-  let currentSeconds = 0;
-  
-  progressInterval = setInterval(() => {
-    if (!isPlaying) {
-      clearInterval(progressInterval);
-      return;
-    }
-    
-    currentSeconds += 0.5;
-    const progress = (currentSeconds / totalSeconds) * 100;
-    
-    if (progress >= 100) {
-      clearInterval(progressInterval);
-      nextSong();
-      return;
-    }
-    
-    document.getElementById('progress-fill').style.width = progress + '%';
-    
-    const currentMins = Math.floor(currentSeconds / 60);
-    const currentSecs = Math.floor(currentSeconds % 60);
-    document.getElementById('current-time').textContent = 
-      `${currentMins}:${currentSecs.toString().padStart(2, '0')}`;
-  }, 500);
 }
 
 function togglePlay() {
-  isPlaying = !isPlaying;
-  document.getElementById('play-btn').textContent = isPlaying ? '⏸️' : '▶️';
-  
-  if (isPlaying) {
-    document.getElementById('vinyl').classList.add('playing');
-    simulateProgress();
+  const vinyl = document.getElementById('vinyl');
+  if (vinyl.classList.contains('playing')) {
+    vinyl.classList.remove('playing');
   } else {
-    document.getElementById('vinyl').classList.remove('playing');
+    vinyl.classList.add('playing');
   }
 }
 
 function nextSong() {
-  currentSongIndex = (currentSongIndex + 1) % songs.length;
+  currentSongIndex = (currentSongIndex + 1) % musicData.length;
   playSong(currentSongIndex);
 }
 
 function prevSong() {
-  currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+  currentSongIndex = (currentSongIndex - 1 + musicData.length) % musicData.length;
   playSong(currentSongIndex);
 }
 
-function filterPlaylist(filter) {
-  currentFilter = filter;
-  document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-  event.target.classList.add('active');
-  renderPlaylist(filter);
-}
-
-document.getElementById('play-btn').addEventListener('click', togglePlay);
-document.getElementById('next-btn').addEventListener('click', nextSong);
-document.getElementById('prev-btn').addEventListener('click', prevSong);
-
-renderPlaylist();
-
-// Physics Levels
-const physicsLevels = {
-  '11': [
-    {
-      id: 1,
-      title: 'Units & Measurements',
-      description: 'Master SI units, dimensional analysis, and measurement techniques',
-      concepts: ['SI Units', 'Dimensional Formula', 'Significant Figures', 'Error Analysis'],
-      questions: [
-        {
-          question: 'What is the dimensional formula of Force?',
-          options: ['[MLT⁻²]', '[ML²T⁻²]', '[MLT⁻¹]', '[ML²T⁻¹]'],
-          correct: 0,
-          explanation: 'Force = mass × acceleration = M × LT⁻² = [MLT⁻²]'
-        },
-        {
-          question: 'Which of these is a fundamental unit?',
-          options: ['Newton', 'Joule', 'Kilogram', 'Watt'],
-          correct: 2,
-          explanation: 'Kilogram is a fundamental unit of mass in SI system'
-        },
-        {
-          question: 'If length = 5.00 cm and breadth = 2.0 cm, what is the area with correct significant figures?',
-          options: ['10 cm²', '10.0 cm²', '10.00 cm²', '1.0 × 10¹ cm²'],
-          correct: 3,
-          explanation: 'Result should have 2 significant figures (least in given data): 5.00 × 2.0 = 10 = 1.0 × 10¹ cm²'
-        }
-      ]
-    },
-    {
-      id: 2,
-      title: 'Motion in a Straight Line',
-      description: 'Understand kinematics, velocity, acceleration, and equations of motion',
-      concepts: ['Displacement', 'Velocity', 'Acceleration', 'Equations of Motion'],
-      questions: [
-        {
-          question: 'A car accelerates from rest at 2 m/s². What is its velocity after 5 seconds?',
-          options: ['5 m/s', '10 m/s', '15 m/s', '20 m/s'],
-          correct: 1,
-          explanation: 'v = u + at = 0 + 2×5 = 10 m/s'
-        },
-        {
-          question: 'Which equation relates velocity, acceleration, and displacement?',
-          options: ['v = u + at', 's = ut + ½at²', 'v² = u² + 2as', 's = (u+v)t/2'],
-          correct: 2,
-          explanation: 'v² = u² + 2as is the equation that relates velocity, acceleration, and displacement'
-        },
-        {
-          question: 'A ball is thrown upward with velocity 20 m/s. What is the maximum height? (g = 10 m/s²)',
-          options: ['10 m', '20 m', '30 m', '40 m'],
-          correct: 1,
-          explanation: 'At max height, v = 0. Using v² = u² - 2gh: 0 = 400 - 20h, h = 20 m'
-        }
-      ]
-    },
-    {
-      id: 3,
-      title: 'Motion in a Plane',
-      description: 'Learn about vectors, projectile motion, and circular motion',
-      concepts: ['Vectors', 'Projectile Motion', 'Relative Velocity', 'Circular Motion'],
-      questions: [
-        {
-          question: 'If A = 3i + 4j, what is the magnitude of A?',
-          options: ['3', '4', '5', '7'],
-          correct: 2,
-          explanation: '|A| = √(3² + 4²) = √(9 + 16) = √25 = 5'
-        },
-        {
-          question: 'At what angle should a projectile be launched for maximum range?',
-          options: ['30°', '45°', '60°', '90°'],
-          correct: 1,
-          explanation: 'Maximum range occurs at 45° angle of projection'
-        },
-        {
-          question: 'What is the direction of centripetal acceleration?',
-          options: ['Tangent to circle', 'Away from center', 'Towards center', 'Perpendicular to plane'],
-          correct: 2,
-          explanation: 'Centripetal acceleration always points towards the center of circular path'
-        }
-      ]
-    }
-  ],
-  '12': [
-    {
-      id: 1,
-      title: 'Electric Charges and Fields',
-      description: 'Understand electrostatics, Coulomb\'s law, and electric fields',
-      concepts: ['Coulomb\'s Law', 'Electric Field', 'Gauss\'s Law', 'Electric Potential'],
-      questions: [
-        {
-          question: 'What is the SI unit of electric field?',
-          options: ['N/C', 'C/N', 'V/m', 'Both A and C'],
-          correct: 3,
-          explanation: 'Electric field can be expressed as N/C or V/m, both are equivalent'
-        },
-        {
-          question: 'Two charges +q and -q separated by distance d form a:',
-          options: ['Monopole', 'Dipole', 'Quadrupole', 'Octupole'],
-          correct: 1,
-          explanation: 'Two equal and opposite charges form an electric dipole'
-        },
-        {
-          question: 'Electric field inside a conductor is:',
-          options: ['Maximum', 'Minimum', 'Zero', 'Infinite'],
-          correct: 2,
-          explanation: 'In electrostatic equilibrium, electric field inside a conductor is zero'
-        }
-      ]
-    }
-  ]
-};
-
-const chemistryLevels = {
-  '11': [
-    {
-      id: 1,
-      title: 'Atomic Structure',
-      description: 'Explore atoms, quantum numbers, and electronic configuration',
-      concepts: ['Bohr Model', 'Quantum Numbers', 'Orbitals', 'Electronic Configuration'],
-      questions: [
-        {
-          question: 'What is the maximum number of electrons in d orbital?',
-          options: ['2', '6', '10', '14'],
-          correct: 2,
-          explanation: 'd orbital has 5 sub-orbitals, each can hold 2 electrons: 5×2 = 10'
-        },
-        {
-          question: 'Which quantum number determines the shape of orbital?',
-          options: ['n', 'l', 'm', 's'],
-          correct: 1,
-          explanation: 'Azimuthal quantum number (l) determines the shape of orbital'
-        },
-        {
-          question: 'Electronic configuration of Cr (Z=24) is:',
-          options: ['[Ar] 3d⁴ 4s²', '[Ar] 3d⁵ 4s¹', '[Ar] 3d⁶ 4s⁰', '[Ar] 3d³ 4s³'],
-          correct: 1,
-          explanation: 'Cr has exceptional configuration [Ar] 3d⁵ 4s¹ for half-filled stability'
-        }
-      ]
-    },
-    {
-      id: 2,
-      title: 'Chemical Bonding',
-      description: 'Understand ionic, covalent, and metallic bonding',
-      concepts: ['Ionic Bond', 'Covalent Bond', 'Lewis Structure', 'VSEPR Theory'],
-      questions: [
-        {
-          question: 'Which molecule has linear shape?',
-          options: ['H₂O', 'CO₂', 'NH₃', 'CH₄'],
-          correct: 1,
-          explanation: 'CO₂ has linear shape with bond angle 180°'
-        },
-        {
-          question: 'What is the hybridization of carbon in CH₄?',
-          options: ['sp', 'sp²', 'sp³', 'sp³d'],
-          correct: 2,
-          explanation: 'Carbon in CH₄ is sp³ hybridized with tetrahedral geometry'
-        },
-        {
-          question: 'Which has the highest ionic character?',
-          options: ['NaCl', 'MgO', 'AlN', 'SiC'],
-          correct: 1,
-          explanation: 'MgO has highest ionic character due to large electronegativity difference'
-        }
-      ]
-    }
-  ],
-  '12': [
-    {
-      id: 1,
-      title: 'Electrochemistry',
-      description: 'Study redox reactions, electrochemical cells, and batteries',
-      concepts: ['Redox Reactions', 'Galvanic Cell', 'Nernst Equation', 'Electrolysis'],
-      questions: [
-        {
-          question: 'In a galvanic cell, oxidation occurs at:',
-          options: ['Anode', 'Cathode', 'Salt bridge', 'Both electrodes'],
-          correct: 0,
-          explanation: 'Oxidation always occurs at anode in electrochemical cells'
-        },
-        {
-          question: 'Standard hydrogen electrode has potential:',
-          options: ['-1 V', '0 V', '+1 V', '+2 V'],
-          correct: 1,
-          explanation: 'SHE is assigned 0 V as reference electrode'
-        },
-        {
-          question: 'Which metal is used in dry cell as anode?',
-          options: ['Copper', 'Zinc', 'Iron', 'Silver'],
-          correct: 1,
-          explanation: 'Zinc is used as anode in dry cell (Leclanche cell)'
-        }
-      ]
-    }
-  ]
-};
-
-const mathsLevels = {
-  '11': [
-    {
-      id: 1,
-      title: 'Sets and Relations',
-      description: 'Master set theory, operations, and relations',
-      concepts: ['Set Operations', 'Venn Diagrams', 'Relations', 'Functions'],
-      questions: [
-        {
-          question: 'If A = {1,2,3} and B = {2,3,4}, what is A ∩ B?',
-          options: ['{1,2,3,4}', '{2,3}', '{1,4}', '{}'],
-          correct: 1,
-          explanation: 'Intersection contains common elements: {2,3}'
-        },
-        {
-          question: 'Which is a reflexive relation on set A?',
-          options: ['(a,a) for all a∈A', '(a,b) implies (b,a)', '(a,b) and (b,c) implies (a,c)', 'None'],
-          correct: 0,
-          explanation: 'Reflexive relation: every element is related to itself'
-        },
-        {
-          question: 'If n(A) = 5 and n(B) = 3, maximum value of n(A∪B) is:',
-          options: ['5', '8', '15', '3'],
-          correct: 1,
-          explanation: 'Maximum when A and B are disjoint: n(A∪B) = 5 + 3 = 8'
-        }
-      ]
-    },
-    {
-      id: 2,
-      title: 'Trigonometry',
-      description: 'Learn trigonometric ratios, identities, and equations',
-      concepts: ['Trigonometric Ratios', 'Identities', 'Equations', 'Inverse Functions'],
-      questions: [
-        {
-          question: 'What is the value of sin²θ + cos²θ?',
-          options: ['0', '1', '2', 'tan²θ'],
-          correct: 1,
-          explanation: 'Fundamental trigonometric identity: sin²θ + cos²θ = 1'
-        },
-        {
-          question: 'If sinθ = 3/5, what is cosθ? (θ in first quadrant)',
-          options: ['3/5', '4/5', '5/3', '5/4'],
-          correct: 1,
-          explanation: 'Using sin²θ + cos²θ = 1: cos²θ = 1 - 9/25 = 16/25, cosθ = 4/5'
-        },
-        {
-          question: 'Period of sin(2x) is:',
-          options: ['2π', 'π', 'π/2', '4π'],
-          correct: 1,
-          explanation: 'Period of sin(nx) is 2π/n, so period of sin(2x) is π'
-        }
-      ]
-    }
-  ],
-  '12': [
-    {
-      id: 1,
-      title: 'Calculus - Differentiation',
-      description: 'Master derivatives, limits, and applications',
-      concepts: ['Limits', 'Derivatives', 'Chain Rule', 'Applications'],
-      questions: [
-        {
-          question: 'What is d/dx(x²)?',
-          options: ['x', '2x', 'x²', '2'],
-          correct: 1,
-          explanation: 'Derivative of x² is 2x using power rule'
-        },
-        {
-          question: 'If y = sin(x), what is dy/dx?',
-          options: ['cos(x)', '-cos(x)', 'sin(x)', '-sin(x)'],
-          correct: 0,
-          explanation: 'Derivative of sin(x) is cos(x)'
-        },
-        {
-          question: 'What does derivative represent geometrically?',
-          options: ['Area', 'Volume', 'Slope of tangent', 'Distance'],
-          correct: 2,
-          explanation: 'Derivative represents slope of tangent to curve at a point'
-        }
-      ]
-    }
-  ]
-};
-
-const techLevels = {
-  'basics': [
-    {
-      id: 1,
-      title: 'Introduction to Programming',
-      description: 'Learn basic programming concepts and logic',
-      concepts: ['Variables', 'Data Types', 'Operators', 'Control Flow'],
-      questions: [
-        {
-          question: 'Which data type stores decimal numbers?',
-          options: ['int', 'float', 'char', 'boolean'],
-          correct: 1,
-          explanation: 'float (floating-point) stores decimal numbers'
-        },
-        {
-          question: 'What does "if-else" statement do?',
-          options: ['Loop', 'Decision making', 'Function call', 'Variable declaration'],
-          correct: 1,
-          explanation: 'if-else is used for conditional decision making'
-        },
-        {
-          question: 'Which loop runs at least once?',
-          options: ['for', 'while', 'do-while', 'foreach'],
-          correct: 2,
-          explanation: 'do-while loop executes at least once before checking condition'
-        }
-      ]
-    },
-    {
-      id: 2,
-      title: 'Arrays and Data Structures',
-      description: 'Understand arrays, lists, and basic data structures',
-      concepts: ['Arrays', 'Lists', 'Stacks', 'Queues'],
-      questions: [
-        {
-          question: 'Array index starts from:',
-          options: ['-1', '0', '1', 'Depends on language'],
-          correct: 1,
-          explanation: 'In most programming languages, array indexing starts from 0'
-        },
-        {
-          question: 'Which follows LIFO principle?',
-          options: ['Queue', 'Stack', 'Array', 'Tree'],
-          correct: 1,
-          explanation: 'Stack follows Last In First Out (LIFO) principle'
-        },
-        {
-          question: 'Time complexity of accessing array element by index:',
-          options: ['O(1)', 'O(n)', 'O(log n)', 'O(n²)'],
-          correct: 0,
-          explanation: 'Array access by index is O(1) - constant time'
-        }
-      ]
-    }
-  ],
-  'intermediate': [
-    {
-      id: 1,
-      title: 'Object-Oriented Programming',
-      description: 'Master OOP concepts: classes, objects, inheritance',
-      concepts: ['Classes', 'Objects', 'Inheritance', 'Polymorphism'],
-      questions: [
-        {
-          question: 'What is encapsulation?',
-          options: ['Hiding data', 'Code reuse', 'Multiple forms', 'Creating objects'],
-          correct: 0,
-          explanation: 'Encapsulation is bundling data and methods, hiding internal details'
-        },
-        {
-          question: 'Which allows code reuse through parent-child relationship?',
-          options: ['Encapsulation', 'Inheritance', 'Polymorphism', 'Abstraction'],
-          correct: 1,
-          explanation: 'Inheritance allows child class to reuse parent class code'
-        },
-        {
-          question: 'What is method overloading?',
-          options: ['Same name, different parameters', 'Different name, same parameters', 'Hiding methods', 'Virtual methods'],
-          correct: 0,
-          explanation: 'Method overloading: same method name with different parameters'
-        }
-      ]
-    }
-  ],
-  'advanced': [
-    {
-      id: 1,
-      title: 'Algorithms and Complexity',
-      description: 'Analyze algorithms, time complexity, and optimization',
-      concepts: ['Big O Notation', 'Sorting', 'Searching', 'Dynamic Programming'],
-      questions: [
-        {
-          question: 'Time complexity of binary search:',
-          options: ['O(1)', 'O(log n)', 'O(n)', 'O(n log n)'],
-          correct: 1,
-          explanation: 'Binary search has O(log n) time complexity'
-        },
-        {
-          question: 'Which sorting algorithm is most efficient on average?',
-          options: ['Bubble Sort', 'Quick Sort', 'Selection Sort', 'Insertion Sort'],
-          correct: 1,
-          explanation: 'Quick Sort has average time complexity O(n log n)'
-        },
-        {
-          question: 'What is dynamic programming?',
-          options: ['Runtime coding', 'Storing subproblem results', 'Parallel processing', 'Memory allocation'],
-          correct: 1,
-          explanation: 'Dynamic programming stores results of subproblems to avoid recomputation'
-        }
-      ]
-    }
-  ]
-};
-
-let currentPhysicsClass = '11';
-let currentChemistryClass = '11';
-let currentMathsClass = '11';
-let currentTechLevel = 'basics';
-
-function showPhysicsClass(classNum) {
-  currentPhysicsClass = classNum;
-  document.querySelectorAll('#physics .subject-btn').forEach(btn => btn.classList.remove('active'));
-  event.target.classList.add('active');
-  renderLevels('physics', physicsLevels[classNum], 'physics-levels');
-}
-
-function showChemistryClass(classNum) {
-  currentChemistryClass = classNum;
-  document.querySelectorAll('#chemistry .subject-btn').forEach(btn => btn.classList.remove('active'));
-  event.target.classList.add('active');
-  renderLevels('chemistry', chemistryLevels[classNum], 'chemistry-levels');
-}
-
-function showMathsClass(classNum) {
-  currentMathsClass = classNum;
-  document.querySelectorAll('#maths .subject-btn').forEach(btn => btn.classList.remove('active'));
-  event.target.classList.add('active');
-  renderLevels('maths', mathsLevels[classNum], 'maths-levels');
-}
-
-function showTechLevel(level) {
-  currentTechLevel = level;
-  document.querySelectorAll('#tech .subject-btn').forEach(btn => btn.classList.remove('active'));
-  event.target.classList.add('active');
-  renderLevels('tech', techLevels[level], 'tech-levels');
-}
-
-function renderLevels(subject, levels, containerId) {
-  const container = document.getElementById(containerId);
-  const progress = JSON.parse(localStorage.getItem('progress') || '{}');
+function renderPhysics() {
+  const progress = getProgress();
   
-  container.innerHTML = levels.map(level => {
-    const key = `${subject}-${level.id}`;
-    const completed = progress[key] || false;
+  mainContent.innerHTML = `
+    <h2 style="margin-bottom: 2rem;">⚛️ Physics Journey</h2>
     
-    return `
-      <div class="level-card ${completed ? 'completed' : ''}" onclick="openLevel('${subject}', ${level.id})">
-        <div class="level-header">
-          <div class="level-number">Level ${level.id}</div>
-          <div class="level-status">${completed ? '✅' : '🎯'}</div>
-        </div>
-        <h3 class="level-title">${level.title}</h3>
-        <p class="level-description">${level.description}</p>
-        <div class="level-concepts">
-          ${level.concepts.map(c => `<span class="concept-tag">${c}</span>`).join('')}
-        </div>
-      </div>
-    `;
-  }).join('');
+    <div style="display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap;">
+      <button class="btn btn-primary" onclick="filterPhysics(11)">Class 11</button>
+      <button class="btn btn-secondary" onclick="filterPhysics(12)">Class 12</button>
+    </div>
+    
+    <div class="grid-3" id="physics-levels"></div>
+  `;
+  
+  renderPhysicsLevels(11);
 }
 
-function openLevel(subject, levelId) {
-  let levels;
-  if (subject === 'physics') levels = physicsLevels[currentPhysicsClass];
-  else if (subject === 'chemistry') levels = chemistryLevels[currentChemistryClass];
-  else if (subject === 'maths') levels = mathsLevels[currentMathsClass];
-  else if (subject === 'tech') levels = techLevels[currentTechLevel];
+function filterPhysics(classNum) {
+  renderPhysicsLevels(classNum);
+}
+
+function renderPhysicsLevels(classNum) {
+  const progress = getProgress();
+  const filtered = physicsData.filter(l => l.class === classNum);
   
-  const level = levels.find(l => l.id === levelId);
+  document.getElementById('physics-levels').innerHTML = filtered.map(level => `
+    <div class="level-card ${progress[`physics-${level.id}`] ? 'completed' : ''}" onclick="openLevel('physics', ${level.id})">
+      <div class="level-header">
+        <div class="level-number">Level ${level.id}</div>
+        <div class="level-status">${progress[`physics-${level.id}`] ? '✅' : '🎯'}</div>
+      </div>
+      <h3 style="margin-bottom: 0.5rem;">${level.title}</h3>
+      <p style="color: var(--text-secondary); font-size: 0.9rem;">${level.description}</p>
+    </div>
+  `).join('');
+}
+
+function renderChemistry() {
+  const progress = getProgress();
+  
+  mainContent.innerHTML = `
+    <h2 style="margin-bottom: 2rem;">🧪 Chemistry Journey</h2>
+    <div class="grid-3" id="chemistry-levels"></div>
+  `;
+  
+  document.getElementById('chemistry-levels').innerHTML = chemistryData.map(level => `
+    <div class="level-card ${progress[`chemistry-${level.id}`] ? 'completed' : ''}" onclick="openLevel('chemistry', ${level.id})">
+      <div class="level-header">
+        <div class="level-number">Level ${level.id}</div>
+        <div class="level-status">${progress[`chemistry-${level.id}`] ? '✅' : '🎯'}</div>
+      </div>
+      <h3 style="margin-bottom: 0.5rem;">${level.title}</h3>
+      <p style="color: var(--text-secondary); font-size: 0.9rem;">${level.description}</p>
+    </div>
+  `).join('');
+}
+
+function renderMaths() {
+  const progress = getProgress();
+  
+  mainContent.innerHTML = `
+    <h2 style="margin-bottom: 2rem;">📐 Mathematics Journey</h2>
+    <div class="grid-3" id="maths-levels"></div>
+  `;
+  
+  document.getElementById('maths-levels').innerHTML = mathsData.map(level => `
+    <div class="level-card ${progress[`maths-${level.id}`] ? 'completed' : ''}" onclick="openLevel('maths', ${level.id})">
+      <div class="level-header">
+        <div class="level-number">Level ${level.id}</div>
+        <div class="level-status">${progress[`maths-${level.id}`] ? '✅' : '🎯'}</div>
+      </div>
+      <h3 style="margin-bottom: 0.5rem;">${level.title}</h3>
+      <p style="color: var(--text-secondary); font-size: 0.9rem;">${level.description}</p>
+    </div>
+  `).join('');
+}
+
+function renderTech() {
+  const progress = getProgress();
+  
+  mainContent.innerHTML = `
+    <h2 style="margin-bottom: 2rem;">💻 Technology Journey</h2>
+    <div class="grid-3" id="tech-levels"></div>
+  `;
+  
+  document.getElementById('tech-levels').innerHTML = techData.map(level => `
+    <div class="level-card ${progress[`tech-${level.id}`] ? 'completed' : ''}" onclick="openLevel('tech', ${level.id})">
+      <div class="level-header">
+        <div class="level-number">Level ${level.id}</div>
+        <div class="level-status">${progress[`tech-${level.id}`] ? '✅' : '🎯'}</div>
+      </div>
+      <h3 style="margin-bottom: 0.5rem;">${level.title}</h3>
+      <p style="color: var(--text-secondary); font-size: 0.9rem;">${level.description}</p>
+    </div>
+  `).join('');
+}
+
+// ==================== LEVEL DETAIL PAGE ====================
+function openLevel(subject, levelId) {
+  let level;
+  if (subject === 'physics') level = physicsData.find(l => l.id === levelId);
+  else if (subject === 'chemistry') level = chemistryData.find(l => l.id === levelId);
+  else if (subject === 'maths') level = mathsData.find(l => l.id === levelId);
+  else if (subject === 'tech') level = techData.find(l => l.id === levelId);
+  
   if (!level) return;
   
-  const modal = document.getElementById('level-modal');
-  const content = document.getElementById('level-content');
-  
-  content.innerHTML = `
-    <h2>${level.title}</h2>
-    <p>${level.description}</p>
-    <div class="level-concepts">
-      <h3>Concepts:</h3>
-      ${level.concepts.map(c => `<span class="concept-tag">${c}</span>`).join('')}
-    </div>
-    <div class="quiz-container">
-      <h3>🎯 Quiz</h3>
-      ${level.questions.map((q, i) => `
-        <div class="question" data-question="${i}">
-          <h4>Q${i + 1}. ${q.question}</h4>
-          <div class="options">
-            ${q.options.map((opt, j) => `
-              <div class="option" onclick="selectOption(this, ${i}, ${j})">${opt}</div>
-            `).join('')}
-          </div>
+  mainContent.innerHTML = `
+    <button class="back-btn" onclick="loadPage('${subject}')">← Back to ${subject.charAt(0).toUpperCase() + subject.slice(1)}</button>
+    
+    <div class="card">
+      <h1 style="margin-bottom: 1rem; color: var(--accent);">${level.title}</h1>
+      <p style="color: var(--text-secondary); margin-bottom: 2rem;">${level.description}</p>
+      
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/${level.videoId}" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen></iframe>
+      </div>
+      
+      <div class="notes-section">
+        <h3>📝 Key Notes</h3>
+        <ul>
+          ${level.notes.map(note => `<li>${note}</li>`).join('')}
+        </ul>
+      </div>
+      
+      <div class="quiz-container">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+          <h3>🎯 Quiz Time</h3>
+          <div class="timer" id="timer">⏱️ <span id="time-left">10:00</span></div>
         </div>
-      `).join('')}
-      <button class="submit-quiz" onclick="submitQuiz('${subject}', ${levelId})">Submit Quiz</button>
+        
+        ${level.quiz.map((q, i) => `
+          <div class="question" data-question="${i}">
+            <h4>Q${i + 1}. ${q.question}</h4>
+            <div class="options">
+              ${q.options.map((opt, j) => `
+                <div class="option" onclick="selectOption(this, ${i}, ${j})">${opt}</div>
+              `).join('')}
+            </div>
+            <div class="explanation" style="display: none; margin-top: 1rem; padding: 1rem; background: rgba(102, 126, 234, 0.1); border-radius: 10px; color: var(--text-secondary);">
+              <strong>Explanation:</strong> ${q.explanation}
+            </div>
+          </div>
+        `).join('')}
+        
+        <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;" onclick="submitQuiz('${subject}', ${levelId})">Submit Quiz</button>
+      </div>
     </div>
   `;
   
-  modal.classList.add('active');
+  startTimer(600); // 10 minutes
+}
+
+let timerInterval;
+
+function startTimer(seconds) {
+  let timeLeft = seconds;
+  
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    
+    const mins = Math.floor(timeLeft / 60);
+    const secs = timeLeft % 60;
+    document.getElementById('time-left').textContent = 
+      `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      alert('⏰ Time\'s up! Submitting quiz...');
+      // Auto-submit logic here
+    }
+  }, 1000);
 }
 
 function selectOption(element, questionIndex, optionIndex) {
@@ -709,69 +750,63 @@ function selectOption(element, questionIndex, optionIndex) {
 }
 
 function submitQuiz(subject, levelId) {
-  let levels;
-  if (subject === 'physics') levels = physicsLevels[currentPhysicsClass];
-  else if (subject === 'chemistry') levels = chemistryLevels[currentChemistryClass];
-  else if (subject === 'maths') levels = mathsLevels[currentMathsClass];
-  else if (subject === 'tech') levels = techLevels[currentTechLevel];
+  clearInterval(timerInterval);
   
-  const level = levels.find(l => l.id === levelId);
+  let level;
+  if (subject === 'physics') level = physicsData.find(l => l.id === levelId);
+  else if (subject === 'chemistry') level = chemistryData.find(l => l.id === levelId);
+  else if (subject === 'maths') level = mathsData.find(l => l.id === levelId);
+  else if (subject === 'tech') level = techData.find(l => l.id === levelId);
+  
   let correct = 0;
   
   document.querySelectorAll('.question').forEach((q, i) => {
     const selected = q.querySelector('.option.selected');
-    if (!selected) return;
+    const correctIndex = level.quiz[i].correct;
+    const explanation = q.querySelector('.explanation');
     
-    const selectedIndex = parseInt(selected.dataset.selected);
-    const correctIndex = level.questions[i].correct;
-    
-    if (selectedIndex === correctIndex) {
-      selected.classList.add('correct');
-      correct++;
+    if (selected) {
+      const selectedIndex = parseInt(selected.dataset.selected);
+      
+      if (selectedIndex === correctIndex) {
+        selected.classList.add('correct');
+        correct++;
+      } else {
+        selected.classList.add('wrong');
+        q.querySelectorAll('.option')[correctIndex].classList.add('correct');
+      }
     } else {
-      selected.classList.add('wrong');
       q.querySelectorAll('.option')[correctIndex].classList.add('correct');
     }
+    
+    explanation.style.display = 'block';
   });
   
-  const percentage = (correct / level.questions.length) * 100;
+  const percentage = (correct / level.quiz.length) * 100;
   
   if (percentage >= 70) {
-    const progress = JSON.parse(localStorage.getItem('progress') || '{}');
+    const progress = getProgress();
     progress[`${subject}-${levelId}`] = true;
-    localStorage.setItem('progress', JSON.stringify(progress));
-    
-    alert(`🎉 Congratulations! You scored ${percentage.toFixed(0)}% and completed this level!`);
+    saveProgress(progress);
     
     setTimeout(() => {
-      closeModal();
-      if (subject === 'physics') showPhysicsClass(currentPhysicsClass);
-      else if (subject === 'chemistry') showChemistryClass(currentChemistryClass);
-      else if (subject === 'maths') showMathsClass(currentMathsClass);
-      else if (subject === 'tech') showTechLevel(currentTechLevel);
-      
-      updateStats();
-    }, 2000);
+      alert(`🎉 Congratulations! You scored ${percentage.toFixed(0)}% (${correct}/${level.quiz.length}) and completed this level!`);
+      loadPage(subject);
+    }, 1000);
   } else {
-    alert(`You scored ${percentage.toFixed(0)}%. You need 70% to pass. Review and try again!`);
+    alert(`📊 You scored ${percentage.toFixed(0)}% (${correct}/${level.quiz.length}). You need 70% to pass. Review the explanations and try again!`);
   }
 }
 
-function closeModal() {
-  document.getElementById('level-modal').classList.remove('active');
+// ==================== PROGRESS MANAGEMENT ====================
+function getProgress() {
+  return JSON.parse(localStorage.getItem('progress') || '{}');
 }
 
-function updateStats() {
-  const progress = JSON.parse(localStorage.getItem('progress') || '{}');
-  const completed = Object.keys(progress).filter(k => progress[k]).length;
-  document.getElementById('total-completed').textContent = completed;
+function saveProgress(progress) {
+  localStorage.setItem('progress', JSON.stringify(progress));
 }
 
-// Initialize
-renderLevels('physics', physicsLevels['11'], 'physics-levels');
-renderLevels('chemistry', chemistryLevels['11'], 'chemistry-levels');
-renderLevels('maths', mathsLevels['11'], 'maths-levels');
-renderLevels('tech', techLevels['basics'], 'tech-levels');
-updateStats();
-
+// ==================== INITIALIZE ====================
+loadPage('home');
 console.log('🚀 PCM-JEE Journey Hub loaded successfully!');
