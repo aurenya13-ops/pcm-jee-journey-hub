@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PCM × Tech Journey Hub - The Ultimate Learning Platform</title>
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="integration-styles.css">
 </head>
 <body>
   <div id="app">
@@ -15,18 +14,21 @@
         <h1>🚀 PCM × Tech Journey Hub</h1>
       </div>
       <div class="nav-links">
-        <button class="nav-btn active" data-page="home">Home</button>
-        <button class="nav-btn" data-page="dashboard">Dashboard</button>
-        <button class="nav-btn" data-page="music">🎵 Music</button>
-        <button class="nav-btn" data-page="physics">Physics</button>
-        <button class="nav-btn" data-page="chemistry">Chemistry</button>
-        <button class="nav-btn" data-page="maths">Maths</button>
-        <button class="nav-btn" data-page="tech">Technology</button>
-        <button class="nav-btn" data-page="integration">🔥 PCM×Tech</button>
+        <button class="nav-btn active" onclick="showSection('home')">Home</button>
+        <button class="nav-btn" onclick="showSection('dashboard')">Dashboard</button>
+        <button class="nav-btn" onclick="showSection('music')">🎵 Music</button>
+        <button class="nav-btn" onclick="showSection('physics')">Physics</button>
+        <button class="nav-btn" onclick="showSection('chemistry')">Chemistry</button>
+        <button class="nav-btn" onclick="showSection('maths')">Maths</button>
+        <button class="nav-btn" onclick="showSection('tech')">Technology</button>
+        <button class="nav-btn" onclick="showSection('integration')">🔥 PCM×Tech</button>
       </div>
       <div class="theme-indicator">
-        <span id="theme-name">Cosmic Blue</span>
-        <div class="theme-timer">⏱️ <span id="theme-countdown">48:00:00</span></div>
+        <span id="theme-name">🔥 Neon Cyberpunk</span>
+        <div class="theme-controls">
+          <button class="theme-btn" onclick="prevTheme()" title="Previous Theme">◀</button>
+          <button class="theme-btn" onclick="nextTheme()" title="Next Theme">▶</button>
+        </div>
       </div>
     </nav>
 
@@ -34,19 +36,7 @@
     <main id="main-content"></main>
   </div>
 
-  <!-- Load Data Files First -->
-  <script src="music-data.js"></script>
-  <script src="tech-pcm-integration.js"></script>
-  <script src="tech-pcm-expansion.js"></script>
-  
   <!-- Load App Logic -->
   <script src="app.js"></script>
-  <script src="app-integration.js"></script>
-  <script src="app-router.js"></script>
-  
-  <!-- YouTube API for Music Player -->
-  <script>
-    // YouTube API will be loaded by app-integration.js
-  </script>
 </body>
 </html>
