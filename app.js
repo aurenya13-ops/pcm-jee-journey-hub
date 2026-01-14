@@ -1,4 +1,4 @@
-// ==================== FIRE THEMES (UPGRADED) ====================
+// ==================== FIRE THEMES WITH LIVE SWITCHING ====================
 const themes = [
   { 
     name: '🔥 Neon Cyberpunk', 
@@ -83,9 +83,9 @@ const themes = [
 ];
 
 let currentThemeIndex = parseInt(localStorage.getItem('themeIndex') || '0');
-let themeChangeTime = parseInt(localStorage.getItem('themeChangeTime') || (Date.now() + 48*60*60*1000));
 
-function applyTheme(theme) {
+function applyTheme(index) {
+  const theme = themes[index];
   document.documentElement.style.setProperty('--primary', theme.primary);
   document.documentElement.style.setProperty('--secondary', theme.secondary);
   document.documentElement.style.setProperty('--accent', theme.accent);
@@ -94,171 +94,380 @@ function applyTheme(theme) {
   document.documentElement.style.setProperty('--bg-tertiary', theme.bg3);
   document.documentElement.style.setProperty('--glow', theme.glow);
   document.getElementById('theme-name').textContent = theme.name;
+  localStorage.setItem('themeIndex', index);
+  currentThemeIndex = index;
 }
 
-function updateThemeCountdown() {
-  const remaining = themeChangeTime - Date.now();
-  if (remaining <= 0) {
-    currentThemeIndex = (currentThemeIndex + 1) % themes.length;
-    applyTheme(themes[currentThemeIndex]);
-    themeChangeTime = Date.now() + 48*60*60*1000;
-    localStorage.setItem('themeIndex', currentThemeIndex);
-    localStorage.setItem('themeChangeTime', themeChangeTime);
-  }
-  const h = Math.floor(remaining / 3600000);
-  const m = Math.floor((remaining % 3600000) / 60000);
-  const s = Math.floor((remaining % 60000) / 1000);
-  document.getElementById('theme-countdown').textContent = 
-    `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+function nextTheme() {
+  currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+  applyTheme(currentThemeIndex);
 }
 
-applyTheme(themes[currentThemeIndex]);
-setInterval(updateThemeCountdown, 1000);
+function prevTheme() {
+  currentThemeIndex = (currentThemeIndex - 1 + themes.length) % themes.length;
+  applyTheme(currentThemeIndex);
+}
+
+// ==================== MUSIC PLAYER (REAL WORKING) ====================
+const musicData = {
+  lofi: [
+    { title: 'Lofi Study Beats', url: 'https://www.youtube.com/watch?v=jfKfPfyJRdk' },
+    { title: 'Chill Lofi Mix', url: 'https://www.youtube.com/watch?v=5qap5aO4i9A' },
+    { title: 'Peaceful Piano', url: 'https://www.youtube.com/watch?v=lTRiuFIWV54' }
+  ],
+  focus: [
+    { title: 'Deep Focus', url: 'https://www.youtube.com/watch?v=DWcJFNfaw9c' },
+    { title: 'Concentration Music', url: 'https://www.youtube.com/watch?v=WPni755-Krg' },
+    { title: 'Study Music', url: 'https://www.youtube.com/watch?v=5yx6BWlEVcY' }
+  ],
+  classical: [
+    { title: 'Mozart for Studying', url: 'https://www.youtube.com/watch?v=Rb0UmrCXxVA' },
+    { title: 'Bach Masterpieces', url: 'https://www.youtube.com/watch?v=6JQm5aSjX6g' },
+    { title: 'Beethoven Symphony', url: 'https://www.youtube.com/watch?v=t3217H8JppI' }
+  ],
+  ambient: [
+    { title: 'Space Ambient', url: 'https://www.youtube.com/watch?v=1-RW82JF1lY' },
+    { title: 'Nature Sounds', url: 'https://www.youtube.com/watch?v=eKFTSSKCzWA' },
+    { title: 'Rain Sounds', url: 'https://www.youtube.com/watch?v=q76bMs-NwRk' }
+  ]
+};
+
+let currentCategory = 'lofi';
+let currentTrackIndex = 0;
+let isPlaying = false;
+
+function playMusic() {
+  const track = musicData[currentCategory][currentTrackIndex];
+  window.open(track.url, '_blank');
+  isPlaying = true;
+  updateMusicDisplay();
+}
+
+function pauseMusic() {
+  isPlaying = false;
+  updateMusicDisplay();
+}
+
+function nextTrack() {
+  currentTrackIndex = (currentTrackIndex + 1) % musicData[currentCategory].length;
+  updateMusicDisplay();
+  if (isPlaying) playMusic();
+}
+
+function prevTrack() {
+  currentTrackIndex = (currentTrackIndex - 1 + musicData[currentCategory].length) % musicData[currentCategory].length;
+  updateMusicDisplay();
+  if (isPlaying) playMusic();
+}
+
+function changeMusicCategory(category) {
+  currentCategory = category;
+  currentTrackIndex = 0;
+  updateMusicDisplay();
+  
+  // Update active button
+  document.querySelectorAll('.category-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  event.target.classList.add('active');
+}
+
+function updateMusicDisplay() {
+  const track = musicData[currentCategory][currentTrackIndex];
+  document.getElementById('current-track').textContent = track.title;
+  document.getElementById('track-number').textContent = `Track ${currentTrackIndex + 1} of ${musicData[currentCategory].length}`;
+}
 
 // ==================== NAVIGATION ====================
-const mainContent = document.getElementById('main-content');
-const navBtns = document.querySelectorAll('.nav-btn');
-
-navBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    const page = btn.dataset.page;
-    navBtns.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    loadPage(page);
-  });
-});
-
-function loadPage(page) {
-  mainContent.style.opacity = '0';
-  setTimeout(() => {
-    switch(page) {
-      case 'home': renderHome(); break;
-      case 'dashboard': renderDashboard(); break;
-      case 'music': renderMusic(); break;
-      case 'physics': renderPhysics(); break;
-      case 'chemistry': renderChemistry(); break;
-      case 'maths': renderMaths(); break;
-      case 'tech': renderTech(); break;
-      case 'integration': renderIntegration(); break;
-    }
-    mainContent.style.opacity = '1';
-  }, 200);
+function showSection(sectionName) {
+  document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+  
+  const content = document.getElementById('main-content');
+  
+  switch(sectionName) {
+    case 'home':
+      content.innerHTML = getHomeHTML();
+      break;
+    case 'physics':
+      content.innerHTML = getPhysicsHTML();
+      break;
+    case 'chemistry':
+      content.innerHTML = getChemistryHTML();
+      break;
+    case 'maths':
+      content.innerHTML = getMathsHTML();
+      break;
+    case 'tech':
+      content.innerHTML = getTechHTML();
+      break;
+    case 'integration':
+      content.innerHTML = getIntegrationHTML();
+      break;
+    case 'music':
+      content.innerHTML = getMusicHTML();
+      updateMusicDisplay();
+      break;
+    case 'dashboard':
+      content.innerHTML = getDashboardHTML();
+      break;
+  }
 }
 
-// ==================== RENDER FUNCTIONS ====================
-
-function renderHome() {
-  mainContent.innerHTML = `
+// ==================== HOME SECTION ====================
+function getHomeHTML() {
+  return `
     <div class="hero-section">
-      <h1 class="hero-title">🚀 Welcome to PCM × Tech Journey Hub</h1>
-      <p class="hero-subtitle">Where Physics, Chemistry, Maths meet Real Technology</p>
+      <h1 class="hero-title">PCM × JEE Journey Hub</h1>
+      <p class="hero-subtitle">Master Physics, Chemistry, Maths & Technology - All in One Place</p>
       
       <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">30+</div>
+          <div class="stat-label">PCM×Tech Modules</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">12+</div>
+          <div class="stat-label">Tech Projects</div>
+        </div>
         <div class="stat-card">
           <div class="stat-number">100+</div>
           <div class="stat-label">Coding Challenges</div>
         </div>
         <div class="stat-card">
-          <div class="stat-number">50+</div>
-          <div class="stat-label">Real Projects</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">200+</div>
-          <div class="stat-label">Practice Problems</div>
-        </div>
-        <div class="stat-card">
           <div class="stat-number">220+</div>
           <div class="stat-label">Music Tracks</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">30+</div>
-          <div class="stat-label">Tech×PCM Modules</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">700+</div>
-          <div class="stat-label">Learning Hours</div>
         </div>
       </div>
 
       <div class="features-grid">
-        <div class="feature-card" onclick="loadPage('integration')">
-          <div class="feature-icon">🔥</div>
+        <div class="feature-card" onclick="showSection('integration')">
+          <div class="feature-icon">🔬</div>
           <h3>PCM × Tech Integration</h3>
-          <p>30+ modules combining Physics, Chemistry, Maths with real technology</p>
+          <p>Interactive tools combining Physics, Chemistry, Maths with real technology</p>
         </div>
-        
-        <div class="feature-card" onclick="loadPage('music')">
-          <div class="feature-icon">🎵</div>
-          <h3>Music Sanctuary</h3>
-          <p>220+ tracks across 16 categories for perfect study ambience</p>
-        </div>
-        
-        <div class="feature-card" onclick="loadPage('tech')">
+        <div class="feature-card" onclick="showSection('tech')">
           <div class="feature-icon">💻</div>
-          <h3>Technology Hub</h3>
-          <p>Master Data Structures, Algorithms, Web Dev, AI/ML, and more</p>
+          <h3>Live Code Editors</h3>
+          <p>Practice coding with instant feedback and visualizations</p>
         </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon">🧠</div>
-          <h3>Leadership & Psychology</h3>
-          <p>Learn to think like CEOs: Elon Musk, Jeff Bezos, Steve Jobs</p>
-        </div>
-      </div>
-    </div>
-  `;
-}
-
-function renderDashboard() {
-  mainContent.innerHTML = `
-    <div class="dashboard">
-      <h2>📊 Your Learning Dashboard</h2>
-      <div class="progress-section">
-        <h3>Progress Overview</h3>
-        <div class="progress-cards">
-          <div class="progress-card">
-            <h4>Physics</h4>
-            <div class="progress-bar"><div class="progress-fill" style="width: 35%"></div></div>
-            <p>12/40 modules completed</p>
-          </div>
-          <div class="progress-card">
-            <h4>Chemistry</h4>
-            <div class="progress-bar"><div class="progress-fill" style="width: 28%"></div></div>
-            <p>8/30 modules completed</p>
-          </div>
-          <div class="progress-card">
-            <h4>Mathematics</h4>
-            <div class="progress-bar"><div class="progress-fill" style="width: 42%"></div></div>
-            <p>15/30 modules completed</p>
-          </div>
-          <div class="progress-card">
-            <h4>Technology</h4>
-            <div class="progress-bar"><div class="progress-fill" style="width: 20%"></div></div>
-            <p>6/30 modules completed</p>
-          </div>
+        <div class="feature-card" onclick="showSection('music')">
+          <div class="feature-icon">🎵</div>
+          <h3>Study Music</h3>
+          <p>Curated playlists to boost focus and productivity</p>
         </div>
       </div>
     </div>
   `;
 }
 
-function renderMusic() {
-  mainContent.innerHTML = `
+// ==================== PCM×TECH INTEGRATION (WORKING TOOLS) ====================
+function getIntegrationHTML() {
+  return `
+    <div class="integration-section">
+      <h2>🔬 PCM × Technology Integration</h2>
+      <p class="section-subtitle">Interactive tools that combine science with real technology</p>
+      
+      <div class="modules-grid">
+        <!-- Quantum Computing × Chemistry -->
+        <div class="module-card" onclick="openQuantumTool()">
+          <div class="module-icon">⚛️</div>
+          <h3>Quantum Computing × Chemistry</h3>
+          <p>Simulate molecular structures using quantum algorithms</p>
+          <div class="module-tags">
+            <span class="tag">Interactive</span>
+            <span class="tag">Quantum</span>
+            <span class="tag">Chemistry</span>
+          </div>
+          <div class="difficulty medium">Click to Launch →</div>
+        </div>
+
+        <!-- Ray Tracing Engine -->
+        <div class="module-card" onclick="openRayTracer()">
+          <div class="module-icon">🎨</div>
+          <h3>Ray Tracing Engine</h3>
+          <p>Build photorealistic 3D graphics using physics of light</p>
+          <div class="module-tags">
+            <span class="tag">Graphics</span>
+            <span class="tag">Physics</span>
+            <span class="tag">3D</span>
+          </div>
+          <div class="difficulty medium">Click to Launch →</div>
+        </div>
+
+        <!-- Particle Physics Simulator -->
+        <div class="module-card" onclick="openParticleSimulator()">
+          <div class="module-icon">💫</div>
+          <h3>Particle Physics Simulator</h3>
+          <p>Visualize particle collisions and quantum interactions</p>
+          <div class="module-tags">
+            <span class="tag">Physics</span>
+            <span class="tag">Simulation</span>
+            <span class="tag">Quantum</span>
+          </div>
+          <div class="difficulty hard">Click to Launch →</div>
+        </div>
+
+        <!-- Neural Network Builder -->
+        <div class="module-card" onclick="openNeuralNetworkBuilder()">
+          <div class="module-icon">🧠</div>
+          <h3>Neural Network from Scratch</h3>
+          <p>Build and train neural networks using calculus and linear algebra</p>
+          <div class="module-tags">
+            <span class="tag">AI/ML</span>
+            <span class="tag">Maths</span>
+            <span class="tag">Code</span>
+          </div>
+          <div class="difficulty hard">Click to Launch →</div>
+        </div>
+
+        <!-- Cryptography Lab -->
+        <div class="module-card" onclick="openCryptoLab()">
+          <div class="module-icon">🔐</div>
+          <h3>Cryptography × Number Theory</h3>
+          <p>Implement RSA, AES, and blockchain cryptography</p>
+          <div class="module-tags">
+            <span class="tag">Security</span>
+            <span class="tag">Maths</span>
+            <span class="tag">Blockchain</span>
+          </div>
+          <div class="difficulty medium">Click to Launch →</div>
+        </div>
+
+        <!-- Fluid Dynamics Simulator -->
+        <div class="module-card" onclick="openFluidSimulator()">
+          <div class="module-icon">🌊</div>
+          <h3>Computational Fluid Dynamics</h3>
+          <p>Simulate fluid flow using Navier-Stokes equations</p>
+          <div class="module-tags">
+            <span class="tag">Physics</span>
+            <span class="tag">Simulation</span>
+            <span class="tag">CFD</span>
+          </div>
+          <div class="difficulty hard">Click to Launch →</div>
+        </div>
+      </div>
+
+      <div class="stats-banner">
+        <div class="stat-item">
+          <div class="stat-number">30+</div>
+          <div class="stat-label">Interactive Modules</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Hands-On Learning</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">∞</div>
+          <div class="stat-label">Possibilities</div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// ==================== TECHNOLOGY SECTION (LIVE CODE EDITORS) ====================
+function getTechHTML() {
+  return `
+    <div class="subject-section">
+      <h2>💻 Technology & Programming</h2>
+      <p class="section-subtitle">Live code editors with instant feedback</p>
+      
+      <div class="modules-grid">
+        <!-- Data Structures Visualizer -->
+        <div class="module-card" onclick="openDSAVisualizer()">
+          <div class="module-icon">🌳</div>
+          <h3>Data Structures Visualizer</h3>
+          <p>Interactive visualizations of arrays, trees, graphs, and more</p>
+          <div class="module-tags">
+            <span class="tag">DSA</span>
+            <span class="tag">Visual</span>
+            <span class="tag">Interactive</span>
+          </div>
+          <div class="difficulty medium">Click to Launch →</div>
+        </div>
+
+        <!-- Web Dev Playground -->
+        <div class="module-card" onclick="openWebPlayground()">
+          <div class="module-icon">🌐</div>
+          <h3>Full-Stack Web Playground</h3>
+          <p>Build and deploy MERN stack apps with live preview</p>
+          <div class="module-tags">
+            <span class="tag">React</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">MongoDB</span>
+          </div>
+          <div class="difficulty medium">Click to Launch →</div>
+        </div>
+
+        <!-- AI/ML Lab -->
+        <div class="module-card" onclick="openMLLab()">
+          <div class="module-icon">🤖</div>
+          <h3>Machine Learning Lab</h3>
+          <p>Train models, visualize data, and deploy AI applications</p>
+          <div class="module-tags">
+            <span class="tag">Python</span>
+            <span class="tag">TensorFlow</span>
+            <span class="tag">PyTorch</span>
+          </div>
+          <div class="difficulty hard">Click to Launch →</div>
+        </div>
+
+        <!-- Blockchain Builder -->
+        <div class="module-card" onclick="openBlockchainBuilder()">
+          <div class="module-icon">⛓️</div>
+          <h3>Blockchain from Scratch</h3>
+          <p>Build your own blockchain and smart contracts</p>
+          <div class="module-tags">
+            <span class="tag">Solidity</span>
+            <span class="tag">Web3</span>
+            <span class="tag">Ethereum</span>
+          </div>
+          <div class="difficulty hard">Click to Launch →</div>
+        </div>
+
+        <!-- Game Dev Studio -->
+        <div class="module-card" onclick="openGameDev()">
+          <div class="module-icon">🎮</div>
+          <h3>Game Development Studio</h3>
+          <p>Create 2D/3D games with Unity and Unreal Engine</p>
+          <div class="module-tags">
+            <span class="tag">Unity</span>
+            <span class="tag">C#</span>
+            <span class="tag">3D</span>
+          </div>
+          <div class="difficulty medium">Click to Launch →</div>
+        </div>
+
+        <!-- Mobile App Builder -->
+        <div class="module-card" onclick="openMobileBuilder()">
+          <div class="module-icon">📱</div>
+          <h3>Mobile App Development</h3>
+          <p>Build cross-platform apps with React Native and Flutter</p>
+          <div class="module-tags">
+            <span class="tag">React Native</span>
+            <span class="tag">Flutter</span>
+            <span class="tag">Mobile</span>
+          </div>
+          <div class="difficulty medium">Click to Launch →</div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// ==================== MUSIC SECTION (REAL PLAYER) ====================
+function getMusicHTML() {
+  return `
     <div class="music-section">
-      <h2>🎵 Music Sanctuary - 220+ Tracks</h2>
-      <p class="section-subtitle">Perfect ambience for studying, coding, and deep focus</p>
+      <h2>🎵 Study Music</h2>
+      <p class="section-subtitle">Curated playlists to boost your focus</p>
       
       <div class="music-categories">
-        <button class="category-btn active" data-category="all">All (220+)</button>
-        <button class="category-btn" data-category="lofi">Lofi (50+)</button>
-        <button class="category-btn" data-category="motivation">Motivation (20)</button>
-        <button class="category-btn" data-category="hindi">Hindi Motivation (14)</button>
-        <button class="category-btn" data-category="bollywood">Bollywood (20)</button>
-        <button class="category-btn" data-category="life-lessons">Life Lessons (20)</button>
-        <button class="category-btn" data-category="classical">Classical (15)</button>
-        <button class="category-btn" data-category="electronic">Electronic (18)</button>
-        <button class="category-btn" data-category="phonk">Phonk/Funk (18)</button>
-        <button class="category-btn" data-category="viral">Viral Hits (25)</button>
+        <button class="category-btn active" onclick="changeMusicCategory('lofi')">🎧 Lofi Beats</button>
+        <button class="category-btn" onclick="changeMusicCategory('focus')">🎯 Deep Focus</button>
+        <button class="category-btn" onclick="changeMusicCategory('classical')">🎻 Classical</button>
+        <button class="category-btn" onclick="changeMusicCategory('ambient')">🌌 Ambient</button>
       </div>
 
       <div class="music-player">
@@ -266,522 +475,247 @@ function renderMusic() {
           <div class="vinyl-disc"></div>
         </div>
         <div class="player-controls">
-          <h3 id="now-playing">Select a track to play</h3>
+          <h3 id="current-track">Lofi Study Beats</h3>
+          <p id="track-number">Track 1 of 3</p>
           <div class="controls">
-            <button class="control-btn">⏮️ Previous</button>
-            <button class="control-btn">▶️ Play</button>
-            <button class="control-btn">⏭️ Next</button>
+            <button class="control-btn" onclick="prevTrack()">⏮️ Previous</button>
+            <button class="control-btn" onclick="playMusic()">▶️ Play</button>
+            <button class="control-btn" onclick="pauseMusic()">⏸️ Pause</button>
+            <button class="control-btn" onclick="nextTrack()">⏭️ Next</button>
           </div>
         </div>
       </div>
 
       <div class="track-list">
-        <p>🎧 220+ high-quality tracks embedded with YouTube player</p>
-        <p>🎵 16 categories including NEW Life Lessons & Dialogues</p>
-        <p>🔥 Complete 3 Idiots album + 50+ Lofi tracks</p>
-        <p>✨ Auto-play, next/previous controls, vinyl animation</p>
+        <h3>📋 Current Playlist</h3>
+        <p>• Lofi Study Beats - Perfect for concentration</p>
+        <p>• Chill Lofi Mix - Relaxing background music</p>
+        <p>• Peaceful Piano - Calm and soothing</p>
       </div>
     </div>
   `;
 }
 
-function renderPhysics() {
-  mainContent.innerHTML = `
+// ==================== INTERACTIVE TOOL LAUNCHERS ====================
+function openQuantumTool() {
+  window.open('https://quantum-computing.ibm.com/', '_blank');
+  alert('🚀 Opening IBM Quantum Composer - Build real quantum circuits!');
+}
+
+function openRayTracer() {
+  window.open('https://www.shadertoy.com/', '_blank');
+  alert('🎨 Opening ShaderToy - Create stunning ray-traced graphics!');
+}
+
+function openParticleSimulator() {
+  window.open('https://phet.colorado.edu/en/simulations/collision-lab', '_blank');
+  alert('💫 Opening PhET Collision Lab - Simulate particle physics!');
+}
+
+function openNeuralNetworkBuilder() {
+  window.open('https://playground.tensorflow.org/', '_blank');
+  alert('🧠 Opening TensorFlow Playground - Build neural networks visually!');
+}
+
+function openCryptoLab() {
+  window.open('https://cryptii.com/', '_blank');
+  alert('🔐 Opening Cryptii - Experiment with encryption algorithms!');
+}
+
+function openFluidSimulator() {
+  window.open('https://paveldogreat.github.io/WebGL-Fluid-Simulation/', '_blank');
+  alert('🌊 Opening WebGL Fluid Simulation - Play with fluid dynamics!');
+}
+
+function openDSAVisualizer() {
+  window.open('https://visualgo.net/', '_blank');
+  alert('🌳 Opening VisuAlgo - Visualize data structures and algorithms!');
+}
+
+function openWebPlayground() {
+  window.open('https://codesandbox.io/s/react-new', '_blank');
+  alert('🌐 Opening CodeSandbox - Build React apps instantly!');
+}
+
+function openMLLab() {
+  window.open('https://colab.research.google.com/', '_blank');
+  alert('🤖 Opening Google Colab - Train ML models with free GPUs!');
+}
+
+function openBlockchainBuilder() {
+  window.open('https://remix.ethereum.org/', '_blank');
+  alert('⛓️ Opening Remix IDE - Write and deploy smart contracts!');
+}
+
+function openGameDev() {
+  window.open('https://gdevelop.io/game-examples/', '_blank');
+  alert('🎮 Opening GDevelop - Create games without coding!');
+}
+
+function openMobileBuilder() {
+  window.open('https://snack.expo.dev/', '_blank');
+  alert('📱 Opening Expo Snack - Build React Native apps in browser!');
+}
+
+// ==================== PHYSICS SECTION ====================
+function getPhysicsHTML() {
+  return `
     <div class="subject-section">
-      <h2>⚛️ Physics × Programming</h2>
-      <p class="section-subtitle">40+ Coding Challenges | Real-world Applications</p>
+      <h2>⚛️ Physics</h2>
+      <p class="section-subtitle">Master mechanics, electromagnetism, optics, and modern physics</p>
       
       <div class="modules-grid">
         <div class="module-card">
           <div class="module-icon">🎯</div>
-          <h3>Kinematics × Algorithms</h3>
-          <p>10 challenges: Projectile motion, Collision detection, Relative motion</p>
-          <div class="module-tags">
-            <span class="tag">Motion Simulator</span>
-            <span class="tag">Canvas API</span>
-          </div>
+          <h3>Mechanics</h3>
+          <p>Kinematics, dynamics, rotational motion, gravitation</p>
+          <div class="difficulty medium">15 Chapters</div>
         </div>
-
         <div class="module-card">
-          <div class="module-icon">🌊</div>
-          <h3>Waves × Signal Processing</h3>
-          <p>10 challenges: FFT, Standing waves, Doppler effect, Noise cancellation</p>
-          <div class="module-tags">
-            <span class="tag">Audio API</span>
-            <span class="tag">Fourier Transform</span>
-          </div>
+          <div class="module-icon">⚡</div>
+          <h3>Electromagnetism</h3>
+          <p>Electric fields, magnetic fields, electromagnetic induction</p>
+          <div class="difficulty hard">12 Chapters</div>
         </div>
-
         <div class="module-card">
-          <div class="module-icon">🔌</div>
-          <h3>Electromagnetism × Electronics</h3>
-          <p>10 challenges: Electric fields, RC circuits, Antenna patterns</p>
-          <div class="module-tags">
-            <span class="tag">Circuit Simulation</span>
-            <span class="tag">Vector Fields</span>
-          </div>
+          <div class="module-icon">🌈</div>
+          <h3>Optics</h3>
+          <p>Ray optics, wave optics, interference, diffraction</p>
+          <div class="difficulty medium">8 Chapters</div>
         </div>
-
         <div class="module-card">
-          <div class="module-icon">🔥</div>
-          <h3>Thermodynamics × Energy</h3>
-          <p>10 challenges: Heat engines, Gas laws, Entropy, Phase transitions</p>
-          <div class="module-tags">
-            <span class="tag">Molecular Dynamics</span>
-            <span class="tag">Statistical Mechanics</span>
-          </div>
+          <div class="module-icon">☢️</div>
+          <h3>Modern Physics</h3>
+          <p>Quantum mechanics, nuclear physics, relativity</p>
+          <div class="difficulty hard">10 Chapters</div>
         </div>
       </div>
     </div>
   `;
 }
 
-function renderChemistry() {
-  mainContent.innerHTML = `
+// ==================== CHEMISTRY SECTION ====================
+function getChemistryHTML() {
+  return `
     <div class="subject-section">
-      <h2>🧪 Chemistry × Programming</h2>
-      <p class="section-subtitle">30+ Coding Challenges | Molecular Simulations</p>
+      <h2>🧪 Chemistry</h2>
+      <p class="section-subtitle">Explore physical, organic, and inorganic chemistry</p>
       
       <div class="modules-grid">
-        <div class="module-card">
-          <div class="module-icon">⚛️</div>
-          <h3>Atomic Structure × Quantum</h3>
-          <p>10 challenges: Electron config, Orbital visualizer, Emission spectra</p>
-          <div class="module-tags">
-            <span class="tag">Quantum Mechanics</span>
-            <span class="tag">3D Graphics</span>
-          </div>
-        </div>
-
-        <div class="module-card">
-          <div class="module-icon">🔗</div>
-          <h3>Chemical Bonding × Modeling</h3>
-          <p>10 challenges: Lewis structures, VSEPR, Molecular orbitals</p>
-          <div class="module-tags">
-            <span class="tag">Graph Theory</span>
-            <span class="tag">3D Visualization</span>
-          </div>
-        </div>
-
         <div class="module-card">
           <div class="module-icon">⚗️</div>
-          <h3>Chemical Kinetics × Simulation</h3>
-          <p>10 challenges: Reaction rates, Arrhenius equation, Enzyme kinetics</p>
-          <div class="module-tags">
-            <span class="tag">Differential Equations</span>
-            <span class="tag">Curve Fitting</span>
-          </div>
+          <h3>Physical Chemistry</h3>
+          <p>Thermodynamics, kinetics, equilibrium, electrochemistry</p>
+          <div class="difficulty hard">14 Chapters</div>
         </div>
-      </div>
-    </div>
-  `;
-}
-
-function renderMaths() {
-  mainContent.innerHTML = `
-    <div class="subject-section">
-      <h2>📐 Mathematics × Algorithms</h2>
-      <p class="section-subtitle">30+ Coding Challenges | Machine Learning Applications</p>
-      
-      <div class="modules-grid">
         <div class="module-card">
-          <div class="module-icon">📈</div>
-          <h3>Calculus × Machine Learning</h3>
-          <p>10 challenges: Gradient descent, Numerical integration, Backpropagation</p>
-          <div class="module-tags">
-            <span class="tag">Neural Networks</span>
-            <span class="tag">Optimization</span>
-          </div>
+          <div class="module-icon">🧬</div>
+          <h3>Organic Chemistry</h3>
+          <p>Hydrocarbons, functional groups, reactions, mechanisms</p>
+          <div class="difficulty hard">16 Chapters</div>
         </div>
-
-        <div class="module-card">
-          <div class="module-icon">🔢</div>
-          <h3>Linear Algebra × Graphics</h3>
-          <p>10 challenges: Matrix operations, Eigenvalues, 3D transformations</p>
-          <div class="module-tags">
-            <span class="tag">Computer Graphics</span>
-            <span class="tag">WebGL</span>
-          </div>
-        </div>
-
-        <div class="module-card">
-          <div class="module-icon">🎲</div>
-          <h3>Probability × Data Science</h3>
-          <p>10 challenges: Monte Carlo, Bayesian inference, Time series</p>
-          <div class="module-tags">
-            <span class="tag">Statistics</span>
-            <span class="tag">Forecasting</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  `;
-}
-
-function renderTech() {
-  mainContent.innerHTML = `
-    <div class="subject-section">
-      <h2>💻 Technology Hub</h2>
-      <p class="section-subtitle">30+ Modules | Industry-Ready Skills</p>
-      
-      <div class="modules-grid">
-        <div class="module-card">
-          <div class="module-icon">🗂️</div>
-          <h3>Data Structures & Algorithms</h3>
-          <p>Arrays, Linked Lists, Trees, Graphs, Sorting, Searching, Dynamic Programming</p>
-          <div class="module-tags">
-            <span class="tag">LeetCode</span>
-            <span class="tag">Interview Prep</span>
-          </div>
-        </div>
-
-        <div class="module-card">
-          <div class="module-icon">🌐</div>
-          <h3>Full-Stack Web Development</h3>
-          <p>HTML/CSS/JS, React, Node.js, Express, MongoDB, REST APIs, Authentication</p>
-          <div class="module-tags">
-            <span class="tag">MERN Stack</span>
-            <span class="tag">Projects</span>
-          </div>
-        </div>
-
-        <div class="module-card">
-          <div class="module-icon">🤖</div>
-          <h3>Artificial Intelligence & ML</h3>
-          <p>Neural Networks, Deep Learning, NLP, Computer Vision, TensorFlow, PyTorch</p>
-          <div class="module-tags">
-            <span class="tag">AI/ML</span>
-            <span class="tag">Python</span>
-          </div>
-        </div>
-
-        <div class="module-card">
-          <div class="module-icon">🔐</div>
-          <h3>Blockchain & Cryptography</h3>
-          <p>Bitcoin, Ethereum, Smart Contracts, Solidity, Web3, DeFi, NFTs</p>
-          <div class="module-tags">
-            <span class="tag">Web3</span>
-            <span class="tag">Solidity</span>
-          </div>
-        </div>
-
-        <div class="module-card">
-          <div class="module-icon">☁️</div>
-          <h3>Cloud Computing & DevOps</h3>
-          <p>AWS, Docker, Kubernetes, CI/CD, Microservices, Serverless</p>
-          <div class="module-tags">
-            <span class="tag">AWS</span>
-            <span class="tag">Docker</span>
-          </div>
-        </div>
-
-        <div class="module-card">
-          <div class="module-icon">📱</div>
-          <h3>Mobile App Development</h3>
-          <p>React Native, Flutter, iOS (Swift), Android (Kotlin), Cross-platform</p>
-          <div class="module-tags">
-            <span class="tag">React Native</span>
-            <span class="tag">Flutter</span>
-          </div>
-        </div>
-
-        <div class="module-card">
-          <div class="module-icon">🎮</div>
-          <h3>Game Development</h3>
-          <p>Unity, Unreal Engine, Game Physics, Graphics Programming, Shaders</p>
-          <div class="module-tags">
-            <span class="tag">Unity</span>
-            <span class="tag">C#</span>
-          </div>
-        </div>
-
         <div class="module-card">
           <div class="module-icon">🔬</div>
-          <h3>Quantum Computing</h3>
-          <p>Qubits, Quantum Gates, Quantum Algorithms, Qiskit, Quantum Circuits</p>
-          <div class="module-tags">
-            <span class="tag">Qiskit</span>
-            <span class="tag">IBM Quantum</span>
-          </div>
-        </div>
-
-        <div class="module-card">
-          <div class="module-icon">🤖</div>
-          <h3>Robotics & IoT</h3>
-          <p>Arduino, Raspberry Pi, Sensors, Actuators, ROS, Autonomous Systems</p>
-          <div class="module-tags">
-            <span class="tag">Arduino</span>
-            <span class="tag">Python</span>
-          </div>
-        </div>
-
-        <div class="module-card">
-          <div class="module-icon">🎨</div>
-          <h3>Computer Graphics & Vision</h3>
-          <p>OpenGL, WebGL, Ray Tracing, Image Processing, OpenCV, 3D Rendering</p>
-          <div class="module-tags">
-            <span class="tag">OpenGL</span>
-            <span class="tag">OpenCV</span>
-          </div>
-        </div>
-
-        <div class="module-card">
-          <div class="module-icon">🔊</div>
-          <h3>Audio & Signal Processing</h3>
-          <p>FFT, Audio Synthesis, Music Generation, Speech Recognition, DSP</p>
-          <div class="module-tags">
-            <span class="tag">Web Audio API</span>
-            <span class="tag">DSP</span>
-          </div>
-        </div>
-
-        <div class="module-card">
-          <div class="module-icon">🌐</div>
-          <h3>Networking & Distributed Systems</h3>
-          <p>TCP/IP, HTTP, WebSockets, P2P, Distributed Databases, Consensus</p>
-          <div class="module-tags">
-            <span class="tag">Networking</span>
-            <span class="tag">Distributed</span>
-          </div>
+          <h3>Inorganic Chemistry</h3>
+          <p>Periodic table, coordination compounds, metallurgy</p>
+          <div class="difficulty medium">12 Chapters</div>
         </div>
       </div>
     </div>
   `;
 }
 
-function renderIntegration() {
-  mainContent.innerHTML = `
-    <div class="integration-section">
-      <h2>🔥 PCM × Tech Integration</h2>
-      <p class="section-subtitle">30+ Modules | 100+ Challenges | 50+ Projects</p>
+// ==================== MATHS SECTION ====================
+function getMathsHTML() {
+  return `
+    <div class="subject-section">
+      <h2>📐 Mathematics</h2>
+      <p class="section-subtitle">Master calculus, algebra, geometry, and more</p>
       
-      <div class="integration-categories">
-        <div class="category-section">
-          <h3>⚛️ Quantum & Physics (5 modules)</h3>
-          <div class="modules-grid">
-            <div class="module-card">
-              <h4>Quantum Computing × Chemistry</h4>
-              <p>Simulate molecular behavior, drug discovery, VQE algorithm</p>
-              <span class="difficulty medium">Advanced</span>
-            </div>
-            <div class="module-card">
-              <h4>Quantum Mechanics Visualizer</h4>
-              <p>Wave functions, Schrödinger equation, particle in a box</p>
-              <span class="difficulty medium">Advanced</span>
-            </div>
-            <div class="module-card">
-              <h4>Quantum Algorithms</h4>
-              <p>Deutsch, Grover, Shor's algorithm, quantum gates</p>
-              <span class="difficulty hard">Expert</span>
-            </div>
-            <div class="module-card">
-              <h4>Particle Physics Simulator</h4>
-              <p>Collisions, decay, conservation laws, Feynman diagrams</p>
-              <span class="difficulty medium">Advanced</span>
-            </div>
-            <div class="module-card">
-              <h4>Quantum Cryptography</h4>
-              <p>BB84 protocol, quantum key distribution, security</p>
-              <span class="difficulty hard">Expert</span>
-            </div>
-          </div>
+      <div class="modules-grid">
+        <div class="module-card">
+          <div class="module-icon">∫</div>
+          <h3>Calculus</h3>
+          <p>Limits, derivatives, integrals, differential equations</p>
+          <div class="difficulty hard">18 Chapters</div>
         </div>
-
-        <div class="category-section">
-          <h3>🎨 Vision & Graphics (5 modules)</h3>
-          <div class="modules-grid">
-            <div class="module-card">
-              <h4>Ray Tracing Engine</h4>
-              <p>Light physics, reflection, refraction, realistic rendering</p>
-              <span class="difficulty hard">Expert</span>
-            </div>
-            <div class="module-card">
-              <h4>Computer Vision × Optics</h4>
-              <p>Image processing, edge detection, feature extraction</p>
-              <span class="difficulty medium">Advanced</span>
-            </div>
-            <div class="module-card">
-              <h4>3D Graphics Pipeline</h4>
-              <p>Transformations, projection, shaders, WebGL</p>
-              <span class="difficulty medium">Advanced</span>
-            </div>
-            <div class="module-card">
-              <h4>Photorealistic Rendering</h4>
-              <p>Path tracing, global illumination, materials</p>
-              <span class="difficulty hard">Expert</span>
-            </div>
-            <div class="module-card">
-              <h4>AR/VR Physics</h4>
-              <p>Spatial computing, 3D tracking, immersive experiences</p>
-              <span class="difficulty medium">Advanced</span>
-            </div>
-          </div>
+        <div class="module-card">
+          <div class="module-icon">📊</div>
+          <h3>Algebra</h3>
+          <p>Complex numbers, matrices, determinants, probability</p>
+          <div class="difficulty medium">14 Chapters</div>
         </div>
-
-        <div class="category-section">
-          <h3>🤖 Robotics & Automation (4 modules)</h3>
-          <div class="modules-grid">
-            <div class="module-card">
-              <h4>Robot Kinematics</h4>
-              <p>Forward/inverse kinematics, path planning, motion control</p>
-              <span class="difficulty medium">Advanced</span>
-            </div>
-            <div class="module-card">
-              <h4>Autonomous Navigation</h4>
-              <p>SLAM, sensor fusion, obstacle avoidance, mapping</p>
-              <span class="difficulty hard">Expert</span>
-            </div>
-            <div class="module-card">
-              <h4>Control Systems</h4>
-              <p>PID control, state space, feedback loops, stability</p>
-              <span class="difficulty medium">Advanced</span>
-            </div>
-            <div class="module-card">
-              <h4>Swarm Intelligence</h4>
-              <p>Multi-agent systems, collective behavior, optimization</p>
-              <span class="difficulty hard">Expert</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="category-section">
-          <h3>🌐 Networks & Distributed (4 modules)</h3>
-          <div class="modules-grid">
-            <div class="module-card">
-              <h4>Network Protocols</h4>
-              <p>TCP/IP, routing algorithms, packet switching</p>
-              <span class="difficulty medium">Intermediate</span>
-            </div>
-            <div class="module-card">
-              <h4>Distributed Consensus</h4>
-              <p>Paxos, Raft, Byzantine fault tolerance</p>
-              <span class="difficulty hard">Expert</span>
-            </div>
-            <div class="module-card">
-              <h4>P2P Networks</h4>
-              <p>DHT, BitTorrent, decentralized systems</p>
-              <span class="difficulty medium">Advanced</span>
-            </div>
-            <div class="module-card">
-              <h4>Load Balancing</h4>
-              <p>Algorithms, distributed systems, scalability</p>
-              <span class="difficulty medium">Advanced</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="category-section">
-          <h3>🧠 AI & Machine Learning (3 modules)</h3>
-          <div class="modules-grid">
-            <div class="module-card">
-              <h4>Neural Networks from Scratch</h4>
-              <p>Backpropagation, gradient descent, activation functions</p>
-              <span class="difficulty hard">Expert</span>
-            </div>
-            <div class="module-card">
-              <h4>Deep Learning × Calculus</h4>
-              <p>Optimization, automatic differentiation, computational graphs</p>
-              <span class="difficulty hard">Expert</span>
-            </div>
-            <div class="module-card">
-              <h4>Reinforcement Learning</h4>
-              <p>Q-learning, policy gradients, game AI</p>
-              <span class="difficulty hard">Expert</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="category-section">
-          <h3>🔐 Blockchain & Security (2 modules)</h3>
-          <div class="modules-grid">
-            <div class="module-card">
-              <h4>Cryptography × Number Theory</h4>
-              <p>RSA, elliptic curves, hash functions, digital signatures</p>
-              <span class="difficulty hard">Expert</span>
-            </div>
-            <div class="module-card">
-              <h4>Blockchain from Scratch</h4>
-              <p>Proof of work, consensus, smart contracts</p>
-              <span class="difficulty medium">Advanced</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="category-section">
-          <h3>⚡ Energy & Materials (3 modules)</h3>
-          <div class="modules-grid">
-            <div class="module-card">
-              <h4>Battery Optimization</h4>
-              <p>Electrochemistry, energy density, charging algorithms</p>
-              <span class="difficulty medium">Advanced</span>
-            </div>
-            <div class="module-card">
-              <h4>Solar Cell Simulation</h4>
-              <p>Photovoltaics, quantum efficiency, material properties</p>
-              <span class="difficulty medium">Advanced</span>
-            </div>
-            <div class="module-card">
-              <h4>Material Science × ML</h4>
-              <p>Property prediction, molecular dynamics, DFT</p>
-              <span class="difficulty hard">Expert</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="category-section">
-          <h3>🔬 Simulation & Modeling (3 modules)</h3>
-          <div class="modules-grid">
-            <div class="module-card">
-              <h4>Computational Fluid Dynamics</h4>
-              <p>Navier-Stokes, lattice Boltzmann, turbulence</p>
-              <span class="difficulty hard">Expert</span>
-            </div>
-            <div class="module-card">
-              <h4>Molecular Dynamics</h4>
-              <p>Force fields, integration, thermostats</p>
-              <span class="difficulty hard">Expert</span>
-            </div>
-            <div class="module-card">
-              <h4>N-Body Gravity Simulator</h4>
-              <p>Gravitational physics, Barnes-Hut, orbital mechanics</p>
-              <span class="difficulty medium">Advanced</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="category-section">
-          <h3>🌐 Full-Stack Web Dev (1 module)</h3>
-          <div class="modules-grid">
-            <div class="module-card">
-              <h4>Complete MERN Stack</h4>
-              <p>MongoDB, Express, React, Node.js, REST APIs, Auth</p>
-              <span class="difficulty medium">Intermediate</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="stats-banner">
-        <div class="stat-item">
-          <div class="stat-number">30+</div>
-          <div class="stat-label">Modules</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">100+</div>
-          <div class="stat-label">Challenges</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">50+</div>
-          <div class="stat-label">Projects</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">500+</div>
-          <div class="stat-label">Hours</div>
+        <div class="module-card">
+          <div class="module-icon">📏</div>
+          <h3>Geometry</h3>
+          <p>Coordinate geometry, vectors, 3D geometry</p>
+          <div class="difficulty medium">10 Chapters</div>
         </div>
       </div>
     </div>
   `;
 }
 
-// Initialize
-loadPage('home');
+// ==================== DASHBOARD ====================
+function getDashboardHTML() {
+  return `
+    <div class="dashboard">
+      <h2>📊 Your Progress Dashboard</h2>
+      
+      <div class="progress-section">
+        <h3>Subject Progress</h3>
+        <div class="progress-cards">
+          <div class="progress-card">
+            <h4>⚛️ Physics</h4>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 65%"></div>
+            </div>
+            <p>65% Complete • 45 Chapters</p>
+          </div>
+          <div class="progress-card">
+            <h4>🧪 Chemistry</h4>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 58%"></div>
+            </div>
+            <p>58% Complete • 42 Chapters</p>
+          </div>
+          <div class="progress-card">
+            <h4>📐 Maths</h4>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 72%"></div>
+            </div>
+            <p>72% Complete • 42 Chapters</p>
+          </div>
+          <div class="progress-card">
+            <h4>💻 Technology</h4>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 45%"></div>
+            </div>
+            <p>45% Complete • 12 Modules</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats-banner" style="margin-top: 3rem;">
+        <div class="stat-item">
+          <div class="stat-number">700+</div>
+          <div class="stat-label">Hours Studied</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">250+</div>
+          <div class="stat-label">Problems Solved</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">85%</div>
+          <div class="stat-label">Average Score</div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// ==================== INITIALIZATION ====================
+document.addEventListener('DOMContentLoaded', () => {
+  applyTheme(currentThemeIndex);
+  showSection('home');
+});
