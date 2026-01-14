@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PCM-JEE Journey Hub - Your Personal Learning Companion</title>
+  <title>PCM-JEE Journey Hub</title>
   <style>
     :root {
       --primary: #667eea;
@@ -17,11 +17,7 @@
       --success: #4ade80;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -50,10 +46,7 @@
       50% { opacity: 0.8; transform: scale(1.1); }
     }
 
-    #app {
-      position: relative;
-      z-index: 1;
-    }
+    #app { position: relative; z-index: 1; }
 
     .navbar {
       background: rgba(15, 12, 41, 0.8);
@@ -75,14 +68,9 @@
       background: linear-gradient(135deg, var(--primary), var(--accent));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      background-clip: text;
     }
 
-    .nav-links {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
+    .nav-links { display: flex; gap: 1rem; flex-wrap: wrap; }
 
     .nav-btn {
       background: transparent;
@@ -108,36 +96,22 @@
       font-size: 0.9rem;
     }
 
-    .theme-timer {
-      color: var(--accent);
-      font-weight: bold;
-    }
+    .theme-timer { color: var(--accent); font-weight: bold; }
 
-    .section {
-      display: none;
-      padding: 2rem;
-      animation: fadeIn 0.5s ease;
-    }
-
-    .section.active {
-      display: block;
-    }
+    .section { display: none; padding: 2rem; animation: fadeIn 0.5s ease; }
+    .section.active { display: block; }
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .hero {
-      text-align: center;
-      padding: 3rem 0;
-    }
+    .hero { text-align: center; padding: 3rem 0; }
 
     .glitch {
       font-size: 3.5rem;
       font-weight: bold;
       text-transform: uppercase;
-      position: relative;
       text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
                   -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
                   0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
@@ -145,20 +119,11 @@
     }
 
     @keyframes glitch {
-      0% { text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75), -0.05em -0.025em 0 rgba(0, 255, 0, 0.75), -0.025em 0.05em 0 rgba(0, 0, 255, 0.75); }
-      14% { text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75), -0.05em -0.025em 0 rgba(0, 255, 0, 0.75), -0.025em 0.05em 0 rgba(0, 0, 255, 0.75); }
-      15% { text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75), 0.025em 0.025em 0 rgba(0, 255, 0, 0.75), -0.05em -0.05em 0 rgba(0, 0, 255, 0.75); }
-      49% { text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75), 0.025em 0.025em 0 rgba(0, 255, 0, 0.75), -0.05em -0.05em 0 rgba(0, 0, 255, 0.75); }
-      50% { text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75), 0.05em 0 0 rgba(0, 255, 0, 0.75), 0 -0.05em 0 rgba(0, 0, 255, 0.75); }
-      99% { text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75), 0.05em 0 0 rgba(0, 255, 0, 0.75), 0 -0.05em 0 rgba(0, 0, 255, 0.75); }
-      100% { text-shadow: -0.025em 0 0 rgba(255, 0, 0, 0.75), -0.025em -0.025em 0 rgba(0, 255, 0, 0.75), -0.025em -0.05em 0 rgba(0, 0, 255, 0.75); }
+      0%, 14%, 49%, 99% { text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75), -0.05em -0.025em 0 rgba(0, 255, 0, 0.75), -0.025em 0.05em 0 rgba(0, 0, 255, 0.75); }
+      15%, 50% { text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75), 0.025em 0.025em 0 rgba(0, 255, 0, 0.75), -0.05em -0.05em 0 rgba(0, 0, 255, 0.75); }
     }
 
-    .subtitle {
-      font-size: 1.3rem;
-      color: var(--text-secondary);
-      margin: 1rem 0 3rem;
-    }
+    .subtitle { font-size: 1.3rem; color: var(--text-secondary); margin: 1rem 0 3rem; }
 
     .stats-grid {
       display: grid;
@@ -189,22 +154,11 @@
       background: linear-gradient(135deg, var(--primary), var(--accent));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      background-clip: text;
     }
 
-    .stat-label {
-      color: var(--text-secondary);
-      margin-top: 0.5rem;
-      font-size: 1rem;
-    }
+    .stat-label { color: var(--text-secondary); margin-top: 0.5rem; }
 
-    .quick-actions {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      margin-top: 2rem;
-      flex-wrap: wrap;
-    }
+    .quick-actions { display: flex; gap: 1rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap; }
 
     .action-btn {
       padding: 1rem 2.5rem;
@@ -216,101 +170,245 @@
       transition: all 0.3s ease;
     }
 
-    .action-btn.primary {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: white;
-    }
+    .action-btn.primary { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; }
+    .action-btn.secondary { background: transparent; border: 2px solid var(--accent); color: var(--accent); }
+    .action-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4); }
 
-    .action-btn.secondary {
-      background: transparent;
-      border: 2px solid var(--accent);
-      color: var(--accent);
-    }
+    .content-container { max-width: 1400px; margin: 0 auto; }
+    .section-subtitle { text-align: center; color: var(--text-secondary); margin-bottom: 2rem; }
 
-    .action-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
-    }
-
-    .content-container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .section-subtitle {
-      text-align: center;
-      color: var(--text-secondary);
+    /* Music Player */
+    .player-main {
+      background: rgba(15, 12, 41, 0.6);
+      border: 2px solid var(--primary);
+      border-radius: 20px;
+      padding: 2rem;
       margin-bottom: 2rem;
+      backdrop-filter: blur(10px);
+      max-width: 600px;
+      margin: 0 auto 2rem;
     }
 
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
+    .album-art {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      margin: 0 auto 1.5rem;
     }
 
-    .feature-card {
+    .vinyl-record {
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, #1a1a1a 30%, #000 70%);
+      border-radius: 50%;
+      position: absolute;
+      animation: spin 3s linear infinite paused;
+    }
+
+    .vinyl-record.playing { animation-play-state: running; }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .album-cover {
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 10px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+    }
+
+    .player-info { text-align: center; margin-bottom: 1.5rem; }
+    .player-info h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+    .player-info p { color: var(--text-secondary); }
+
+    .player-controls { display: flex; justify-content: center; gap: 1rem; margin-bottom: 1.5rem; }
+
+    .control-btn {
+      background: rgba(102, 126, 234, 0.2);
+      border: 2px solid var(--primary);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+
+    .control-btn.play-btn { width: 70px; height: 70px; font-size: 1.5rem; }
+    .control-btn:hover { background: var(--primary); transform: scale(1.1); }
+
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background: rgba(102, 126, 234, 0.2);
+      border-radius: 3px;
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      border-radius: 3px;
+      width: 0%;
+      transition: width 0.1s linear;
+    }
+
+    .time-display {
+      display: flex;
+      justify-content: space-between;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .volume-control {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .volume-control input { width: 150px; }
+
+    /* Playlist */
+    .playlist-section {
       background: rgba(15, 12, 41, 0.6);
       border: 2px solid var(--primary);
       border-radius: 20px;
       padding: 2rem;
       backdrop-filter: blur(10px);
+    }
+
+    .playlist-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .playlist-filters { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+    .filter-btn {
+      background: transparent;
+      border: 2px solid var(--primary);
+      color: var(--text-primary);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      cursor: pointer;
       transition: all 0.3s ease;
     }
 
-    .feature-card:hover {
+    .filter-btn.active, .filter-btn:hover { background: var(--primary); }
+
+    .playlist {
+      display: grid;
+      gap: 1rem;
+      max-height: 500px;
+      overflow-y: auto;
+    }
+
+    .song-item {
+      background: rgba(102, 126, 234, 0.1);
+      border: 1px solid rgba(102, 126, 234, 0.3);
+      border-radius: 10px;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .song-item:hover, .song-item.active {
+      background: rgba(102, 126, 234, 0.3);
+      border-color: var(--accent);
+      transform: translateX(5px);
+    }
+
+    .song-info h4 { margin-bottom: 0.3rem; }
+    .song-info p { color: var(--text-secondary); font-size: 0.9rem; }
+    .song-duration { color: var(--text-secondary); }
+
+    /* Learning Sections */
+    .subject-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .subject-btn {
+      background: rgba(102, 126, 234, 0.2);
+      border: 2px solid var(--primary);
+      color: var(--text-primary);
+      padding: 1rem 2rem;
+      border-radius: 15px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    .subject-btn.active, .subject-btn:hover {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      transform: translateY(-3px);
+      box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+    }
+
+    .levels-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .level-card {
+      background: rgba(15, 12, 41, 0.6);
+      border: 2px solid var(--primary);
+      border-radius: 15px;
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .level-card:hover {
       transform: translateY(-5px);
       box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
       border-color: var(--accent);
     }
 
-    .feature-icon {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-    }
+    .level-card.locked { opacity: 0.5; cursor: not-allowed; }
+    .level-card.completed { border-color: var(--success); background: rgba(74, 222, 128, 0.1); }
 
-    .feature-card h3 {
-      margin-bottom: 1rem;
-      color: var(--accent);
-    }
-
-    .feature-list {
-      list-style: none;
-      padding: 0;
-    }
-
-    .feature-list li {
-      padding: 0.5rem 0;
-      color: var(--text-secondary);
-    }
-
-    .feature-list li:before {
-      content: "✓ ";
-      color: var(--success);
-      font-weight: bold;
-      margin-right: 0.5rem;
-    }
-
-    .level-preview {
-      background: rgba(102, 126, 234, 0.1);
-      border: 1px solid rgba(102, 126, 234, 0.3);
-      border-radius: 10px;
-      padding: 1rem;
-      margin: 0.5rem 0;
-    }
-
-    .level-preview h4 {
-      color: var(--accent);
-      margin-bottom: 0.5rem;
-    }
-
-    .concept-tags {
+    .level-header {
       display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 0.5rem;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
     }
+
+    .level-number { font-size: 1.5rem; font-weight: bold; color: var(--accent); }
+    .level-status { font-size: 1.5rem; }
+    .level-title { font-size: 1.2rem; margin-bottom: 0.5rem; }
+    .level-description { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem; }
+
+    .level-concepts { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 
     .concept-tag {
       background: rgba(102, 126, 234, 0.3);
@@ -320,32 +418,113 @@
       border: 1px solid var(--primary);
     }
 
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(5px);
+    }
+
+    .modal.active { display: flex; align-items: center; justify-content: center; }
+
+    .modal-content {
+      background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
+      border: 2px solid var(--primary);
+      border-radius: 20px;
+      padding: 2rem;
+      max-width: 800px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      animation: modalSlideIn 0.3s ease;
+    }
+
+    @keyframes modalSlideIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      font-size: 2rem;
+      cursor: pointer;
+      color: var(--text-secondary);
+      transition: color 0.3s ease;
+    }
+
+    .close-modal:hover { color: #f87171; }
+
+    .quiz-container { margin-top: 2rem; }
+
+    .question {
+      background: rgba(102, 126, 234, 0.1);
+      border: 2px solid var(--primary);
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .question h4 { margin-bottom: 1rem; color: var(--accent); }
+    .options { display: grid; gap: 0.8rem; }
+
+    .option {
+      background: rgba(102, 126, 234, 0.2);
+      border: 2px solid var(--primary);
+      padding: 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .option:hover { background: rgba(102, 126, 234, 0.4); transform: translateX(5px); }
+    .option.selected { border-color: var(--accent); background: rgba(240, 147, 251, 0.3); }
+    .option.correct { border-color: var(--success); background: rgba(74, 222, 128, 0.2); }
+    .option.wrong { border-color: #f87171; background: rgba(248, 113, 113, 0.2); }
+
+    .submit-quiz {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border: none;
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      font-weight: bold;
+      width: 100%;
+      margin-top: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .submit-quiz:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4); }
+
     @media (max-width: 768px) {
-      .glitch {
-        font-size: 2rem;
-      }
-      
-      .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      
-      .navbar {
-        flex-direction: column;
-      }
+      .glitch { font-size: 2rem; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .navbar { flex-direction: column; }
+      .levels-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
   <div id="app">
     <nav class="navbar">
-      <div class="nav-brand">
-        <h1>🚀 PCM-JEE Journey Hub</h1>
-      </div>
+      <div class="nav-brand"><h1>🚀 PCM-JEE Journey Hub</h1></div>
       <div class="nav-links">
         <button class="nav-btn active" onclick="showSection('home')">Home</button>
-        <button class="nav-btn" onclick="showSection('music')">Music Sanctuary</button>
-        <button class="nav-btn" onclick="showSection('game')">Learning Quest</button>
-        <button class="nav-btn" onclick="showSection('about')">About</button>
+        <button class="nav-btn" onclick="showSection('music')">Music</button>
+        <button class="nav-btn" onclick="showSection('physics')">Physics</button>
+        <button class="nav-btn" onclick="showSection('chemistry')">Chemistry</button>
+        <button class="nav-btn" onclick="showSection('maths')">Maths</button>
+        <button class="nav-btn" onclick="showSection('tech')">Technology</button>
       </div>
       <div class="theme-indicator">
         <span id="theme-name">Cosmic Blue</span>
@@ -356,19 +535,19 @@
     <section id="home" class="section active">
       <div class="hero">
         <h2 class="glitch">Welcome to Your Journey</h2>
-        <p class="subtitle">Where Physics, Chemistry, Mathematics meet Technology</p>
+        <p class="subtitle">Master PCM & Technology - One Level at a Time</p>
         <div class="stats-grid">
           <div class="stat-card">
-            <div class="stat-number">127</div>
-            <div class="stat-label">Total Levels</div>
+            <div class="stat-number" id="total-completed">0</div>
+            <div class="stat-label">Levels Completed</div>
           </div>
           <div class="stat-card">
             <div class="stat-number">150+</div>
-            <div class="stat-label">Curated Songs</div>
+            <div class="stat-label">Songs</div>
           </div>
           <div class="stat-card">
-            <div class="stat-number">6</div>
-            <div class="stat-label">Dynamic Themes</div>
+            <div class="stat-number" id="streak">0</div>
+            <div class="stat-label">Day Streak</div>
           </div>
           <div class="stat-card">
             <div class="stat-number">∞</div>
@@ -376,226 +555,115 @@
           </div>
         </div>
         <div class="quick-actions">
-          <button class="action-btn primary" onclick="showSection('game')">🎮 Start Learning</button>
-          <button class="action-btn secondary" onclick="showSection('music')">🎵 Relax with Music</button>
+          <button class="action-btn primary" onclick="showSection('physics')">📚 Start Learning</button>
+          <button class="action-btn secondary" onclick="showSection('music')">🎵 Music</button>
         </div>
       </div>
     </section>
 
     <section id="music" class="section">
       <div class="content-container">
-        <h2>🎵 Music Sanctuary</h2>
-        <p class="section-subtitle">Find your peace, stay motivated on your JEE journey</p>
+        <h2 style="text-align: center; margin-bottom: 2rem;">🎵 Music Sanctuary</h2>
         
-        <div class="feature-grid">
-          <div class="feature-card">
-            <div class="feature-icon">🎧</div>
-            <h3>Hindi Hits (50+ Songs)</h3>
-            <ul class="feature-list">
-              <li>Pal Pal - Talwinder, Afusic</li>
-              <li>Paaro - Shubh</li>
-              <li>Kesariya - Arijit Singh</li>
-              <li>Tum Hi Ho - Arijit Singh</li>
-              <li>Excuses - AP Dhillon</li>
-              <li>Brown Munde - AP Dhillon</li>
-              <li>Baller, No Love - Shubh</li>
-              <li>Levels, Goat - Sidhu Moose Wala</li>
-              <li>Channa Mereya, Raabta, Dil Diyan Gallan</li>
-              <li>Kahani Suno - Kaifi Khalil</li>
-            </ul>
+        <div class="player-main">
+          <div class="album-art">
+            <div class="vinyl-record" id="vinyl"></div>
+            <div class="album-cover" id="album-cover">🎵</div>
           </div>
+          <div class="player-info">
+            <h3 id="current-song">Select a song</h3>
+            <p id="current-artist">Artist</p>
+          </div>
+          <div class="player-controls">
+            <button class="control-btn" id="prev-btn">⏮️</button>
+            <button class="control-btn play-btn" id="play-btn">▶️</button>
+            <button class="control-btn" id="next-btn">⏭️</button>
+          </div>
+          <div class="progress-bar" id="progress-bar">
+            <div class="progress-fill" id="progress-fill"></div>
+          </div>
+          <div class="time-display">
+            <span id="current-time">0:00</span>
+            <span id="total-time">0:00</span>
+          </div>
+          <div class="volume-control">
+            <span>🔊</span>
+            <input type="range" id="volume" min="0" max="100" value="70">
+          </div>
+        </div>
 
-          <div class="feature-card">
-            <div class="feature-icon">🎸</div>
-            <h3>English Favorites (60+ Songs)</h3>
-            <ul class="feature-list">
-              <li>See You Again - Wiz Khalifa ft. Charlie Puth</li>
-              <li>Night Changes - One Direction</li>
-              <li>What Makes You Beautiful - 1D</li>
-              <li>Perfect, Shape of You, Photograph - Ed Sheeran</li>
-              <li>Blinding Lights - The Weeknd</li>
-              <li>Faded - Alan Walker</li>
-              <li>Memories - Maroon 5</li>
-              <li>Levitating - Dua Lipa</li>
-              <li>Stay - The Kid LAROI, Justin Bieber</li>
-              <li>Someone Like You - Adele</li>
-            </ul>
+        <div class="playlist-section">
+          <div class="playlist-header">
+            <h3>📻 Your Playlist</h3>
+            <div class="playlist-filters">
+              <button class="filter-btn active" onclick="filterPlaylist('all')">All</button>
+              <button class="filter-btn" onclick="filterPlaylist('hindi')">Hindi</button>
+              <button class="filter-btn" onclick="filterPlaylist('english')">English</button>
+              <button class="filter-btn" onclick="filterPlaylist('motivation')">Motivation</button>
+            </div>
           </div>
-
-          <div class="feature-card">
-            <div class="feature-icon">💪</div>
-            <h3>Motivation Boost (40+ Songs)</h3>
-            <ul class="feature-list">
-              <li>Believer, Thunder, Radioactive - Imagine Dragons</li>
-              <li>Unstoppable - Sia</li>
-              <li>Hall of Fame - The Script</li>
-              <li>Lose Yourself - Eminem</li>
-              <li>Eye of the Tiger - Survivor</li>
-              <li>Apna Time Aayega, Zinda</li>
-              <li>Chak De India, Jai Ho</li>
-              <li>The Nights, Wake Me Up - Avicii</li>
-              <li>Titanium, Stronger</li>
-            </ul>
-          </div>
+          <div class="playlist" id="playlist"></div>
         </div>
       </div>
     </section>
 
-    <section id="game" class="section">
+    <section id="physics" class="section">
       <div class="content-container">
-        <h2>🎮 Learning Quest: PCM × Technology</h2>
-        <p class="section-subtitle">Master concepts through interactive challenges</p>
-
-        <div class="feature-grid">
-          <div class="feature-card">
-            <div class="feature-icon">📚</div>
-            <h3>Class 11 Journey (45 Levels)</h3>
-            <div class="level-preview">
-              <h4>Level 1: Units & Dimensions × Data Types</h4>
-              <p style="color: var(--text-secondary); font-size: 0.9rem;">Understanding physical quantities and how computers store data</p>
-              <div class="concept-tags">
-                <span class="concept-tag">SI Units</span>
-                <span class="concept-tag">Dimensional Analysis</span>
-                <span class="concept-tag">Data Types</span>
-              </div>
-            </div>
-            <div class="level-preview">
-              <h4>Level 2: Motion in 1D × Algorithms</h4>
-              <div class="concept-tags">
-                <span class="concept-tag">Kinematics</span>
-                <span class="concept-tag">Sequential Algorithms</span>
-              </div>
-            </div>
-            <div class="level-preview">
-              <h4>Level 3: Vectors × Arrays</h4>
-              <div class="concept-tags">
-                <span class="concept-tag">Vector Math</span>
-                <span class="concept-tag">Array Operations</span>
-              </div>
-            </div>
-            <p style="margin-top: 1rem; color: var(--text-secondary);">+ 42 more levels!</p>
-          </div>
-
-          <div class="feature-card">
-            <div class="feature-icon">🔬</div>
-            <h3>Class 12 Journey (45 Levels)</h3>
-            <ul class="feature-list">
-              <li>Thermodynamics × State Machines</li>
-              <li>Trigonometry × Graphics Programming</li>
-              <li>Chemical Bonding × Graph Theory</li>
-              <li>Sequences & Series × Dynamic Programming</li>
-              <li>Electromagnetism × Circuit Design</li>
-              <li>Organic Chemistry × Molecular Modeling</li>
-              <li>Calculus × Optimization Algorithms</li>
-            </ul>
-          </div>
-
-          <div class="feature-card">
-            <div class="feature-icon">👑</div>
-            <h3>Grand Master (37 Levels)</h3>
-            <p style="color: var(--text-secondary);">Ultimate challenges combining ALL PCM+Tech knowledge</p>
-            <ul class="feature-list">
-              <li>Multi-concept problem solving</li>
-              <li>Real-world applications</li>
-              <li>Research-level challenges</li>
-              <li>Complete mastery verification</li>
-            </ul>
-          </div>
+        <h2 style="text-align: center; margin-bottom: 1rem;">⚛️ Physics Journey</h2>
+        <p class="section-subtitle">Master physics concepts with real-world applications</p>
+        <div class="subject-tabs">
+          <button class="subject-btn active" onclick="showPhysicsClass('11')">Class 11</button>
+          <button class="subject-btn" onclick="showPhysicsClass('12')">Class 12</button>
         </div>
+        <div class="levels-grid" id="physics-levels"></div>
       </div>
     </section>
 
-    <section id="about" class="section">
+    <section id="chemistry" class="section">
       <div class="content-container">
-        <h2>🌟 About PCM-JEE Journey Hub</h2>
-        <div class="feature-grid">
-          <div class="feature-card">
-            <div class="feature-icon">🎨</div>
-            <h3>Dynamic Themes (48hr rotation)</h3>
-            <ul class="feature-list">
-              <li>Cosmic Blue - Deep space vibes</li>
-              <li>Sunset Vibes - Warm & energizing</li>
-              <li>Ocean Dreams - Calm & focused</li>
-              <li>Forest Calm - Natural & peaceful</li>
-              <li>Purple Haze - Creative & mysterious</li>
-              <li>Golden Hour - Warm & motivating</li>
-            </ul>
-          </div>
-
-          <div class="feature-card">
-            <div class="feature-icon">💡</div>
-            <h3>The Philosophy</h3>
-            <ul class="feature-list">
-              <li>Make learning PCM enjoyable</li>
-              <li>Show real-world tech applications</li>
-              <li>Keep you motivated with music</li>
-              <li>Build strong foundation</li>
-              <li>Blend knowledge with adventure</li>
-            </ul>
-          </div>
-
-          <div class="feature-card">
-            <div class="feature-icon">✨</div>
-            <h3>Your Journey Companion</h3>
-            <p style="color: var(--text-secondary);">
-              This is YOUR personal space. Every level you complete, every song you listen to, 
-              every concept you master brings you closer to your dreams. Keep going! 💪
-            </p>
-          </div>
+        <h2 style="text-align: center; margin-bottom: 1rem;">🧪 Chemistry Journey</h2>
+        <p class="section-subtitle">Explore the molecular world</p>
+        <div class="subject-tabs">
+          <button class="subject-btn active" onclick="showChemistryClass('11')">Class 11</button>
+          <button class="subject-btn" onclick="showChemistryClass('12')">Class 12</button>
         </div>
+        <div class="levels-grid" id="chemistry-levels"></div>
       </div>
     </section>
+
+    <section id="maths" class="section">
+      <div class="content-container">
+        <h2 style="text-align: center; margin-bottom: 1rem;">📐 Mathematics Journey</h2>
+        <p class="section-subtitle">Build logical thinking and problem-solving skills</p>
+        <div class="subject-tabs">
+          <button class="subject-btn active" onclick="showMathsClass('11')">Class 11</button>
+          <button class="subject-btn" onclick="showMathsClass('12')">Class 12</button>
+        </div>
+        <div class="levels-grid" id="maths-levels"></div>
+      </div>
+    </section>
+
+    <section id="tech" class="section">
+      <div class="content-container">
+        <h2 style="text-align: center; margin-bottom: 1rem;">💻 Technology Journey</h2>
+        <p class="section-subtitle">Apply PCM concepts in programming and tech</p>
+        <div class="subject-tabs">
+          <button class="subject-btn active" onclick="showTechLevel('basics')">Basics</button>
+          <button class="subject-btn" onclick="showTechLevel('intermediate')">Intermediate</button>
+          <button class="subject-btn" onclick="showTechLevel('advanced')">Advanced</button>
+        </div>
+        <div class="levels-grid" id="tech-levels"></div>
+      </div>
+    </section>
+
+    <div id="level-modal" class="modal">
+      <div class="modal-content">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <div id="level-content"></div>
+      </div>
+    </div>
   </div>
 
-  <script>
-    function showSection(sectionId) {
-      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-      document.getElementById(sectionId).classList.add('active');
-      event.target.classList.add('active');
-    }
-
-    const themes = [
-      { name: 'Cosmic Blue', primary: '#667eea', secondary: '#764ba2', accent: '#f093fb', bg1: '#0f0c29', bg2: '#302b63', bg3: '#24243e' },
-      { name: 'Sunset Vibes', primary: '#f857a6', secondary: '#ff5858', accent: '#ffd89b', bg1: '#1a0a2e', bg2: '#3d2c5e', bg3: '#5a3d7a' },
-      { name: 'Ocean Dreams', primary: '#00d2ff', secondary: '#3a7bd5', accent: '#00f2fe', bg1: '#0a192f', bg2: '#172a45', bg3: '#1e3a5f' },
-      { name: 'Forest Calm', primary: '#56ab2f', secondary: '#a8e063', accent: '#7bed9f', bg1: '#0d1b0e', bg2: '#1a2f1b', bg3: '#274428' },
-      { name: 'Purple Haze', primary: '#a044ff', secondary: '#6a3093', accent: '#e94057', bg1: '#1a0033', bg2: '#2d0052', bg3: '#400070' },
-      { name: 'Golden Hour', primary: '#f7971e', secondary: '#ffd200', accent: '#ffed4e', bg1: '#1f1300', bg2: '#3d2600', bg3: '#5c3900' }
-    ];
-
-    let currentThemeIndex = parseInt(localStorage.getItem('themeIndex') || '0');
-    let themeChangeTime = parseInt(localStorage.getItem('themeChangeTime') || (Date.now() + 48*60*60*1000));
-
-    function applyTheme(theme) {
-      document.documentElement.style.setProperty('--primary', theme.primary);
-      document.documentElement.style.setProperty('--secondary', theme.secondary);
-      document.documentElement.style.setProperty('--accent', theme.accent);
-      document.documentElement.style.setProperty('--bg-primary', theme.bg1);
-      document.documentElement.style.setProperty('--bg-secondary', theme.bg2);
-      document.documentElement.style.setProperty('--bg-tertiary', theme.bg3);
-      document.getElementById('theme-name').textContent = theme.name;
-    }
-
-    function updateThemeCountdown() {
-      const remaining = themeChangeTime - Date.now();
-      if (remaining <= 0) {
-        currentThemeIndex = (currentThemeIndex + 1) % themes.length;
-        applyTheme(themes[currentThemeIndex]);
-        themeChangeTime = Date.now() + 48*60*60*1000;
-        localStorage.setItem('themeIndex', currentThemeIndex);
-        localStorage.setItem('themeChangeTime', themeChangeTime);
-      }
-      const h = Math.floor(remaining / 3600000);
-      const m = Math.floor((remaining % 3600000) / 60000);
-      const s = Math.floor((remaining % 60000) / 1000);
-      document.getElementById('theme-countdown').textContent = 
-        `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
-    }
-
-    applyTheme(themes[currentThemeIndex]);
-    setInterval(updateThemeCountdown, 1000);
-    console.log('🚀 PCM-JEE Journey Hub loaded!');
-  </script>
+  <script src="app.js"></script>
 </body>
 </html>
