@@ -1,0 +1,920 @@
+/* ==================== MUSIC LIBRARY STYLES ==================== */
+
+.music-page {
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.music-page h1 {
+  font-size: 3rem;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: var(--accent);
+  margin-bottom: 30px;
+}
+
+.music-filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+  padding: 20px;
+  background: var(--bg-secondary);
+  border-radius: 15px;
+}
+
+.filter-btn {
+  padding: 12px 24px;
+  background: var(--bg-tertiary);
+  border: 2px solid transparent;
+  border-radius: 25px;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.filter-btn:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.filter-btn.active {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  border-color: var(--accent);
+  box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+}
+
+.music-player-container {
+  margin-bottom: 40px;
+}
+
+.current-player {
+  background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+  border-radius: 20px;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 20px;
+  border: 2px solid var(--primary);
+}
+
+.vinyl-animation {
+  width: 120px;
+  height: 120px;
+  position: relative;
+}
+
+.vinyl {
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, #1a1a1a 30%, #000 70%);
+  border-radius: 50%;
+  border: 3px solid var(--accent);
+  position: relative;
+}
+
+.vinyl::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 30px;
+  background: var(--primary);
+  border-radius: 50%;
+}
+
+.vinyl.spinning {
+  animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.player-info {
+  flex: 1;
+}
+
+.player-info h2 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  color: var(--accent);
+}
+
+.player-info p {
+  font-size: 1.2rem;
+  color: #aaa;
+}
+
+.player-controls {
+  display: flex;
+  gap: 15px;
+}
+
+.player-controls button {
+  padding: 12px 24px;
+  background: var(--primary);
+  border: none;
+  border-radius: 25px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.player-controls button:hover {
+  background: var(--secondary);
+  transform: scale(1.05);
+}
+
+.music-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.music-card {
+  background: var(--bg-secondary);
+  border-radius: 15px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.music-card:hover {
+  transform: translateY(-10px);
+  border-color: var(--primary);
+  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+}
+
+.music-thumbnail {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 aspect ratio */
+  overflow: hidden;
+}
+
+.music-thumbnail img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.play-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.music-card:hover .play-overlay {
+  opacity: 1;
+}
+
+.music-info {
+  padding: 15px;
+}
+
+.music-info h3 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  color: #fff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.music-info p {
+  color: #aaa;
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+
+.duration {
+  display: inline-block;
+  padding: 4px 12px;
+  background: var(--primary);
+  border-radius: 12px;
+  font-size: 0.85rem;
+  color: #fff;
+}
+
+
+/* ==================== TECH×PCM INTEGRATION STYLES ==================== */
+
+.integration-page {
+  padding: 40px 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.integration-page h1 {
+  font-size: 3.5rem;
+  background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.hero-text {
+  text-align: center;
+  font-size: 1.4rem;
+  color: var(--accent);
+  margin-bottom: 50px;
+}
+
+.integration-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-bottom: 50px;
+}
+
+.stat-card {
+  background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  border: 2px solid var(--primary);
+}
+
+.stat-card h2 {
+  font-size: 3rem;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.stat-card p {
+  font-size: 1.1rem;
+  color: #aaa;
+}
+
+.modules-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 30px;
+}
+
+.integration-module-card {
+  background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+  padding: 30px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.integration-module-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 0;
+}
+
+.integration-module-card:hover::before {
+  opacity: 0.1;
+}
+
+.integration-module-card:hover {
+  transform: translateY(-10px);
+  border-color: var(--primary);
+  box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+}
+
+.integration-module-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.module-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.module-icon {
+  font-size: 3rem;
+}
+
+.difficulty {
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.difficulty.intermediate {
+  background: linear-gradient(135deg, #f7971e, #ffd200);
+  color: #000;
+}
+
+.difficulty.advanced {
+  background: linear-gradient(135deg, #e94057, #f27121);
+  color: #fff;
+}
+
+.difficulty.expert {
+  background: linear-gradient(135deg, #a044ff, #6a3093);
+  color: #fff;
+}
+
+.integration-module-card h2 {
+  font-size: 1.6rem;
+  margin-bottom: 15px;
+  color: var(--accent);
+}
+
+.integration-module-card p {
+  color: #ccc;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.module-meta {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.start-btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  border: none;
+  border-radius: 25px;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.start-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 20px rgba(102, 126, 234, 0.5);
+}
+
+
+/* ==================== MODULE DETAIL PAGE ==================== */
+
+.module-detail-page {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.back-btn {
+  padding: 12px 24px;
+  background: var(--bg-secondary);
+  border: 2px solid var(--primary);
+  border-radius: 25px;
+  color: #fff;
+  cursor: pointer;
+  margin-bottom: 30px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+  background: var(--primary);
+  transform: translateX(-5px);
+}
+
+.module-hero {
+  text-align: center;
+  padding: 50px 20px;
+  background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+  border-radius: 20px;
+  margin-bottom: 40px;
+  border: 2px solid var(--primary);
+}
+
+.hero-icon {
+  font-size: 5rem;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.module-hero h1 {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.module-hero p {
+  font-size: 1.3rem;
+  color: #ccc;
+  margin-bottom: 20px;
+}
+
+.difficulty-badge {
+  display: inline-block;
+  padding: 10px 25px;
+  border-radius: 25px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.prerequisites {
+  background: var(--bg-secondary);
+  padding: 25px;
+  border-radius: 15px;
+  margin-bottom: 30px;
+  border-left: 4px solid var(--accent);
+}
+
+.prereq-tags {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 15px;
+}
+
+.tag {
+  padding: 8px 16px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--primary);
+  border-radius: 20px;
+  font-size: 0.9rem;
+  color: var(--accent);
+}
+
+.sub-levels {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+.sub-level-card {
+  background: var(--bg-secondary);
+  padding: 25px;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.sub-level-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+}
+
+.sub-level-card h2 {
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+  color: var(--accent);
+}
+
+.level-preview {
+  margin: 15px 0;
+  color: #aaa;
+}
+
+.level-preview p {
+  margin: 8px 0;
+}
+
+.explore-btn {
+  width: 100%;
+  padding: 12px;
+  background: var(--primary);
+  border: none;
+  border-radius: 20px;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: all 0.3s ease;
+}
+
+.explore-btn:hover {
+  background: var(--secondary);
+  transform: scale(1.05);
+}
+
+
+/* ==================== SUB-LEVEL DETAIL PAGE ==================== */
+
+.sub-level-detail {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.sub-level-detail h1 {
+  font-size: 2.5rem;
+  margin: 30px 0;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.theory-section,
+.coding-section,
+.project-section,
+.problems-section {
+  margin-bottom: 50px;
+}
+
+.concept-block {
+  background: var(--bg-secondary);
+  padding: 25px;
+  border-radius: 15px;
+  margin-bottom: 25px;
+  border-left: 4px solid;
+}
+
+.concept-block.physics {
+  border-left-color: #667eea;
+}
+
+.concept-block.chemistry {
+  border-left-color: #f093fb;
+}
+
+.concept-block.maths {
+  border-left-color: #ffd200;
+}
+
+.concept-block.ai {
+  border-left-color: #00d2ff;
+}
+
+.concept-block h2 {
+  font-size: 1.6rem;
+  margin-bottom: 15px;
+}
+
+.concept-block ul {
+  list-style: none;
+  padding: 0;
+}
+
+.concept-block li {
+  padding: 10px 0;
+  padding-left: 30px;
+  position: relative;
+  line-height: 1.6;
+}
+
+.concept-block li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-size: 1.2rem;
+}
+
+.applications,
+.video-resources,
+.derivations {
+  background: var(--bg-secondary);
+  padding: 25px;
+  border-radius: 15px;
+  margin-top: 25px;
+}
+
+.video-card {
+  display: inline-block;
+  margin: 15px 15px 15px 0;
+  width: 280px;
+}
+
+.video-card img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease;
+}
+
+.video-card:hover img {
+  transform: scale(1.05);
+}
+
+.video-card a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.derivation-card {
+  background: var(--bg-tertiary);
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  border: 1px solid var(--primary);
+}
+
+.derivation-card h3 {
+  color: var(--accent);
+  margin-bottom: 15px;
+}
+
+.derivation-card ol {
+  padding-left: 25px;
+  line-height: 1.8;
+}
+
+.derivation-card .solution {
+  margin-top: 20px;
+  padding: 15px;
+  background: var(--bg-primary);
+  border-radius: 8px;
+  border-left: 3px solid var(--accent);
+}
+
+.derivation-card code {
+  color: var(--accent);
+  font-size: 1.1rem;
+}
+
+
+/* ==================== CODING SECTION ==================== */
+
+.code-editor {
+  background: var(--bg-secondary);
+  border-radius: 15px;
+  overflow: hidden;
+  margin: 25px 0;
+  border: 2px solid var(--primary);
+}
+
+.editor-header {
+  background: var(--bg-tertiary);
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--primary);
+}
+
+.editor-header button {
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #56ab2f, #a8e063);
+  border: none;
+  border-radius: 20px;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.editor-header button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(86, 171, 47, 0.4);
+}
+
+.code-textarea {
+  width: 100%;
+  min-height: 400px;
+  padding: 20px;
+  background: #1e1e1e;
+  color: #d4d4d4;
+  border: none;
+  font-family: 'Courier New', monospace;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  resize: vertical;
+}
+
+.test-cases,
+.hints {
+  background: var(--bg-secondary);
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+.test-cases h3,
+.hints h3 {
+  color: var(--accent);
+  margin-bottom: 15px;
+}
+
+.hints details {
+  cursor: pointer;
+}
+
+.hints summary {
+  padding: 10px;
+  background: var(--bg-tertiary);
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.code-output {
+  background: var(--bg-tertiary);
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  min-height: 100px;
+  font-family: 'Courier New', monospace;
+}
+
+.output-message {
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 4px solid;
+}
+
+.output-message.info {
+  background: rgba(0, 210, 255, 0.1);
+  border-left-color: #00d2ff;
+}
+
+.output-message a {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+
+/* ==================== PROJECT SECTION ==================== */
+
+.requirements,
+.key-concepts,
+.implementation-hints {
+  background: var(--bg-secondary);
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+.requirements h3,
+.key-concepts h3,
+.implementation-hints h3 {
+  color: var(--accent);
+  margin-bottom: 15px;
+}
+
+.starter-code {
+  background: var(--bg-secondary);
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+.starter-code pre {
+  background: #1e1e1e;
+  padding: 20px;
+  border-radius: 8px;
+  overflow-x: auto;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.starter-code code {
+  color: #d4d4d4;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.project-links {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.resource-link {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  border-radius: 25px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.resource-link:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+}
+
+
+/* ==================== PROBLEMS SECTION ==================== */
+
+.problem-card {
+  background: var(--bg-secondary);
+  padding: 25px;
+  border-radius: 15px;
+  margin-bottom: 25px;
+  border: 2px solid;
+}
+
+.problem-card.medium {
+  border-color: #f7971e;
+}
+
+.problem-card.hard {
+  border-color: #e94057;
+}
+
+.problem-card.expert {
+  border-color: #a044ff;
+}
+
+.problem-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.problem-header h3 {
+  color: var(--accent);
+  font-size: 1.4rem;
+}
+
+.question {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 20px;
+  color: #ddd;
+}
+
+.problem-card details {
+  margin-top: 15px;
+}
+
+.problem-card summary {
+  padding: 12px;
+  background: var(--bg-tertiary);
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.problem-card summary:hover {
+  background: var(--primary);
+}
+
+.problem-card .solution h4 {
+  color: var(--accent);
+  margin: 15px 0 10px 0;
+}
+
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+
+@media (max-width: 768px) {
+  .music-page h1,
+  .integration-page h1 {
+    font-size: 2rem;
+  }
+  
+  .modules-grid,
+  .sub-levels {
+    grid-template-columns: 1fr;
+  }
+  
+  .current-player {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .music-filters {
+    justify-content: center;
+  }
+  
+  .integration-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
