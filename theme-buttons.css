@@ -1,0 +1,26 @@
+/* ==================== THEME SWITCHER BUTTONS ==================== */
+.theme-controls {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.theme-btn {
+  background: var(--primary);
+  border: 2px solid var(--accent);
+  color: var(--text-primary);
+  padding: 0.4rem 0.8rem;
+  border-radius: 15px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px rgba(255, 0, 110, 0.3);
+}
+
+.theme-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 25px var(--glow);
+  background: var(--accent);
+  color: var(--bg-primary);
+}
