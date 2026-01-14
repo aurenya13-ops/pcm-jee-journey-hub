@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PCM-JEE Journey Hub - Your Personal Learning Companion</title>
+  <style>
+    :root {
+      --primary: #667eea;
+      --secondary: #764ba2;
+      --accent: #f093fb;
+      --bg-primary: #0f0c29;
+      --bg-secondary: #302b63;
+      --bg-tertiary: #24243e;
+      --text-primary: #ffffff;
+      --text-secondary: #b8b8d4;
+      --success: #4ade80;
+      --warning: #fbbf24;
+      --danger: #f87171;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-tertiary) 100%);
+      color: var(--text-primary);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 80%, rgba(240, 147, 251, 0.1) 0%, transparent 50%);
+      animation: bgShift 20s ease infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes bgShift {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.1); }
+    }
+
+    #app {
+      position: relative;
+      z-index: 1;
+    }
+
+    .navbar {
+      background: rgba(15, 12, 41, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid rgba(102, 126, 234, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .nav-brand h1 {
+      font-size: 1.5rem;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-btn {
+      background: transparent;
+      border: 2px solid var(--primary);
+      color: var(--text-primary);
+      padding: 0.5rem 1.5rem;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+    }
+
+    .nav-btn:hover, .nav-btn.active {
+      background: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    .theme-indicator {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      font-size: 0.9rem;
+    }
+
+    .theme-timer {
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    .section {
+      display: none;
+      padding: 2rem;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero {
+      text-align: center;
+      padding: 3rem 0;
+    }
+
+    .glitch {
+      font-size: 3.5rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      position: relative;
+      text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+                  -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+                  0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+      animation: glitch 500ms infinite;
+    }
+
+    @keyframes glitch {
+      0% { text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75), -0.05em -0.025em 0 rgba(0, 255, 0, 0.75), -0.025em 0.05em 0 rgba(0, 0, 255, 0.75); }
+      14% { text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75), -0.05em -0.025em 0 rgba(0, 255, 0, 0.75), -0.025em 0.05em 0 rgba(0, 0, 255, 0.75); }
+      15% { text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75), 0.025em 0.025em 0 rgba(0, 255, 0, 0.75), -0.05em -0.05em 0 rgba(0, 0, 255, 0.75); }
+      49% { text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75), 0.025em 0.025em 0 rgba(0, 255, 0, 0.75), -0.05em -0.05em 0 rgba(0, 0, 255, 0.75); }
+      50% { text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75), 0.05em 0 0 rgba(0, 255, 0, 0.75), 0 -0.05em 0 rgba(0, 0, 255, 0.75); }
+      99% { text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75), 0.05em 0 0 rgba(0, 255, 0, 0.75), 0 -0.05em 0 rgba(0, 0, 255, 0.75); }
+      100% { text-shadow: -0.025em 0 0 rgba(255, 0, 0, 0.75), -0.025em -0.025em 0 rgba(0, 255, 0, 0.75), -0.025em -0.05em 0 rgba(0, 0, 255, 0.75); }
+    }
+
+    .subtitle {
+      font-size: 1.3rem;
+      color: var(--text-secondary);
+      margin: 1rem 0 3rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto 3rem;
+    }
+
+    .stat-card {
+      background: rgba(102, 126, 234, 0.1);
+      border: 2px solid var(--primary);
+      border-radius: 15px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+      border-color: var(--accent);
+    }
+
+    .stat-number {
+      font-size: 3rem;
+      font-weight: bold;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stat-label {
+      color: var(--text-secondary);
+      margin-top: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .quick-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .action-btn {
+      padding: 1rem 2.5rem;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    .action-btn.primary {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+    }
+
+    .action-btn.secondary {
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+    }
+
+    .action-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+    }
+
+    .content-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .feature-card {
+      background: rgba(15, 12, 41, 0.6);
+      border: 2px solid var(--primary);
+      border-radius: 20px;
+      padding: 2rem;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+      border-color: var(--accent);
+    }
+
+    .feature-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .feature-card h3 {
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+
+    .feature-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .feature-list li {
+      padding: 0.5rem 0;
+      color: var(--text-secondary);
+    }
+
+    .feature-list li:before {
+      content: "✓ ";
+      color: var(--success);
+      font-weight: bold;
+      margin-right: 0.5rem;
+    }
+
+    .level-preview {
+      background: rgba(102, 126, 234, 0.1);
+      border: 1px solid rgba(102, 126, 234, 0.3);
+      border-radius: 10px;
+      padding: 1rem;
+      margin: 0.5rem 0;
+    }
+
+    .level-preview h4 {
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .concept-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .concept-tag {
+      background: rgba(102, 126, 234, 0.3);
+      padding: 0.3rem 0.8rem;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      border: 1px solid var(--primary);
+    }
+
+    @media (max-width: 768px) {
+      .glitch {
+        font-size: 2rem;
+      }
+      
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .navbar {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <nav class="navbar">
+      <div class="nav-brand">
+        <h1>🚀 PCM-JEE Journey Hub</h1>
+      </div>
+      <div class="nav-links">
+        <button class="nav-btn active" onclick="showSection('home')">Home</button>
+        <button class="nav-btn" onclick="showSection('music')">Music Sanctuary</button>
+        <button class="nav-btn" onclick="showSection('game')">Learning Quest</button>
+        <button class="nav-btn" onclick="showSection('about')">About</button>
+      </div>
+      <div class="theme-indicator">
+        <span id="theme-name">Cosmic Blue</span>
+        <div class="theme-timer">⏱️ <span id="theme-countdown">48:00:00</span></div>
+      </div>
+    </nav>
+
+    <section id="home" class="section active">
+      <div class="hero">
+        <h2 class="glitch">Welcome to Your Journey</h2>
+        <p class="subtitle">Where Physics, Chemistry, Mathematics meet Technology</p>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-number">127</div>
+            <div class="stat-label">Total Levels</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">150+</div>
+            <div class="stat-label">Curated Songs</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">6</div>
+            <div class="stat-label">Dynamic Themes</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">∞</div>
+            <div class="stat-label">Possibilities</div>
+          </div>
+        </div>
+        <div class="quick-actions">
+          <button class="action-btn primary" onclick="showSection('game')">🎮 Start Learning</button>
+          <button class="action-btn secondary" onclick="showSection('music')">🎵 Relax with Music</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="music" class="section">
+      <div class="content-container">
+        <h2>🎵 Music Sanctuary</h2>
+        <p class="section-subtitle">Find your peace, stay motivated on your JEE journey</p>
+        
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-icon">🎧</div>
+            <h3>Hindi Hits (50+ Songs)</h3>
+            <ul class="feature-list">
+              <li>Pal Pal - Talwinder, Afusic</li>
+              <li>Paaro - Shubh</li>
+              <li>Kesariya - Arijit Singh</li>
+              <li>Tum Hi Ho - Arijit Singh</li>
+              <li>Excuses - AP Dhillon</li>
+              <li>Brown Munde - AP Dhillon</li>
+              <li>Baller, No Love - Shubh</li>
+              <li>Levels, Goat - Sidhu Moose Wala</li>
+              <li>Channa Mereya, Raabta, Dil Diyan Gallan</li>
+              <li>Kahani Suno - Kaifi Khalil</li>
+            </ul>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🎸</div>
+            <h3>English Favorites (60+ Songs)</h3>
+            <ul class="feature-list">
+              <li>See You Again - Wiz Khalifa ft. Charlie Puth</li>
+              <li>Night Changes - One Direction</li>
+              <li>What Makes You Beautiful - 1D</li>
+              <li>Perfect, Shape of You, Photograph - Ed Sheeran</li>
+              <li>Blinding Lights, Peaches - The Weeknd</li>
+              <li>Faded, Closer - Alan Walker</li>
+              <li>Memories - Maroon 5</li>
+              <li>Levitating - Dua Lipa</li>
+              <li>Stay - The Kid LAROI, Justin Bieber</li>
+              <li>Someone Like You - Adele</li>
+            </ul>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">💪</div>
+            <h3>Motivation Boost (40+ Songs)</h3>
+            <ul class="feature-list">
+              <li>Believer, Thunder, Radioactive, Warriors - Imagine Dragons</li>
+              <li>Unstoppable - Sia</li>
+              <li>Hall of Fame - The Script</li>
+              <li>Lose Yourself, Can't Hold Us - Eminem</li>
+              <li>Eye of the Tiger - Survivor</li>
+              <li>Apna Time Aayega, Zinda</li>
+              <li>Chak De India, Jai Ho</li>
+              <li>The Nights, Wake Me Up - Avicii</li>
+              <li>Titanium, Stronger</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="game" class="section">
+      <div class="content-container">
+        <h2>🎮 Learning Quest: PCM × Technology</h2>
+        <p class="section-subtitle">Master concepts through interactive challenges</p>
+
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-icon">📚</div>
+            <h3>Class 11 Journey (45 Levels)</h3>
+            <div class="level-preview">
+              <h4>Level 1: Units & Dimensions × Data Types</h4>
+              <p style="color: var(--text-secondary); font-size: 0.9rem;">Understanding physical quantities and how computers store data</p>
+              <div class="concept-tags">
+                <span class="concept-tag">SI Units</span>
+                <span class="concept-tag">Dimensional Analysis</span>
+                <span class="concept-tag">Data Types</span>
+              </div>
+            </div>
+            <div class="level-preview">
+              <h4>Level 2: Motion in 1D × Algorithms</h4>
+              <div class="concept-tags">
+                <span class="concept-tag">Kinematics</span>
+                <span class="concept-tag">Sequential Algorithms</span>
+              </div>
+            </div>
+            <div class="level-preview">
+              <h4>Level 3: Vectors × Arrays</h4>
+              <div class="concept-tags">
+                <span class="concept-tag">Vector Math</span>
+                <span class="concept-tag">Array Operations</span>
+              </div>
+            </div>
+            <p style="margin-top: 1rem; color: var(--text-secondary);">+ 42 more levels!</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🔬</div>
+            <h3>Class 12 Journey (45 Levels)</h3>
+            <ul class="feature-list">
+              <li>Thermodynamics × State Machines</li>
+              <li>Trigonometry × Graphics Programming</li>
+              <li>Chemical Bonding × Graph Theory</li>
+              <li>Sequences & Series × Dynamic Programming</li>
+              <li>Electromagnetism × Circuit Design</li>
+              <li>Organic Chemistry × Molecular Modeling</li>
+              <li>Calculus × Optimization Algorithms</li>
+            </ul>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">👑</div>
+            <h3>Grand Master (37 Levels)</h3>
+            <p style="color: var(--text-secondary);">Ultimate challenges combining ALL PCM+Tech knowledge</p>
+            <ul class="feature-list">
+              <li>Multi-concept problem solving</li>
+              <li>Real-world applications</li>
+              <li>Research-level challenges</li>
+              <li>Complete mastery verification</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="content-container">
+        <h2>🌟 About PCM-JEE Journey Hub</h2>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-icon">🎨</div>
+            <h3>Dynamic Themes (48hr rotation)</h3>
+            <ul class="feature-list">
+              <li>Cosmic Blue - Deep space vibes</li>
+              <li>Sunset Vibes - Warm & energizing</li>
+              <li>Ocean Dreams - Calm & focused</li>
+              <li>Forest Calm - Natural & peaceful</li>
+              <li>Purple Haze - Creative & mysterious</li>
+              <li>Golden Hour - Warm & motivating</li>
+            </ul>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">💡</div>
+            <h3>The Philosophy</h3>
+            <ul class="feature-list">
+              <li>Make learning PCM enjoyable</li>
+              <li>Show real-world tech applications</li>
+              <li>Keep you motivated with music</li>
+              <li>Build strong foundation</li>
+              <li>Blend knowledge with adventure</li>
+            </ul>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">✨</div>
+            <h3>Your Journey Companion</h3>
+            <p style="color: var(--text-secondary);">
+              This is YOUR personal space. Every level you complete, every song you listen to, 
+              every concept you master brings you closer to your dreams. Keep going! 💪
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    function showSection(sectionId) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(sectionId).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    const themes = [
+      { name: 'Cosmic Blue', primary: '#667eea', secondary: '#764ba2', accent: '#f093fb', bg1: '#0f0c29', bg2: '#302b63', bg3: '#24243e' },
+      { name: 'Sunset Vibes', primary: '#f857a6', secondary: '#ff5858', accent: '#ffd89b', bg1: '#1a0a2e', bg2: '#3d2c5e', bg3: '#5a3d7a' },
+      { name: 'Ocean Dreams', primary: '#00d2ff', secondary: '#3a7bd5', accent: '#00f2fe', bg1: '#0a192f', bg2: '#172a45', bg3: '#1e3a5f' },
+      { name: 'Forest Calm', primary: '#56ab2f', secondary: '#a8e063', accent: '#7bed9f', bg1: '#0d1b0e', bg2: '#1a2f1b', bg3: '#274428' },
+      { name: 'Purple Haze', primary: '#a044ff', secondary: '#6a3093', accent: '#e94057', bg1: '#1a0033', bg2: '#2d0052', bg3: '#400070' },
+      { name: 'Golden Hour', primary: '#f7971e', secondary: '#ffd200', accent: '#ffed4e', bg1: '#1f1300', bg2: '#3d2600', bg3: '#5c3900' }
+    ];
+
+    let currentThemeIndex = parseInt(localStorage.getItem('themeIndex') || '0');
+    let themeChangeTime = parseInt(localStorage.getItem('themeChangeTime') || (Date.now() + 48*60*60*1000));
+
+    function applyTheme(theme) {
+      document.documentElement.style.setProperty('--primary', theme.primary);
+      document.documentElement.style.setProperty('--secondary', theme.secondary);
+      document.documentElement.style.setProperty('--accent', theme.accent);
+      document.documentElement.style.setProperty('--bg-primary', theme.bg1);
+      document.documentElement.style.setProperty('--bg-secondary', theme.bg2);
+      document.documentElement.style.setProperty('--bg-tertiary', theme.bg3);
+      document.getElementById('theme-name').textContent = theme.name;
+    }
+
+    function updateThemeCountdown() {
+      const remaining = themeChangeTime - Date.now();
+      if (remaining <= 0) {
+        currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+        applyTheme(themes[currentThemeIndex]);
+        themeChangeTime = Date.now() + 48*60*60*1000;
+        localStorage.setItem('themeIndex', currentThemeIndex);
+        localStorage.setItem('themeChangeTime', themeChangeTime);
+      }
+      const h = Math.floor(remaining / 3600000);
+      const m = Math.floor((remaining % 3600000) / 60000);
+      const s = Math.floor((remaining % 60000) / 1000);
+      document.getElementById('theme-countdown').textContent = 
+        `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+    }
+
+    applyTheme(themes[currentThemeIndex]);
+    setInterval(updateThemeCountdown, 1000);
+  </script>
+</body>
+</html>
