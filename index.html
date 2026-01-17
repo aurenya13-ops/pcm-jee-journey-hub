@@ -179,7 +179,12 @@
       <!-- Content will be dynamically loaded here -->
     </main>
 
-    <!-- Floating Music Player (Bottom-Right, Smaller) -->
+    <!-- Music Toggle Button (Shows when player is hidden) -->
+    <button class="music-toggle-btn" onclick="toggleMusicPlayer()" title="Open Music Player (Ctrl+M)">
+      <i class="fas fa-music"></i>
+    </button>
+
+    <!-- Floating Music Player (Hidden by default, shows when playing) -->
     <div class="floating-music-player" id="floating-player">
       <div class="player-header" onclick="toggleMusicPlayer()">
         <i class="fas fa-music"></i>
