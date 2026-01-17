@@ -1,314 +1,335 @@
-# 🚀 PCM × Tech Journey Hub
+# 🚀 PCM × Tech Ultimate Hub
 
-**The Ultimate Learning Platform for JEE Aspirants**
+![PCM Hub Logo](https://nyc3.digitaloceanspaces.com/bhindi-drive/files/dd268986-2ece-4de2-81bb-7cb0174757e8/2026-01-17T03-32-51-180Z-109ae6b5-nano-banana-pro_1768620770948.jpg)
 
-Where Physics, Chemistry, and Mathematics meet Real-World Technology
+**The Ultimate Learning Platform for Physics, Chemistry, Mathematics & Technology**
 
----
+Replace expensive coaching with a complete, self-paced learning ecosystem. Master concepts, build projects, and ace your exams!
 
-## 🔥 **LIVE DEMO**
-
-**🌐 https://aurenya13-ops.github.io/pcm-jee-journey-hub/**
+🌐 **Live Site:** [https://aurenya13-ops.github.io/pcm-jee-journey-hub/](https://aurenya13-ops.github.io/pcm-jee-journey-hub/)
 
 ---
 
-## 📊 **PLATFORM STATS - MASSIVE EXPANSION!**
+## ✨ NEW FEATURES (Latest Update)
 
-| Feature | Count |
-|---------|-------|
-| 🎵 **Music Tracks** | **200+** curated songs |
-| 📁 **Music Categories** | **15** categories |
-| 📚 **Tech×PCM Modules** | **30+** deep modules |
-| 🔬 **PCM Subjects** | Physics, Chemistry, Maths |
-| 💻 **Tech Domains** | 30+ (AI, Blockchain, Quantum, AR/VR, 5G, etc.) |
-| ⏱️ **Content Hours** | **500+** hours |
-| 🎨 **Themes** | 6 rotating themes (48-hour cycle) |
-| 📱 **Responsive** | Mobile, Tablet, Desktop |
+### 🎨 **Professional Logo & Branding**
+- Custom-designed neon cyberpunk logo
+- PWA manifest for installable app
+- Favicon and app icons
+- Chrome shortcut support
 
----
+### ⌨️ **Keyboard Shortcuts**
+- `Ctrl/Cmd + K` - Focus search bar
+- `Ctrl/Cmd + T` - Change theme
+- `Ctrl/Cmd + M` - Toggle music player
+- `Ctrl/Cmd + P` - Start Pomodoro timer
+- `Esc` - Close modals/players
 
-## 🎵 **MUSIC LIBRARY - 200+ TRACKS**
+### 🔔 **Smart Notifications**
+- Achievement alerts
+- Goal completion notifications
+- Study session tracking
+- XP gain notifications
 
-### **15 Categories:**
-
-1. **☕ Lofi & Study (50+ tracks)**
-   - 24/7 Live Streams (Lofi Girl, Chillhop, Synthwave)
-   - Long Mixes (3-10 hours each)
-   - Themed Lofi (Anime, Ghibli, Pokemon, Tokyo, Midnight)
-   - Jazz Lofi, Piano Lofi, Guitar Lofi
-   - Seasonal Lofi (Winter, Summer, Autumn, Spring)
-   - Mood Lofi (Chill, Happy, Sad, Relaxing)
-   - Special (Cyberpunk, Vaporwave, Retrowave, Spacewave)
-   - Study Specific (Focus, Concentration, Reading)
-   - Artist Collections (Jinsang, Idealism, Tomppabeats, Potsu, Kupla)
-   - International (Japanese, Korean, French, Brazilian)
-   - Nature Lofi (Forest, Ocean, Mountain, Desert)
-
-2. **🔥 Motivation (20 tracks)** - Believer, Lose Yourself, Warriors, Thunder, Natural
-
-3. **🇮🇳 Hindi Motivation (14 tracks)** - Zinda, Chak De India, Dangal, Jai Ho, Malhari
-
-4. **🌃 Phonk/Funk (18 tracks)** - SLAVA FUNK, Brazilian Phonk, Drift Phonk, Sigma Mix
-
-5. **🎶 Viral Hits (25 tracks)** - Love Nwantiti, The Nights, Blinding Lights, Heat Waves
-
-6. **🎬 Bollywood (15 tracks)** - Mann Mera, Kesariya, Tum Hi Ho, Bekhayali
-
-7. **🎹 Classical (10 tracks)** - Moonlight Sonata, Interstellar Theme, Canon in D
-
-8. **⚡ Electronic (10 tracks)** - Strobe, Faded, Levels, Clarity, Titanium
-
-9. **🌙 Ambient (8 tracks)** - Weightless, Rain Sounds (10 hours), Ocean Waves
-
-10. **🎸 Rock (8 tracks)** - Numb, Bohemian Rhapsody, Stairway to Heaven
-
-11. **🎧 Indie/Alternative (10 tracks)** - Pumped Up Kicks, Riptide, Take Me to Church
-
-12. **🔊 Trap/Hip-Hop (10 tracks)** - SICKO MODE, goosebumps, Lucid Dreams, Rockstar
-
-13. **💥 EDM/Festival (8 tracks)** - Tremor, Tsunami, Turn Down for What
-
-14. **🇰🇷 K-Pop (8 tracks)** - Dynamite, Butter, How You Like That, Gangnam Style
-
-15. **🎼 More Categories** - Jazz, Blues, Country, Metal (coming soon!)
-
-**Features:** YouTube player, category filters, vinyl animation, auto-play, next/prev
+### 📊 **Progress Tracking**
+- Auto-save progress
+- Export/Import data
+- Study session timer
+- Daily goals tracker
+- Total study time tracking
 
 ---
 
-## 💻 **TECHNOLOGY × PCM - 30+ MODULES**
+## 📚 Complete Learning System
 
-### **🔥 ALL 30+ CUTTING-EDGE MODULES:**
+### **Core Subjects**
+- **Physics** - Mechanics, Electromagnetism, Thermodynamics, Optics, Modern Physics
+- **Chemistry** - Organic, Inorganic, Physical Chemistry
+- **Mathematics** - Calculus, Algebra, Geometry, Trigonometry, Statistics
 
-#### **QUANTUM & ADVANCED PHYSICS (5 modules)**
-1. ⚛️ **Quantum Computing × Chemistry** - Drug discovery, VQE, molecular simulation
-2. 🤖 **AI/ML × Physics** - Physics-Informed Neural Networks, particle detection
-3. 🔬 **Nanotechnology × Quantum Mechanics** - Atomic-scale engineering
-4. 🚀 **Space Technology × Orbital Mechanics** - Satellite design, Mars missions
-5. 🌍 **Climate Modeling × Computational Physics** - Earth simulation, predictions
-
-#### **COMPUTER VISION & GRAPHICS (5 modules)**
-6. 🔬 **Computer Vision × Chemistry** - Molecular recognition, lab assistant
-7. 🥽 **Augmented Reality × Optics** - AR apps, Apple Vision Pro tech
-8. 🎮 **Virtual Reality × 3D Graphics** - Immersive experiences, VR chemistry lab
-9. 🎨 **Computer Graphics × Optics** - Ray tracing, photorealistic rendering
-10. 🎨 **Generative AI × Mathematics** - GANs, Diffusion models, DALL-E tech
-
-#### **ROBOTICS & AUTOMATION (4 modules)**
-11. 🤖 **Robotics × Mechanics** - Kinematics, PID control, line-following
-12. 🚗 **Autonomous Vehicles × Control Systems** - Self-driving algorithms
-13. 🐝 **Swarm Robotics × Collective Intelligence** - Drone swarms, coordination
-14. 🧠 **Neural Interfaces × Neuroscience** - Brain-computer interfaces, Neuralink
-
-#### **NETWORKS & DISTRIBUTED SYSTEMS (4 modules)**
-15. 📡 **5G Networks × Electromagnetic Waves** - mmWave physics, beamforming
-16. ⚡ **Edge Computing × Distributed Systems** - Real-time processing
-17. 🌐 **Metaverse × Distributed Systems** - Decentralized virtual worlds
-18. 📡 **IoT × Sensors** - Smart home, environmental monitoring
-
-#### **AI & MACHINE LEARNING (3 modules)**
-19. 🧬 **Bioinformatics × Algorithms** - Genome sequencing, AlphaFold
-20. 🧬 **Personalized Medicine × Genomics** - Cancer prediction, precision medicine
-21. 🧠 **Neuromorphic Computing × Brain-Inspired AI** - Spiking neural networks
-
-#### **BLOCKCHAIN & SECURITY (2 modules)**
-22. ⛓️ **Blockchain × Cryptography** - Build cryptocurrency, RSA, elliptic curves
-23. 🔐 **Cybersecurity × Cryptography** - Encryption, threat detection
-
-#### **ENERGY & MATERIALS (3 modules)**
-24. ☀️ **Renewable Energy × Thermodynamics** - Solar panels, wind turbines
-25. 🧪 **Smart Materials × Chemistry** - Shape memory, self-healing
-26. 🧬 **Synthetic Biology × Genetic Engineering** - CRISPR, genetic circuits
-
-#### **SIMULATION & MODELING (3 modules)**
-27. 👥 **Digital Twins × Simulation** - Virtual replicas, optimization
-28. 🎮 **Game Development × Physics** - Physics engines, Angry Birds clone
-29. 📊 **Data Science × Statistics** - Climate prediction, Monte Carlo
-
-#### **BONUS MODULE**
-30. 🌐 **Full-Stack Web Development × All PCM** - Build complete web apps
+### **Learning Resources**
+- 📹 **Video Lectures** - Curated playlists from 3Blue1Brown, Khan Academy, Crash Course
+- 📝 **Practice Problems** - 500+ problems across all subjects
+- 📋 **Mock Tests** - JEE Main & Advanced style full-length tests
+- 🔬 **Interactive Simulators** - PhET simulations, circuit builders, chemistry labs
+- 🧮 **Scientific Calculators** - Desmos, WolframAlpha, Symbolab integration
+- 📚 **Notes & Flashcards** - Organize your study materials
+- 📅 **Study Planner** - Plan your schedule
 
 ---
 
-## 🎯 **LEARNING STRUCTURE**
+## 💻 Technology & Coding
 
-Each module has **4 comprehensive sub-levels:**
+### **Code Playground**
+- **JavaScript** - CodeSandbox integration
+- **Python** - Google Colab with FREE GPU
+- **Multi-Language** - Replit for 50+ languages
 
-### **1. Theory (Deep Dive)**
-- ✅ Video lectures from YouTube experts
-- ✅ Concept explanations with real examples
-- ✅ Mathematical derivations step-by-step
-- ✅ Real-world applications (companies, products)
-- ✅ Physics, Chemistry, Maths core concepts
-
-### **2. Coding Challenge**
-- ✅ Starter code provided (Python/JavaScript)
-- ✅ You complete the functions
-- ✅ Test cases with validation
-- ✅ Hints available (try first!)
-- ✅ Full solution with explanation
-
-### **3. Project (Build Something Real)**
-- ✅ Detailed requirements
-- ✅ Key concepts to apply
-- ✅ Implementation hints
-- ✅ Starter HTML/code templates
-- ✅ Links to deploy (CodePen/StackBlitz/Repl.it)
-
-### **4. Problems (Challenge Yourself)**
-- ✅ Real-world scenarios
-- ✅ Multiple difficulty levels (Medium/Hard/Expert)
-- ✅ Hints available
-- ✅ Step-by-step solutions
+### **Projects & Tools**
+- Algorithm Visualizers
+- Regex Testers
+- 3D Geometry Tools
+- Data Structure Visualizations
 
 ---
 
-## 🎨 **6 ROTATING THEMES**
+## 🎮 Gamification System
 
-Themes change every 48 hours automatically:
+### **Earn XP & Level Up**
+- Navigate sections: **+5 XP**
+- Complete problems: **+10 XP**
+- Finish mock tests: **+50 XP**
+- Study sessions: **+2 XP per minute**
+- Daily goals: **+50 XP**
 
-1. **Cosmic Blue** - Deep space vibes 🌌
-2. **Sunset Vibes** - Warm gradients 🌅
-3. **Ocean Dreams** - Cool blues 🌊
-4. **Forest Calm** - Nature greens 🌲
-5. **Purple Haze** - Mystical purples 💜
-6. **Golden Hour** - Warm golds ✨
-
----
-
-## 📱 **RESPONSIVE DESIGN**
-
-- ✅ Mobile-first approach
-- ✅ Tablet optimized
-- ✅ Desktop enhanced
-- ✅ Touch-friendly controls
-- ✅ Works on all screen sizes
+### **Track Your Progress**
+- **XP System** - Earn experience points
+- **Level Progression** - Level up as you learn
+- **Streak Tracking** - Maintain daily study streaks
+- **Achievements** - Unlock badges and milestones
+- **Visual Progress** - Progress bars for each subject
 
 ---
 
-## 🚀 **TECH STACK**
+## 🎵 Music Player (30+ Songs)
 
-- **Frontend:** HTML5, CSS3, JavaScript (Vanilla)
-- **Music:** YouTube IFrame API
-- **Styling:** CSS Grid, Flexbox, Gradients, Animations
-- **Storage:** LocalStorage for progress & theme
-- **Hosting:** GitHub Pages (Free!)
+### **6 Curated Playlists**
+1. **Lofi Beats** - Chill study music
+2. **Deep Focus** - Intense concentration
+3. **Classical** - Mozart, Bach, Beethoven
+4. **Ambient** - Nature sounds, space ambient
+5. **Motivation** - Epic motivational music
+6. **EDM Study** - Electronic focus music
+
+### **Features**
+- Real YouTube embedded player
+- Play/Pause, Next/Previous controls
+- Shuffle & Repeat modes
+- Floating player (always accessible)
+- Collapsible interface
 
 ---
 
-## 📂 **FILE STRUCTURE**
+## ⏱️ Pomodoro Timer
+
+- **25-minute** focus sessions
+- **5-minute** break reminders
+- Floating timer (bottom-left)
+- Play, Pause, Reset controls
+- Auto-tracks study time
+
+---
+
+## 🎨 8 Beautiful Themes
+
+Switch themes instantly with arrow buttons:
+
+1. **🔥 Neon Cyberpunk** - Electric pink & blue
+2. **🌅 Sunset Paradise** - Warm orange & gold
+3. **🌊 Ocean Depths** - Cool blues & cyan
+4. **🌲 Matrix Green** - Hacker green
+5. **💜 Purple Reign** - Royal purple
+6. **⚡ Electric Gold** - Bright gold
+7. **🎮 Retro Arcade** - Neon pink & cyan
+8. **🌌 Deep Space** - Dark purple & violet
+
+---
+
+## 📱 Install as App (PWA)
+
+### **Desktop (Chrome/Edge)**
+1. Click install icon in address bar
+2. Click "Install"
+3. Launch from desktop!
+
+### **Mobile (iOS/Android)**
+1. Open in Safari/Chrome
+2. Tap "Share" → "Add to Home Screen"
+3. Launch like a native app!
+
+---
+
+## 🔍 Global Search
+
+Type keywords in the search bar to instantly jump to sections:
+- "physics" → Physics modules
+- "code" → Code playground
+- "test" → Mock tests
+- "music" → Music player
+- And more!
+
+---
+
+## 📊 Personal Dashboard
+
+### **Portfolio Section**
+- Showcase projects
+- Display achievements
+- Professional profile
+
+### **Blog**
+- Share learning journey
+- Write articles
+- Document progress
+
+### **Resume Builder**
+- Create professional resume
+- List skills and achievements
+- Download PDF
+
+### **Contact Form**
+- Get in touch
+- Feedback and suggestions
+
+---
+
+## 🛠️ Tech Stack
+
+- **HTML5** - Structure
+- **CSS3** - Styling with custom properties
+- **JavaScript** - Interactivity and logic
+- **YouTube API** - Music player integration
+- **MathJax** - Mathematical notation rendering
+- **Font Awesome** - Icons
+- **LocalStorage** - Data persistence
+- **PWA** - Progressive Web App support
+
+---
+
+## 🎯 Perfect For
+
+- **JEE Aspirants** - Complete preparation platform
+- **Self-learners** - Replace expensive coaching
+- **Students** - Supplement school education
+- **Tech Enthusiasts** - Learn coding alongside PCM
+- **Anyone** - Who wants to master science and math
+
+---
+
+## 🚀 Features Coming Soon
+
+- [ ] AI-powered doubt solving
+- [ ] Live study groups
+- [ ] Peer-to-peer learning
+- [ ] Advanced analytics
+- [ ] Mobile app (native)
+- [ ] Offline mode
+- [ ] More simulators
+- [ ] Custom problem sets
+- [ ] Video tutorials
+- [ ] Community forum
+
+---
+
+## 📂 File Structure
 
 ```
 pcm-jee-journey-hub/
-├── index.html                  # Main HTML
+├── index.html                  # Main HTML with logo & PWA
+├── manifest.json               # PWA manifest
 ├── styles.css                  # Core styles
-├── integration-styles.css      # Music & Tech×PCM styles
-├── app.js                      # Main app logic (2000+ lines)
-├── app-integration.js          # Music & integration pages
-├── app-router.js               # Enhanced routing
-├── music-data.js               # 200+ tracks data
-├── tech-pcm-integration.js     # First 10 modules
-├── tech-pcm-expansion.js       # 20 MORE modules
+├── app.js                      # Main app logic
+├── all-content.js              # All section content
+├── gamification.js             # XP/Level system
+├── study-tools.js              # Pomodoro timer
+├── music-player.js             # Music functionality
+├── search.js                   # Global search
+├── extra-features.js           # Keyboard shortcuts, notifications
 └── README.md                   # This file
 ```
 
 ---
 
-## 🎓 **FOR STUDENTS**
+## 🎓 How to Use
 
-This platform is designed for:
-- 🎯 JEE aspirants who want to see real applications
-- 💻 Students interested in technology
-- 🧠 Anyone who wants to learn PCM deeply
-- 🚀 Future engineers and scientists
-- 🔬 Curious minds who ask "Why?" and "How?"
+### **Getting Started**
+1. Visit the live site
+2. Explore sidebar navigation
+3. Start learning and earning XP!
+
+### **Navigation**
+- Click sidebar buttons to navigate
+- Use search bar for quick access
+- Try keyboard shortcuts
+
+### **Music Player**
+1. Click floating player (bottom-right)
+2. Choose playlist
+3. Click Play
+4. Enjoy while studying!
+
+### **Pomodoro Timer**
+1. Click Play on timer (bottom-left)
+2. Study for 25 minutes
+3. Take 5-minute break
+4. Repeat!
 
 ---
 
-## 🔥 **WHAT MAKES IT UNIQUE?**
+## 🌟 What Makes It Unique?
 
-1. **Real Integration** - Not just theory, actual coding projects
-2. **Industry Skills** - Learn what companies like Google, Tesla, SpaceX use
-3. **Deep Content** - 500+ hours of material
-4. **Music Library** - 200+ tracks across 15 categories
-5. **Beautiful UI** - Rotating themes, smooth animations
+1. **Complete Platform** - Everything in one place
+2. **Gamification** - Make learning fun
+3. **Music Integration** - Study with perfect music
+4. **Beautiful UI** - 8 stunning themes
+5. **Keyboard Shortcuts** - Power user features
 6. **Progress Tracking** - See your growth
-7. **Free & Open** - No paywalls, no ads, forever free!
-8. **30+ Modules** - From Quantum Computing to Climate Modeling
-9. **50+ Lofi Tracks** - Perfect study music
-10. **Real Projects** - Build portfolio-worthy projects
+7. **PWA Support** - Install as app
+8. **Free & Open** - No paywalls, forever free!
+9. **Responsive** - Works on all devices
+10. **Smart Features** - Notifications, auto-save, export/import
 
 ---
 
-## 🌟 **FUTURE PLANS**
+## 📄 License
 
-- [ ] Add 20 more modules (total 50+)
-- [ ] Video tutorials for each topic
-- [ ] Community forum
-- [ ] Leaderboards & achievements
-- [ ] Mobile app (iOS/Android)
-- [ ] AI tutor integration
-- [ ] Live coding sessions
-- [ ] Certification system
+This project is open source and available for educational purposes.
 
 ---
 
-## 👨‍💻 **DEVELOPER**
+## 🤝 Contributing
 
-**Aurenya**
-- GitHub: [@aurenya13-ops](https://github.com/aurenya13-ops)
-- Email: aurenya13@gmail.com
+Want to add features or fix bugs? Feel free to fork and submit PRs!
 
 ---
 
-## 📜 **LICENSE**
+## 📞 Contact
 
-MIT License - Feel free to use, modify, and share!
-
----
-
-## 🙏 **ACKNOWLEDGMENTS**
-
-- YouTube for music hosting
-- All the amazing artists
-- Open source community
-- JEE aspirants worldwide
-- Every teacher who inspired us
+Have questions or suggestions? Reach out through the Contact section in the app!
 
 ---
 
-## 🚀 **GET STARTED**
+## ⭐ Show Your Support
 
-1. Visit: **https://aurenya13-ops.github.io/pcm-jee-journey-hub/**
-2. Explore the Music Library (200+ tracks!)
-3. Start with a Tech×PCM module (30+ to choose from!)
-4. Code, build, learn!
-5. Share with friends!
+If you find this helpful, give it a star on GitHub!
 
 ---
 
-## 📊 **DETAILED STATS**
+**Made with ❤️ for learners everywhere**
 
-| Metric | Value |
-|--------|-------|
-| Total Music Tracks | 200+ |
-| Music Categories | 15 |
-| Lofi Tracks | 50+ |
-| Tech×PCM Modules | 30+ |
-| Sub-Levels per Module | 4 |
-| Total Sub-Levels | 120+ |
-| Coding Challenges | 30+ |
-| Real Projects | 30+ |
-| Problem Sets | 100+ |
-| Content Hours | 500+ |
-| Themes | 6 |
-| Lines of Code | 10,000+ |
-| Files | 9 |
+*Replace coaching. Master concepts. Build projects. Ace exams.*
 
 ---
 
-**Made with ❤️ for JEE aspirants who want to see the REAL applications of what they're learning!**
+## 🎉 Latest Updates
 
-**Ab koi compete nahi kar payega! 🔥🇮🇳**
+### **v2.0 (January 2026)**
+- ✅ Added professional logo
+- ✅ PWA support for installable app
+- ✅ Keyboard shortcuts
+- ✅ Smart notifications
+- ✅ Progress export/import
+- ✅ Study session tracking
+- ✅ Daily goals system
+- ✅ Enhanced UI with tooltips
+- ✅ Global search improvements
+- ✅ Auto-save functionality
 
-**This is not just a learning platform - it's a MOVEMENT!** 🚀
+### **v1.0 (January 2026)**
+- ✅ Initial release
+- ✅ Complete PCM modules
+- ✅ Music player with 30+ songs
+- ✅ Gamification system
+- ✅ 8 beautiful themes
+- ✅ Pomodoro timer
+- ✅ Interactive tools
