@@ -25,27 +25,35 @@ function loadUserData() {
     updateStatsDisplay();
   }
   
-  // Update streak
+  // Update streak - FIXED: No bonus on first visit
   const lastVisit = localStorage.getItem('last_visit');
   const today = new Date().toDateString();
   
-  if (lastVisit !== today) {
+  if (lastVisit && lastVisit !== today) {
+    // Only check streak if user has visited before
     const yesterday = new Date();
     yesterday.setDate(yesterday.getDate() - 1);
     
     if (lastVisit === yesterday.toDateString()) {
+      // Consecutive day - increase streak and give bonus
       userData.streak++;
-      addXP(50); // Bonus for maintaining streak
+      addXP(50);
       showNotification(`🔥 ${userData.streak} day streak! +50 XP`, 'success');
-    } else if (lastVisit) {
-      userData.streak = 1;
     } else {
+      // Missed days - reset streak
       userData.streak = 1;
+      showNotification('Streak reset. Start a new one today!', 'info');
     }
     
     localStorage.setItem('last_visit', today);
     saveUserData();
+  } else if (!lastVisit) {
+    // First visit ever - just set streak to 1, no bonus
+    userData.streak = 1;
+    localStorage.setItem('last_visit', today);
+    saveUserData();
   }
+  // If lastVisit === today, do nothing (already visited today)
 }
 
 // Save user data
@@ -642,7 +650,7 @@ function toggleAnswer(index) {
   }
 }
 
-// Mark chapter complete
+// Mark chapter complete - FIXED: Proper validation
 function markChapterComplete(chapterId, chapterName) {
   if (!userData.completedChapters.includes(chapterId)) {
     userData.completedChapters.push(chapterId);
@@ -650,19 +658,19 @@ function markChapterComplete(chapterId, chapterName) {
     showNotification(`✅ Chapter "${chapterName}" completed! +100 XP`, 'success');
     saveUserData();
   } else {
-    showNotification('Chapter already completed!', 'info');
+    showNotification('⚠️ Chapter already completed!', 'warning');
   }
 }
 
 // Copy to clipboard
 function copyToClipboard(text) {
   navigator.clipboard.writeText(text);
-  showNotification('Copied to clipboard!', 'success');
+  showNotification('📋 Copied to clipboard!', 'success');
 }
 
-// Start practice (placeholder)
+// Start practice - FIXED: Just shows info, no XP
 function startPractice(chapterId) {
-  showNotification('Practice mode coming soon!', 'info');
+  showNotification('🎯 Practice mode coming soon!', 'info');
 }
 
 // ==================== INITIALIZE APP ====================
@@ -679,7 +687,7 @@ window.addEventListener('DOMContentLoaded', () => {
 function handleSearch(event) {
   if (event.key === 'Enter') {
     const query = event.target.value.toLowerCase();
-    showNotification(`Searching for: ${query}`, 'info');
+    showNotification(`🔍 Searching for: ${query}`, 'info');
   }
 }
 
