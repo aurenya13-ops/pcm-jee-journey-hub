@@ -1,88 +1,16 @@
-// ==================== FIRE THEMES WITH LIVE SWITCHING ====================
+// ==================== THEMES ====================
 const themes = [
-  { 
-    name: '🔥 Neon Cyberpunk', 
-    primary: '#ff006e', 
-    secondary: '#8338ec', 
-    accent: '#00f5ff', 
-    bg1: '#0a0e27', 
-    bg2: '#1a1f3a', 
-    bg3: '#2a2f4a',
-    glow: '#ff006e'
-  },
-  { 
-    name: '🌅 Sunset Paradise', 
-    primary: '#ff6b35', 
-    secondary: '#f7931e', 
-    accent: '#ffd23f', 
-    bg1: '#1a0a2e', 
-    bg2: '#2d1b3d', 
-    bg3: '#3d2c5e',
-    glow: '#ff6b35'
-  },
-  { 
-    name: '🌊 Ocean Depths', 
-    primary: '#00d9ff', 
-    secondary: '#0099ff', 
-    accent: '#00ffcc', 
-    bg1: '#001a33', 
-    bg2: '#002b4d', 
-    bg3: '#003d66',
-    glow: '#00d9ff'
-  },
-  { 
-    name: '🌲 Matrix Green', 
-    primary: '#00ff41', 
-    secondary: '#00cc33', 
-    accent: '#39ff14', 
-    bg1: '#0d1b0e', 
-    bg2: '#1a2f1b', 
-    bg3: '#274428',
-    glow: '#00ff41'
-  },
-  { 
-    name: '💜 Purple Reign', 
-    primary: '#b537f2', 
-    secondary: '#9d4edd', 
-    accent: '#e0aaff', 
-    bg1: '#1a0033', 
-    bg2: '#2d0052', 
-    bg3: '#400070',
-    glow: '#b537f2'
-  },
-  { 
-    name: '⚡ Electric Gold', 
-    primary: '#ffd60a', 
-    secondary: '#ffc300', 
-    accent: '#ffea00', 
-    bg1: '#1f1300', 
-    bg2: '#3d2600', 
-    bg3: '#5c3900',
-    glow: '#ffd60a'
-  },
-  {
-    name: '🎮 Retro Arcade',
-    primary: '#ff00ff',
-    secondary: '#00ffff',
-    accent: '#ffff00',
-    bg1: '#0a0014',
-    bg2: '#1a0028',
-    bg3: '#2a003c',
-    glow: '#ff00ff'
-  },
-  {
-    name: '🌌 Deep Space',
-    primary: '#7b2cbf',
-    secondary: '#5a189a',
-    accent: '#c77dff',
-    bg1: '#000000',
-    bg2: '#0d0221',
-    bg3: '#1a0442',
-    glow: '#7b2cbf'
-  }
+  { name: '🔥 Neon Cyberpunk', primary: '#ff006e', secondary: '#8338ec', accent: '#00f5ff', bg1: '#0a0e27', bg2: '#1a1f3a', bg3: '#2a2f4a', glow: '#ff006e' },
+  { name: '🌅 Sunset Paradise', primary: '#ff6b35', secondary: '#f7931e', accent: '#ffd23f', bg1: '#1a0a2e', bg2: '#2d1b3d', bg3: '#3d2c5e', glow: '#ff6b35' },
+  { name: '🌊 Ocean Depths', primary: '#00d9ff', secondary: '#0099ff', accent: '#00ffcc', bg1: '#001a33', bg2: '#002b4d', bg3: '#003d66', glow: '#00d9ff' },
+  { name: '🌲 Matrix Green', primary: '#00ff41', secondary: '#00cc33', accent: '#39ff14', bg1: '#0d1b0e', bg2: '#1a2f1b', bg3: '#274428', glow: '#00ff41' },
+  { name: '💜 Purple Reign', primary: '#b537f2', secondary: '#9d4edd', accent: '#e0aaff', bg1: '#1a0033', bg2: '#2d0052', bg3: '#400070', glow: '#b537f2' },
+  { name: '⚡ Electric Gold', primary: '#ffd60a', secondary: '#ffc300', accent: '#ffea00', bg1: '#1f1300', bg2: '#3d2600', bg3: '#5c3900', glow: '#ffd60a' },
+  { name: '🎮 Retro Arcade', primary: '#ff00ff', secondary: '#00ffff', accent: '#ffff00', bg1: '#0a0014', bg2: '#1a0028', bg3: '#2a003c', glow: '#ff00ff' },
+  { name: '🌌 Deep Space', primary: '#7b2cbf', secondary: '#5a189a', accent: '#c77dff', bg1: '#000000', bg2: '#0d0221', bg3: '#1a0442', glow: '#7b2cbf' }
 ];
 
-let currentThemeIndex = parseInt(localStorage.getItem('themeIndex') || '0');
+let currentThemeIndex = parseInt(localStorage.getItem('themeIndex')) || 0;
 
 function applyTheme(index) {
   const theme = themes[index];
@@ -94,610 +22,402 @@ function applyTheme(index) {
   document.documentElement.style.setProperty('--bg-tertiary', theme.bg3);
   document.documentElement.style.setProperty('--glow', theme.glow);
   
-  const themeNameEl = document.getElementById('theme-name');
-  if (themeNameEl) {
-    themeNameEl.textContent = theme.name;
-  }
+  const nameEl = document.getElementById('theme-name');
+  if (nameEl) nameEl.textContent = theme.name;
   
   localStorage.setItem('themeIndex', index);
   currentThemeIndex = index;
-  
-  console.log('Theme applied:', theme.name); // Debug log
 }
 
 function nextTheme() {
-  console.log('Next theme clicked'); // Debug log
   currentThemeIndex = (currentThemeIndex + 1) % themes.length;
   applyTheme(currentThemeIndex);
 }
 
 function prevTheme() {
-  console.log('Previous theme clicked'); // Debug log
   currentThemeIndex = (currentThemeIndex - 1 + themes.length) % themes.length;
   applyTheme(currentThemeIndex);
 }
 
-// Make functions globally accessible
 window.nextTheme = nextTheme;
 window.prevTheme = prevTheme;
-window.applyTheme = applyTheme;
-
-// ==================== MUSIC PLAYER (REAL WORKING) ====================
-const musicData = {
-  lofi: [
-    { title: 'Lofi Study Beats', url: 'https://www.youtube.com/watch?v=jfKfPfyJRdk' },
-    { title: 'Chill Lofi Mix', url: 'https://www.youtube.com/watch?v=5qap5aO4i9A' },
-    { title: 'Peaceful Piano', url: 'https://www.youtube.com/watch?v=lTRiuFIWV54' }
-  ],
-  focus: [
-    { title: 'Deep Focus', url: 'https://www.youtube.com/watch?v=DWcJFNfaw9c' },
-    { title: 'Concentration Music', url: 'https://www.youtube.com/watch?v=WPni755-Krg' },
-    { title: 'Study Music', url: 'https://www.youtube.com/watch?v=5yx6BWlEVcY' }
-  ],
-  classical: [
-    { title: 'Mozart for Studying', url: 'https://www.youtube.com/watch?v=Rb0UmrCXxVA' },
-    { title: 'Bach Masterpieces', url: 'https://www.youtube.com/watch?v=6JQm5aSjX6g' },
-    { title: 'Beethoven Symphony', url: 'https://www.youtube.com/watch?v=t3217H8JppI' }
-  ],
-  ambient: [
-    { title: 'Space Ambient', url: 'https://www.youtube.com/watch?v=1-RW82JF1lY' },
-    { title: 'Nature Sounds', url: 'https://www.youtube.com/watch?v=eKFTSSKCzWA' },
-    { title: 'Rain Sounds', url: 'https://www.youtube.com/watch?v=q76bMs-NwRk' }
-  ]
-};
-
-let currentCategory = 'lofi';
-let currentTrackIndex = 0;
-let isPlaying = false;
-
-function playMusic() {
-  const track = musicData[currentCategory][currentTrackIndex];
-  window.open(track.url, '_blank');
-  isPlaying = true;
-  updateMusicDisplay();
-}
-
-function pauseMusic() {
-  isPlaying = false;
-  updateMusicDisplay();
-}
-
-function nextTrack() {
-  currentTrackIndex = (currentTrackIndex + 1) % musicData[currentCategory].length;
-  updateMusicDisplay();
-}
-
-function prevTrack() {
-  currentTrackIndex = (currentTrackIndex - 1 + musicData[currentCategory].length) % musicData[currentCategory].length;
-  updateMusicDisplay();
-}
-
-function selectCategory(category) {
-  currentCategory = category;
-  currentTrackIndex = 0;
-  updateMusicDisplay();
-  
-  document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
-  event.target.classList.add('active');
-}
-
-function updateMusicDisplay() {
-  const track = musicData[currentCategory][currentTrackIndex];
-  const playerHTML = document.querySelector('.player-controls h3');
-  if (playerHTML) {
-    playerHTML.textContent = `Now Playing: ${track.title}`;
-  }
-}
-
-// Make music functions globally accessible
-window.playMusic = playMusic;
-window.pauseMusic = pauseMusic;
-window.nextTrack = nextTrack;
-window.prevTrack = prevTrack;
-window.selectCategory = selectCategory;
 
 // ==================== NAVIGATION ====================
 function showSection(section) {
-  console.log('Showing section:', section); // Debug log
   const content = document.getElementById('main-content');
-  
-  document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+  document.querySelectorAll('.sidebar-btn').forEach(btn => btn.classList.remove('active'));
   event?.target?.classList?.add('active');
   
+  content.innerHTML = getSectionContent(section);
+  content.classList.add('fade-in');
+  
+  if (typeof addXP === 'function') addXP(5);
+}
+
+window.showSection = showSection;
+
+function getSectionContent(section) {
   switch(section) {
-    case 'home':
-      content.innerHTML = getHomeContent();
-      break;
-    case 'dashboard':
-      content.innerHTML = getDashboardContent();
-      break;
-    case 'music':
-      content.innerHTML = getMusicContent();
-      break;
-    case 'physics':
-      content.innerHTML = getPhysicsContent();
-      break;
-    case 'chemistry':
-      content.innerHTML = getChemistryContent();
-      break;
-    case 'maths':
-      content.innerHTML = getMathsContent();
-      break;
-    case 'tech':
-      content.innerHTML = getTechContent();
-      break;
-    case 'integration':
-      content.innerHTML = getIntegrationContent();
-      break;
+    case 'dashboard': return getDashboardContent();
+    case 'physics': return getPhysicsContent();
+    case 'chemistry': return getChemistryContent();
+    case 'maths': return getMathsContent();
+    case 'coding': return getCodingContent();
+    case 'video-lectures': return getVideoLecturesContent();
+    case 'practice': return getPracticeContent();
+    case 'mock-tests': return getMockTestsContent();
+    case 'simulators': return getSimulatorsContent();
+    case 'calculators': return getCalculatorsContent();
+    case 'notes': return getNotesContent();
+    case 'flashcards': return getFlashcardsContent();
+    case 'study-planner': return getStudyPlannerContent();
+    case 'achievements': return getAchievementsContent();
+    case 'portfolio': return getPortfolioContent();
+    case 'blog': return getBlogContent();
+    case 'resume': return getResumeContent();
+    case 'contact': return getContactContent();
+    case 'projects': return getProjectsContent();
+    case 'tech-tools': return getTechToolsContent();
+    case 'visualizers': return getVisualizersContent();
+    case 'resources': return getResourcesContent();
+    case 'music': return getMusicContent();
+    case 'pomodoro': return getPomodoroContent();
+    default: return getDashboardContent();
   }
 }
 
-// Make showSection globally accessible
-window.showSection = showSection;
-
-// ==================== CONTENT GENERATORS ====================
-function getHomeContent() {
-  return `
-    <div class="hero-section">
-      <h1 class="hero-title">Welcome to Your Learning Journey! 🚀</h1>
-      <p class="hero-subtitle">Master Physics, Chemistry, Maths & Technology - All in One Place</p>
-      
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-number">4</div>
-          <div class="stat-label">Core Subjects</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">30+</div>
-          <div class="stat-label">Modules</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">100+</div>
-          <div class="stat-label">Topics</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">∞</div>
-          <div class="stat-label">Possibilities</div>
-        </div>
-      </div>
-
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">⚛️</div>
-          <h3>Physics Mastery</h3>
-          <p>From classical mechanics to quantum physics - understand the universe!</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🧪</div>
-          <h3>Chemistry Excellence</h3>
-          <p>Explore reactions, bonding, and the molecular world!</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">📐</div>
-          <h3>Mathematical Thinking</h3>
-          <p>Build problem-solving skills with calculus, algebra & more!</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">💻</div>
-          <h3>Tech Integration</h3>
-          <p>Apply concepts through coding, simulations & real projects!</p>
-        </div>
-      </div>
-    </div>
-  `;
-}
-
+// ==================== DASHBOARD ====================
 function getDashboardContent() {
   return `
-    <div class="dashboard">
-      <h2>Your Learning Dashboard 📊</h2>
+    <div class="fade-in">
+      <h1><i class="fas fa-chart-line"></i> Your Learning Dashboard</h1>
+      <p class="text-secondary">Track your progress and stay motivated!</p>
       
-      <div class="progress-section">
-        <h3>Subject Progress</h3>
-        <div class="progress-cards">
-          <div class="progress-card">
-            <h4>⚛️ Physics</h4>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: 75%"></div>
-            </div>
-            <p>75% Complete - Keep going!</p>
-          </div>
-          <div class="progress-card">
-            <h4>🧪 Chemistry</h4>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: 60%"></div>
-            </div>
-            <p>60% Complete - Great progress!</p>
-          </div>
-          <div class="progress-card">
-            <h4>📐 Maths</h4>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: 80%"></div>
-            </div>
-            <p>80% Complete - Almost there!</p>
-          </div>
-          <div class="progress-card">
-            <h4>💻 Technology</h4>
-            <div class="progress-bar">
-              <div class="progress-fill" style="width: 65%"></div>
-            </div>
-            <p>65% Complete - Doing great!</p>
-          </div>
+      <div class="stats-grid mt-2">
+        <div class="stat-card">
+          <div class="stat-number">${userXP}</div>
+          <div class="stat-label">Total XP</div>
         </div>
-      </div>
-
-      <div class="stats-banner">
-        <div class="stat-item">
-          <div class="stat-number">700+</div>
-          <div class="stat-label">Hours Studied</div>
+        <div class="stat-card">
+          <div class="stat-number">${userLevel}</div>
+          <div class="stat-label">Current Level</div>
         </div>
-        <div class="stat-item">
-          <div class="stat-number">250+</div>
-          <div class="stat-label">Problems Solved</div>
+        <div class="stat-card">
+          <div class="stat-number">${userStreak}</div>
+          <div class="stat-label">Day Streak</div>
         </div>
-        <div class="stat-item">
+        <div class="stat-card">
           <div class="stat-number">85%</div>
-          <div class="stat-label">Average Score</div>
+          <div class="stat-label">Avg Score</div>
         </div>
       </div>
-    </div>
-  `;
-}
 
-function getMusicContent() {
-  return `
-    <div class="music-section">
-      <h2>🎵 Study Music Player</h2>
-      <p class="section-subtitle">Boost your focus with curated playlists</p>
-
-      <div class="music-categories">
-        <button class="category-btn active" onclick="selectCategory('lofi')">Lofi Beats</button>
-        <button class="category-btn" onclick="selectCategory('focus')">Deep Focus</button>
-        <button class="category-btn" onclick="selectCategory('classical')">Classical</button>
-        <button class="category-btn" onclick="selectCategory('ambient')">Ambient</button>
-      </div>
-
-      <div class="music-player">
-        <div class="vinyl-animation">
-          <div class="vinyl-disc"></div>
-        </div>
-        <div class="player-controls">
-          <h3>Now Playing: ${musicData[currentCategory][currentTrackIndex].title}</h3>
-          <div class="controls">
-            <button class="control-btn" onclick="prevTrack()">⏮️ Previous</button>
-            <button class="control-btn" onclick="playMusic()">▶️ Play</button>
-            <button class="control-btn" onclick="pauseMusic()">⏸️ Pause</button>
-            <button class="control-btn" onclick="nextTrack()">⏭️ Next</button>
+      <h2 class="mt-2"><i class="fas fa-book"></i> Subject Progress</h2>
+      <div class="content-grid">
+        <div class="card">
+          <div class="card-header">
+            <i class="fas fa-atom card-icon"></i>
+            <h3 class="card-title">Physics</h3>
           </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 75%"></div>
+          </div>
+          <p class="text-secondary mt-1">75% Complete - 15/20 modules done</p>
+          <button class="btn mt-1" onclick="showSection('physics')">Continue Learning</button>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <i class="fas fa-flask card-icon"></i>
+            <h3 class="card-title">Chemistry</h3>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 60%"></div>
+          </div>
+          <p class="text-secondary mt-1">60% Complete - 12/20 modules done</p>
+          <button class="btn mt-1" onclick="showSection('chemistry')">Continue Learning</button>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <i class="fas fa-square-root-alt card-icon"></i>
+            <h3 class="card-title">Mathematics</h3>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 80%"></div>
+          </div>
+          <p class="text-secondary mt-1">80% Complete - 16/20 modules done</p>
+          <button class="btn mt-1" onclick="showSection('maths')">Continue Learning</button>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <i class="fas fa-code card-icon"></i>
+            <h3 class="card-title">Coding</h3>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 65%"></div>
+          </div>
+          <p class="text-secondary mt-1">65% Complete - 13/20 modules done</p>
+          <button class="btn mt-1" onclick="showSection('coding')">Continue Learning</button>
         </div>
       </div>
 
-      <div class="track-list">
-        <h3>Track List:</h3>
-        ${musicData[currentCategory].map((track, i) => 
-          `<p>${i + 1}. ${track.title}</p>`
-        ).join('')}
+      <h2 class="mt-2"><i class="fas fa-fire"></i> Quick Actions</h2>
+      <div class="content-grid">
+        <div class="card" onclick="showSection('practice')">
+          <div class="card-header">
+            <i class="fas fa-pen card-icon"></i>
+            <h3 class="card-title">Practice Problems</h3>
+          </div>
+          <p class="text-secondary">Solve 500+ curated problems</p>
+        </div>
+
+        <div class="card" onclick="showSection('mock-tests')">
+          <div class="card-header">
+            <i class="fas fa-clipboard-check card-icon"></i>
+            <h3 class="card-title">Mock Tests</h3>
+          </div>
+          <p class="text-secondary">Take JEE-style mock tests</p>
+        </div>
+
+        <div class="card" onclick="showSection('video-lectures')">
+          <div class="card-header">
+            <i class="fas fa-video card-icon"></i>
+            <h3 class="card-title">Video Lectures</h3>
+          </div>
+          <p class="text-secondary">Watch expert explanations</p>
+        </div>
+
+        <div class="card" onclick="showSection('simulators')">
+          <div class="card-header">
+            <i class="fas fa-vial card-icon"></i>
+            <h3 class="card-title">Simulators</h3>
+          </div>
+          <p class="text-secondary">Interactive experiments</p>
+        </div>
       </div>
     </div>
   `;
 }
 
+// ==================== PHYSICS ====================
 function getPhysicsContent() {
   return `
-    <div class="subject-section">
-      <h2>⚛️ Physics Modules</h2>
-      <p class="section-subtitle">Understand the fundamental laws of nature</p>
+    <div class="fade-in">
+      <h1><i class="fas fa-atom"></i> Physics Modules</h1>
+      <p class="text-secondary">Master the fundamental laws of nature</p>
       
-      <div class="modules-grid">
-        <div class="module-card">
-          <div class="module-icon">🎯</div>
-          <h3>Classical Mechanics</h3>
-          <p>Newton's laws, motion, forces, energy, and momentum</p>
-          <div class="module-tags">
-            <span class="tag">Kinematics</span>
-            <span class="tag">Dynamics</span>
-            <span class="tag">Energy</span>
+      <div class="content-grid mt-2">
+        <div class="card">
+          <div class="card-header">
+            <i class="fas fa-running card-icon"></i>
+            <h3 class="card-title">Mechanics</h3>
           </div>
-          <span class="difficulty medium">Medium</span>
+          <div class="card-body">
+            <p>Kinematics, dynamics, work, energy, and momentum</p>
+          </div>
+          <div class="card-footer">
+            <span class="tag">Newton's Laws</span>
+            <span class="tag">Energy</span>
+            <span class="tag">Momentum</span>
+          </div>
+          <button class="btn mt-1" onclick="alert('Opening Mechanics module...')">Start Learning</button>
         </div>
-        
-        <div class="module-card">
-          <div class="module-icon">⚡</div>
-          <h3>Electromagnetism</h3>
-          <p>Electric fields, magnetic fields, circuits, and waves</p>
-          <div class="module-tags">
+
+        <div class="card">
+          <div class="card-header">
+            <i class="fas fa-bolt card-icon"></i>
+            <h3 class="card-title">Electromagnetism</h3>
+          </div>
+          <div class="card-body">
+            <p>Electric fields, magnetic fields, circuits, and EM waves</p>
+          </div>
+          <div class="card-footer">
             <span class="tag">Electricity</span>
             <span class="tag">Magnetism</span>
             <span class="tag">Waves</span>
           </div>
-          <span class="difficulty hard">Hard</span>
+          <button class="btn mt-1" onclick="alert('Opening Electromagnetism module...')">Start Learning</button>
         </div>
-        
-        <div class="module-card">
-          <div class="module-icon">🌡️</div>
-          <h3>Thermodynamics</h3>
-          <p>Heat, temperature, entropy, and energy transfer</p>
-          <div class="module-tags">
+
+        <div class="card">
+          <div class="card-header">
+            <i class="fas fa-thermometer-half card-icon"></i>
+            <h3 class="card-title">Thermodynamics</h3>
+          </div>
+          <div class="card-body">
+            <p>Heat, temperature, entropy, and laws of thermodynamics</p>
+          </div>
+          <div class="card-footer">
             <span class="tag">Heat</span>
             <span class="tag">Laws</span>
             <span class="tag">Engines</span>
           </div>
-          <span class="difficulty medium">Medium</span>
+          <button class="btn mt-1" onclick="alert('Opening Thermodynamics module...')">Start Learning</button>
         </div>
-        
-        <div class="module-card">
-          <div class="module-icon">🌊</div>
-          <h3>Waves & Optics</h3>
-          <p>Wave motion, sound, light, and optical phenomena</p>
-          <div class="module-tags">
+
+        <div class="card">
+          <div class="card-header">
+            <i class="fas fa-wave-square card-icon"></i>
+            <h3 class="card-title">Waves & Optics</h3>
+          </div>
+          <div class="card-body">
+            <p>Wave motion, sound, light, and optical phenomena</p>
+          </div>
+          <div class="card-footer">
             <span class="tag">Waves</span>
             <span class="tag">Light</span>
             <span class="tag">Optics</span>
           </div>
-          <span class="difficulty medium">Medium</span>
+          <button class="btn mt-1" onclick="alert('Opening Waves module...')">Start Learning</button>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <i class="fas fa-atom card-icon"></i>
+            <h3 class="card-title">Modern Physics</h3>
+          </div>
+          <div class="card-body">
+            <p>Quantum mechanics, relativity, and atomic physics</p>
+          </div>
+          <div class="card-footer">
+            <span class="tag">Quantum</span>
+            <span class="tag">Relativity</span>
+            <span class="tag">Nuclear</span>
+          </div>
+          <button class="btn mt-1" onclick="alert('Opening Modern Physics module...')">Start Learning</button>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <i class="fas fa-vial card-icon"></i>
+            <h3 class="card-title">Physics Simulator</h3>
+          </div>
+          <div class="card-body">
+            <p>Interactive simulations for all physics concepts</p>
+          </div>
+          <button class="btn mt-1" onclick="showSection('simulators')">Open Simulator</button>
         </div>
       </div>
     </div>
   `;
 }
 
+// ==================== CHEMISTRY ====================
 function getChemistryContent() {
   return `
-    <div class="subject-section">
-      <h2>🧪 Chemistry Modules</h2>
-      <p class="section-subtitle">Explore the molecular world</p>
+    <div class="fade-in">
+      <h1><i class="fas fa-flask"></i> Chemistry Modules</h1>
+      <p class="text-secondary">Explore the molecular world</p>
       
-      <div class="modules-grid">
-        <div class="module-card">
-          <div class="module-icon">🔬</div>
-          <h3>Organic Chemistry</h3>
-          <p>Carbon compounds, reactions, and mechanisms</p>
-          <div class="module-tags">
+      <div class="content-grid mt-2">
+        <div class="card">
+          <div class="card-header">
+            <i class="fas fa-leaf card-icon"></i>
+            <h3 class="card-title">Organic Chemistry</h3>
+          </div>
+          <div class="card-body">
+            <p>Carbon compounds, reactions, and mechanisms</p>
+          </div>
+          <div class="card-footer">
             <span class="tag">Hydrocarbons</span>
             <span class="tag">Reactions</span>
             <span class="tag">Mechanisms</span>
           </div>
-          <span class="difficulty hard">Hard</span>
+          <button class="btn mt-1">Start Learning</button>
         </div>
-        
-        <div class="module-card">
-          <div class="module-icon">⚗️</div>
-          <h3>Inorganic Chemistry</h3>
-          <p>Elements, compounds, and coordination chemistry</p>
-          <div class="module-tags">
+
+        <div class="card">
+          <div class="card-header">
+            <i class="fas fa-atom card-icon"></i>
+            <h3 class="card-title">Inorganic Chemistry</h3>
+          </div>
+          <div class="card-body">
+            <p>Elements, compounds, and coordination chemistry</p>
+          </div>
+          <div class="card-footer">
             <span class="tag">Periodic Table</span>
             <span class="tag">Bonding</span>
             <span class="tag">Complexes</span>
           </div>
-          <span class="difficulty medium">Medium</span>
+          <button class="btn mt-1">Start Learning</button>
         </div>
-        
-        <div class="module-card">
-          <div class="module-icon">📊</div>
-          <h3>Physical Chemistry</h3>
-          <p>Thermodynamics, kinetics, and equilibrium</p>
-          <div class="module-tags">
+
+        <div class="card">
+          <div class="card-header">
+            <i class="fas fa-chart-line card-icon"></i>
+            <h3 class="card-title">Physical Chemistry</h3>
+          </div>
+          <div class="card-body">
+            <p>Thermodynamics, kinetics, and equilibrium</p>
+          </div>
+          <div class="card-footer">
             <span class="tag">Thermodynamics</span>
             <span class="tag">Kinetics</span>
             <span class="tag">Equilibrium</span>
           </div>
-          <span class="difficulty hard">Hard</span>
+          <button class="btn mt-1">Start Learning</button>
         </div>
       </div>
     </div>
   `;
 }
 
+// ==================== MATHEMATICS ====================
 function getMathsContent() {
   return `
-    <div class="subject-section">
-      <h2>📐 Mathematics Modules</h2>
-      <p class="section-subtitle">Build your mathematical foundation</p>
+    <div class="fade-in">
+      <h1><i class="fas fa-square-root-alt"></i> Mathematics Modules</h1>
+      <p class="text-secondary">Build your mathematical foundation</p>
       
-      <div class="modules-grid">
-        <div class="module-card">
-          <div class="module-icon">∫</div>
-          <h3>Calculus</h3>
-          <p>Differentiation, integration, and applications</p>
-          <div class="module-tags">
+      <div class="content-grid mt-2">
+        <div class="card">
+          <div class="card-header">
+            <i class="fas fa-infinity card-icon"></i>
+            <h3 class="card-title">Calculus</h3>
+          </div>
+          <div class="card-body">
+            <p>Limits, derivatives, integrals, and applications</p>
+          </div>
+          <div class="card-footer">
             <span class="tag">Limits</span>
             <span class="tag">Derivatives</span>
             <span class="tag">Integrals</span>
           </div>
-          <span class="difficulty hard">Hard</span>
+          <button class="btn mt-1">Start Learning</button>
         </div>
-        
-        <div class="module-card">
-          <div class="module-icon">📈</div>
-          <h3>Algebra</h3>
-          <p>Equations, functions, and complex numbers</p>
-          <div class="module-tags">
+
+        <div class="card">
+          <div class="card-header">
+            <i class="fas fa-calculator card-icon"></i>
+            <h3 class="card-title">Algebra</h3>
+          </div>
+          <div class="card-body">
+            <p>Equations, functions, and complex numbers</p>
+          </div>
+          <div class="card-footer">
             <span class="tag">Equations</span>
             <span class="tag">Functions</span>
             <span class="tag">Complex</span>
           </div>
-          <span class="difficulty medium">Medium</span>
+          <button class="btn mt-1">Start Learning</button>
         </div>
-        
-        <div class="module-card">
-          <div class="module-icon">📐</div>
-          <h3>Geometry</h3>
-          <p>Shapes, vectors, and coordinate geometry</p>
-          <div class="module-tags">
+
+        <div class="card">
+          <div class="card-header">
+            <i class="fas fa-shapes card-icon"></i>
+            <h3 class="card-title">Geometry</h3>
+          </div>
+          <div class="card-body">
+            <p>Shapes, vectors, and coordinate geometry</p>
+          </div>
+          <div class="card-footer">
             <span class="tag">2D Shapes</span>
             <span class="tag">3D Shapes</span>
             <span class="tag">Vectors</span>
           </div>
-          <span class="difficulty medium">Medium</span>
-        </div>
-      </div>
-    </div>
-  `;
-}
-
-function getTechContent() {
-  return `
-    <div class="subject-section">
-      <h2>💻 Technology Modules</h2>
-      <p class="section-subtitle">Apply your knowledge through code</p>
-      
-      <div class="modules-grid">
-        <div class="module-card" onclick="window.open('https://visualgo.net/en', '_blank')">
-          <div class="module-icon">🌳</div>
-          <h3>Data Structures Visualizer</h3>
-          <p>Interactive visualization of trees, graphs, sorting algorithms</p>
-          <div class="module-tags">
-            <span class="tag">Trees</span>
-            <span class="tag">Graphs</span>
-            <span class="tag">Sorting</span>
-          </div>
-        </div>
-        
-        <div class="module-card" onclick="window.open('https://codesandbox.io/s/new', '_blank')">
-          <div class="module-icon">🌐</div>
-          <h3>Full-Stack Web Playground</h3>
-          <p>Build React, Vue, Angular apps instantly in browser</p>
-          <div class="module-tags">
-            <span class="tag">React</span>
-            <span class="tag">Vue</span>
-            <span class="tag">Angular</span>
-          </div>
-        </div>
-        
-        <div class="module-card" onclick="window.open('https://colab.research.google.com/', '_blank')">
-          <div class="module-icon">🤖</div>
-          <h3>Machine Learning Lab</h3>
-          <p>Train ML models with FREE GPUs on Google Colab</p>
-          <div class="module-tags">
-            <span class="tag">Python</span>
-            <span class="tag">TensorFlow</span>
-            <span class="tag">PyTorch</span>
-          </div>
-        </div>
-        
-        <div class="module-card" onclick="window.open('https://remix.ethereum.org/', '_blank')">
-          <div class="module-icon">⛓️</div>
-          <h3>Blockchain Builder</h3>
-          <p>Write and deploy Ethereum smart contracts</p>
-          <div class="module-tags">
-            <span class="tag">Solidity</span>
-            <span class="tag">Web3</span>
-            <span class="tag">DApps</span>
-          </div>
-        </div>
-        
-        <div class="module-card" onclick="window.open('https://editor.gdevelop.io/', '_blank')">
-          <div class="module-icon">🎮</div>
-          <h3>Game Dev Studio</h3>
-          <p>Create 2D/3D games without coding using GDevelop</p>
-          <div class="module-tags">
-            <span class="tag">No-Code</span>
-            <span class="tag">2D/3D</span>
-            <span class="tag">Physics</span>
-          </div>
-        </div>
-        
-        <div class="module-card" onclick="window.open('https://snack.expo.dev/', '_blank')">
-          <div class="module-icon">📱</div>
-          <h3>Mobile App Builder</h3>
-          <p>Build React Native apps and test on your phone</p>
-          <div class="module-tags">
-            <span class="tag">React Native</span>
-            <span class="tag">iOS</span>
-            <span class="tag">Android</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  `;
-}
-
-function getIntegrationContent() {
-  return `
-    <div class="integration-section">
-      <h2>🔥 PCM × Technology Integration</h2>
-      <p class="section-subtitle">Where Science Meets Code - Real Interactive Tools!</p>
-      
-      <div class="integration-categories">
-        <div class="category-section">
-          <h3>⚛️ Physics × Tech</h3>
-          <div class="modules-grid">
-            <div class="module-card" onclick="window.open('https://quantum-computing.ibm.com/composer', '_blank')">
-              <div class="module-icon">💫</div>
-              <h4>Quantum Computing × Chemistry</h4>
-              <p>Build quantum circuits on IBM Quantum Composer</p>
-              <div class="module-tags">
-                <span class="tag">Quantum</span>
-                <span class="tag">IBM</span>
-                <span class="tag">Circuits</span>
-              </div>
-            </div>
-            
-            <div class="module-card" onclick="window.open('https://www.shadertoy.com/new', '_blank')">
-              <div class="module-icon">🎨</div>
-              <h4>Ray Tracing Engine</h4>
-              <p>Create stunning graphics with ShaderToy</p>
-              <div class="module-tags">
-                <span class="tag">GLSL</span>
-                <span class="tag">Graphics</span>
-                <span class="tag">Physics</span>
-              </div>
-            </div>
-            
-            <div class="module-card" onclick="window.open('https://phet.colorado.edu/sims/html/collision-lab/latest/collision-lab_en.html', '_blank')">
-              <div class="module-icon">💥</div>
-              <h4>Particle Physics Simulator</h4>
-              <p>Simulate particle collisions with PhET</p>
-              <div class="module-tags">
-                <span class="tag">Collisions</span>
-                <span class="tag">Momentum</span>
-                <span class="tag">Energy</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="category-section">
-          <h3>🧪 Chemistry × Tech</h3>
-          <div class="modules-grid">
-            <div class="module-card" onclick="window.open('https://playground.tensorflow.org/', '_blank')">
-              <div class="module-icon">🧠</div>
-              <h4>Neural Network Builder</h4>
-              <p>Build & train neural networks visually</p>
-              <div class="module-tags">
-                <span class="tag">ML</span>
-                <span class="tag">Neural Nets</span>
-                <span class="tag">Visual</span>
-              </div>
-            </div>
-            
-            <div class="module-card" onclick="window.open('https://cryptii.com/', '_blank')">
-              <div class="module-icon">🔐</div>
-              <h4>Cryptography Lab</h4>
-              <p>Experiment with encryption algorithms</p>
-              <div class="module-tags">
-                <span class="tag">Encryption</span>
-                <span class="tag">Ciphers</span>
-                <span class="tag">Security</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="category-section">
-          <h3>📐 Maths × Tech</h3>
-          <div class="modules-grid">
-            <div class="module-card" onclick="window.open('https://paveldogreat.github.io/WebGL-Fluid-Simulation/', '_blank')">
-              <div class="module-icon">🌊</div>
-              <h4>Fluid Dynamics Simulator</h4>
-              <p>Play with real fluid physics in browser</p>
-              <div class="module-tags">
-                <span class="tag">WebGL</span>
-                <span class="tag">Physics</span>
-                <span class="tag">Simulation</span>
-              </div>
-            </div>
-          </div>
+          <button class="btn mt-1">Start Learning</button>
         </div>
       </div>
     </div>
@@ -706,7 +426,6 @@ function getIntegrationContent() {
 
 // ==================== INITIALIZATION ====================
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('DOM loaded, initializing...'); // Debug log
   applyTheme(currentThemeIndex);
-  showSection('home');
+  showSection('dashboard');
 });
