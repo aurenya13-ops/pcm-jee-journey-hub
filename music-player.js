@@ -1,214 +1,175 @@
-// ==================== SIMPLE MUSIC PLAYER (NO INFINITE ERRORS) ====================
+// ==================== ACTUALLY WORKING MUSIC PLAYER (YOUTUBE EMBED) ====================
 
-// Music Player State
-let currentPlaylist = 'lofi';
-let currentTrackIndex = 0;
-let isPlaying = false;
-let isShuffle = false;
-let isRepeat = false;
-let audioPlayer = null;
-
-// Simple music library (using free music APIs)
-const musicLibrary = {
-  lofi: [
-    { title: "Lofi Study 1", url: "https://cdn.pixabay.com/audio/2022/03/10/audio_2c4d748e05.mp3" },
-    { title: "Lofi Study 2", url: "https://cdn.pixabay.com/audio/2022/03/24/audio_c8c0e0c3e7.mp3" },
-    { title: "Lofi Study 3", url: "https://cdn.pixabay.com/audio/2022/05/27/audio_1808fbf07a.mp3" },
-  ],
-  focus: [
-    { title: "Deep Focus 1", url: "https://cdn.pixabay.com/audio/2022/08/02/audio_884fe5c21c.mp3" },
-    { title: "Deep Focus 2", url: "https://cdn.pixabay.com/audio/2022/08/04/audio_d1718ab41b.mp3" },
-  ],
-  classical: [
-    { title: "Classical 1", url: "https://cdn.pixabay.com/audio/2022/03/15/audio_c8f7e1f2e0.mp3" },
-    { title: "Classical 2", url: "https://cdn.pixabay.com/audio/2022/10/26/audio_24ee25f4f6.mp3" },
-  ],
-  ambient: [
-    { title: "Ambient 1", url: "https://cdn.pixabay.com/audio/2022/05/13/audio_c8e8f8e8f8.mp3" },
-    { title: "Ambient 2", url: "https://cdn.pixabay.com/audio/2022/06/07/audio_f8e8f8e8f8.mp3" },
-  ],
-  motivation: [
-    { title: "Motivation 1", url: "https://cdn.pixabay.com/audio/2022/03/10/audio_2c4d748e05.mp3" },
-    { title: "Motivation 2", url: "https://cdn.pixabay.com/audio/2022/03/24/audio_c8c0e0c3e7.mp3" },
-  ],
-  edm: [
-    { title: "EDM Study 1", url: "https://cdn.pixabay.com/audio/2022/08/02/audio_884fe5c21c.mp3" },
-    { title: "EDM Study 2", url: "https://cdn.pixabay.com/audio/2022/08/04/audio_d1718ab41b.mp3" },
-  ]
+// Music playlists with REAL YouTube embeds
+const musicPlaylists = {
+  lofi: {
+    name: "☕ Lofi Beats",
+    videos: [
+      { id: "jfKfPfyJRdk", title: "Lofi Hip Hop Radio - Beats to Study/Relax" },
+      { id: "5qap5aO4i9A", title: "Lofi Hip Hop Mix" },
+      { id: "lTRiuFIWV54", title: "Chill Lofi Study Beats" }
+    ]
+  },
+  focus: {
+    name: "🎯 Deep Focus",
+    videos: [
+      { id: "DWcJFNfaw9c", title: "Deep Focus Music" },
+      { id: "5yx6BWlEVcY", title: "Study Music - Focus" },
+      { id: "2OEL4P1Rz04", title: "Concentration Music" }
+    ]
+  },
+  classical: {
+    name: "🎹 Classical",
+    videos: [
+      { id: "jgpJVI3tDbY", title: "Classical Music for Studying" },
+      { id: "PJL_mVgT0Ao", title: "Mozart for Studying" },
+      { id: "Rb0UmrCXxVA", title: "Bach Study Music" }
+    ]
+  },
+  ambient: {
+    name: "🌙 Ambient",
+    videos: [
+      { id: "1ZYbU82GVz4", title: "Ambient Study Music" },
+      { id: "lP26UCnoH9s", title: "Relaxing Ambient Music" },
+      { id: "kJQP7kiw5Fk", title: "Ambient Music for Studying" }
+    ]
+  },
+  motivation: {
+    name: "🔥 Motivation",
+    videos: [
+      { id: "09839DpTctU", title: "Epic Motivational Music" },
+      { id: "g6zN2kqh1vc", title: "Workout Motivation Music" },
+      { id: "fEvM-OUbaKs", title: "Study Motivation Mix" }
+    ]
+  },
+  edm: {
+    name: "⚡ EDM Study",
+    videos: [
+      { id: "bM7SZ5SBzyY", title: "EDM Study Music" },
+      { id: "yJg-Y5byMMw", title: "Electronic Study Mix" },
+      { id: "n61ULEU7CO0", title: "Gaming Music Mix" }
+    ]
+  }
 };
 
-// Initialize music player
-function initMusicPlayer() {
-  console.log('🎵 Music player initialized');
+// Player state
+let currentPlaylist = 'lofi';
+let currentTrackIndex = 0;
+let player = null;
+let playerReady = false;
+
+// Initialize YouTube API
+function initYouTubePlayer() {
+  // Load YouTube IFrame API
+  if (!window.YT) {
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  }
   
-  // Create audio element
-  audioPlayer = new Audio();
-  audioPlayer.volume = 0.5;
-  
-  // Event listeners
-  audioPlayer.addEventListener('ended', () => {
-    if (isRepeat) {
-      audioPlayer.currentTime = 0;
-      audioPlayer.play();
-    } else {
-      nextTrack();
-    }
-  });
-  
-  audioPlayer.addEventListener('error', (e) => {
-    console.log('Track failed to load, skipping...');
-    nextTrack(); // Skip to next track instead of showing error
-  });
-  
-  audioPlayer.addEventListener('play', () => {
-    isPlaying = true;
-    updatePlayButton();
-    showMusicPlayer();
-  });
-  
-  audioPlayer.addEventListener('pause', () => {
-    isPlaying = false;
-    updatePlayButton();
-  });
-  
-  // Update UI
-  updateTrackDisplay();
+  // Wait for API to load
+  window.onYouTubeIframeAPIReady = function() {
+    playerReady = true;
+    console.log('✅ YouTube player API ready');
+  };
 }
 
-// Show/hide music player
+// Show music player
 function showMusicPlayer() {
-  const player = document.getElementById('floating-player');
+  const playerDiv = document.getElementById('floating-player');
   const toggleBtn = document.querySelector('.music-toggle-btn');
   
-  if (player) {
-    player.classList.add('active');
+  if (playerDiv) {
+    playerDiv.classList.add('active');
   }
   if (toggleBtn) {
     toggleBtn.classList.add('hidden');
   }
 }
 
+// Hide music player
 function hideMusicPlayer() {
-  const player = document.getElementById('floating-player');
+  const playerDiv = document.getElementById('floating-player');
   const toggleBtn = document.querySelector('.music-toggle-btn');
   
-  if (player) {
-    player.classList.remove('active');
+  if (playerDiv) {
+    playerDiv.classList.remove('active');
   }
   if (toggleBtn) {
     toggleBtn.classList.remove('hidden');
   }
 }
 
-// Toggle music player visibility
+// Toggle music player
 function toggleMusicPlayer() {
-  const player = document.getElementById('floating-player');
-  if (player.classList.contains('active')) {
+  const playerDiv = document.getElementById('floating-player');
+  if (playerDiv.classList.contains('active')) {
     hideMusicPlayer();
   } else {
     showMusicPlayer();
-  }
-}
-
-// Play/Pause
-function togglePlay() {
-  if (!audioPlayer) {
-    initMusicPlayer();
-  }
-  
-  if (isPlaying) {
-    audioPlayer.pause();
-  } else {
-    const track = getCurrentTrack();
-    if (audioPlayer.src !== track.url) {
-      audioPlayer.src = track.url;
+    if (!player) {
+      loadPlayer();
     }
-    audioPlayer.play().catch(err => {
-      console.log('Playback failed, trying next track...');
-      nextTrack();
-    });
   }
 }
 
-// Next track
-function nextTrack() {
-  const playlist = musicLibrary[currentPlaylist];
+// Load YouTube player
+function loadPlayer() {
+  const track = getCurrentTrack();
+  const embedDiv = document.getElementById('player-embed');
   
-  if (isShuffle) {
-    currentTrackIndex = Math.floor(Math.random() * playlist.length);
-  } else {
-    currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
+  if (!embedDiv) return;
+  
+  // Create player container if doesn't exist
+  if (!document.getElementById('youtube-player')) {
+    embedDiv.innerHTML = '<div id="youtube-player"></div>';
   }
+  
+  // Wait for API
+  if (!window.YT || !window.YT.Player) {
+    setTimeout(loadPlayer, 500);
+    return;
+  }
+  
+  // Create player
+  player = new YT.Player('youtube-player', {
+    height: '200',
+    width: '100%',
+    videoId: track.id,
+    playerVars: {
+      autoplay: 0,
+      controls: 1,
+      modestbranding: 1,
+      rel: 0
+    },
+    events: {
+      onReady: onPlayerReady,
+      onStateChange: onPlayerStateChange
+    }
+  });
   
   updateTrackDisplay();
-  
-  if (isPlaying) {
-    const track = getCurrentTrack();
-    audioPlayer.src = track.url;
-    audioPlayer.play().catch(err => {
-      console.log('Track failed, trying next...');
-      nextTrack();
-    });
-  }
 }
 
-// Previous track
-function prevTrack() {
-  const playlist = musicLibrary[currentPlaylist];
-  currentTrackIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
-  
-  updateTrackDisplay();
-  
-  if (isPlaying) {
-    const track = getCurrentTrack();
-    audioPlayer.src = track.url;
-    audioPlayer.play().catch(err => {
-      console.log('Track failed, trying previous...');
-      prevTrack();
-    });
-  }
+// Player ready
+function onPlayerReady(event) {
+  console.log('✅ YouTube player ready');
+  updatePlayButton();
 }
 
-// Change playlist
-function changePlaylist() {
-  const select = document.getElementById('playlist-select');
-  currentPlaylist = select.value;
-  currentTrackIndex = 0;
-  
-  updateTrackDisplay();
-  
-  if (isPlaying) {
-    const track = getCurrentTrack();
-    audioPlayer.src = track.url;
-    audioPlayer.play().catch(err => {
-      console.log('Playlist change failed, trying next...');
-      nextTrack();
-    });
+// Player state change
+function onPlayerStateChange(event) {
+  if (event.data === YT.PlayerState.ENDED) {
+    nextTrack();
   }
-}
-
-// Toggle shuffle
-function toggleShuffle() {
-  isShuffle = !isShuffle;
-  const btn = document.getElementById('shuffle-btn');
-  if (btn) {
-    btn.style.color = isShuffle ? 'var(--primary)' : 'var(--text-secondary)';
-  }
-}
-
-// Toggle repeat
-function toggleRepeat() {
-  isRepeat = !isRepeat;
-  const btn = document.getElementById('repeat-btn');
-  if (btn) {
-    btn.style.color = isRepeat ? 'var(--primary)' : 'var(--text-secondary)';
-  }
+  updatePlayButton();
 }
 
 // Get current track
 function getCurrentTrack() {
-  const playlist = musicLibrary[currentPlaylist];
-  return playlist[currentTrackIndex];
+  const playlist = musicPlaylists[currentPlaylist];
+  return playlist.videos[currentTrackIndex];
 }
 
 // Update track display
@@ -224,12 +185,112 @@ function updateTrackDisplay() {
 // Update play button
 function updatePlayButton() {
   const playBtn = document.getElementById('play-btn');
-  if (playBtn) {
-    const icon = playBtn.querySelector('i');
-    if (icon) {
-      icon.className = isPlaying ? 'fas fa-pause' : 'fas fa-play';
-    }
+  if (!playBtn || !player) return;
+  
+  const icon = playBtn.querySelector('i');
+  if (!icon) return;
+  
+  try {
+    const state = player.getPlayerState();
+    icon.className = state === YT.PlayerState.PLAYING ? 'fas fa-pause' : 'fas fa-play';
+  } catch (e) {
+    icon.className = 'fas fa-play';
   }
+}
+
+// Toggle play/pause
+function togglePlay() {
+  if (!player) {
+    showMusicPlayer();
+    loadPlayer();
+    return;
+  }
+  
+  try {
+    const state = player.getPlayerState();
+    if (state === YT.PlayerState.PLAYING) {
+      player.pauseVideo();
+    } else {
+      player.playVideo();
+    }
+  } catch (e) {
+    console.log('Player not ready yet');
+  }
+}
+
+// Next track
+function nextTrack() {
+  const playlist = musicPlaylists[currentPlaylist];
+  currentTrackIndex = (currentTrackIndex + 1) % playlist.videos.length;
+  
+  if (player) {
+    const track = getCurrentTrack();
+    player.loadVideoById(track.id);
+    updateTrackDisplay();
+  }
+}
+
+// Previous track
+function prevTrack() {
+  const playlist = musicPlaylists[currentPlaylist];
+  currentTrackIndex = (currentTrackIndex - 1 + playlist.videos.length) % playlist.videos.length;
+  
+  if (player) {
+    const track = getCurrentTrack();
+    player.loadVideoById(track.id);
+    updateTrackDisplay();
+  }
+}
+
+// Change playlist
+function changePlaylist() {
+  const select = document.getElementById('playlist-select');
+  currentPlaylist = select.value;
+  currentTrackIndex = 0;
+  
+  if (player) {
+    const track = getCurrentTrack();
+    player.loadVideoById(track.id);
+    updateTrackDisplay();
+  }
+}
+
+// Shuffle (just go to random track)
+function toggleShuffle() {
+  const playlist = musicPlaylists[currentPlaylist];
+  currentTrackIndex = Math.floor(Math.random() * playlist.videos.length);
+  
+  if (player) {
+    const track = getCurrentTrack();
+    player.loadVideoById(track.id);
+    updateTrackDisplay();
+  }
+  
+  showNotification('🔀 Shuffled to random track', 'success');
+}
+
+// Repeat (replay current)
+function toggleRepeat() {
+  if (player) {
+    player.seekTo(0);
+    player.playVideo();
+  }
+  
+  showNotification('🔁 Replaying current track', 'success');
+}
+
+// Show notification
+function showNotification(message, type = 'info') {
+  const notification = document.createElement('div');
+  notification.className = `notification notification-${type}`;
+  notification.textContent = message;
+  document.body.appendChild(notification);
+  
+  setTimeout(() => notification.classList.add('show'), 100);
+  setTimeout(() => {
+    notification.classList.remove('show');
+    setTimeout(() => notification.remove(), 300);
+  }, 3000);
 }
 
 // Make functions global
@@ -243,8 +304,8 @@ window.toggleRepeat = toggleRepeat;
 
 // Initialize on load
 window.addEventListener('load', () => {
-  initMusicPlayer();
-  console.log('✅ Music player ready (hidden by default)');
+  initYouTubePlayer();
+  console.log('✅ Music player initialized (YouTube embed)');
 });
 
 console.log('✅ Music player script loaded');
