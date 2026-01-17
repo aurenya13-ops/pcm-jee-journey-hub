@@ -58,7 +58,7 @@ function showNotification(message, type = 'info') {
   const notification = document.createElement('div');
   notification.className = `notification notification-${type}`;
   notification.innerHTML = `
-    <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+    <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : type === 'warning' ? 'exclamation-triangle' : 'info-circle'}"></i>
     <span>${message}</span>
   `;
   document.body.appendChild(notification);
@@ -79,7 +79,9 @@ function showSection(section) {
   document.querySelectorAll('.sidebar-btn').forEach(btn => {
     btn.classList.remove('active');
   });
-  event.target.classList.add('active');
+  if (event && event.target) {
+    event.target.classList.add('active');
+  }
   
   // Render section
   const content = document.getElementById('main-content');
@@ -110,7 +112,7 @@ function showSection(section) {
       content.innerHTML = renderFlashcards();
       break;
     case 'music':
-      content.innerHTML = renderMusic();
+      content.innerHTML = '<div class="coming-soon"><i class="fas fa-music"></i><h2>Music Player</h2><p>Use the floating player on the right!</p></div>';
       break;
     case 'notes':
       content.innerHTML = renderNotes();
@@ -308,8 +310,6 @@ function renderPhysics() {
           `).join('')}
         </div>
       </div>
-
-      <!-- More sections would be added here -->
     </div>
   `;
 }
@@ -411,7 +411,7 @@ function showChapter(subject, chapterId) {
       <div class="content-section">
         <h2><i class="fas fa-layer-group"></i> Flashcards</h2>
         <button class="btn-primary" onclick="openFlashcards('${chapterId}')">
-          <i class="fas fa-cards-blank"></i> Study ${chapter.flashcards ? chapter.flashcards.length : chapter.topics.length * 3} Flashcards
+          <i class="fas fa-cards-blank"></i> Study Flashcards
         </button>
       </div>
 
@@ -457,125 +457,22 @@ function copyToClipboard(text) {
   showNotification('Copied to clipboard!', 'success');
 }
 
-// ==================== CHEMISTRY SECTION ====================
+// ==================== OTHER SECTIONS ====================
 
 function renderChemistry() {
-  return `
-    <div class="subject-page">
-      <div class="subject-header">
-        <h1><i class="fas fa-flask"></i> Chemistry - Complete JEE Syllabus</h1>
-        <p>47 Chapters | 550+ Topics | 900+ Problems</p>
-      </div>
-      <div class="coming-soon">
-        <i class="fas fa-flask"></i>
-        <h2>Chemistry Content Loading...</h2>
-        <p>Complete chemistry syllabus with organic, inorganic, and physical chemistry</p>
-      </div>
-    </div>
-  `;
+  return `<div class="coming-soon"><i class="fas fa-flask"></i><h2>Chemistry - 47 Chapters</h2><p>Complete content coming soon!</p></div>`;
 }
-
-// ==================== MATHS SECTION ====================
 
 function renderMaths() {
-  return `
-    <div class="subject-page">
-      <div class="subject-header">
-        <h1><i class="fas fa-square-root-alt"></i> Mathematics - Complete JEE Syllabus</h1>
-        <p>62 Chapters | 700+ Topics | 1200+ Problems</p>
-      </div>
-      <div class="coming-soon">
-        <i class="fas fa-square-root-alt"></i>
-        <h2>Mathematics Content Loading...</h2>
-        <p>Complete maths syllabus with algebra, calculus, and geometry</p>
-      </div>
-    </div>
-  `;
+  return `<div class="coming-soon"><i class="fas fa-square-root-alt"></i><h2>Mathematics - 62 Chapters</h2><p>Complete content coming soon!</p></div>`;
 }
-
-// ==================== TECH SECTION ====================
 
 function renderTech() {
-  if (typeof techContent === 'undefined') {
-    return '<div class="loading">Loading Tech content...</div>';
-  }
-
-  return `
-    <div class="subject-page">
-      <div class="subject-header">
-        <h1><i class="fas fa-laptop-code"></i> Technology - Complete Roadmap</h1>
-        <p>100+ Projects | 500+ DSA Problems | Web Dev | AI/ML | Mobile | DevOps</p>
-      </div>
-
-      <!-- Web Development -->
-      <div class="tech-section">
-        <h2><i class="fas fa-globe"></i> Web Development</h2>
-        <div class="projects-grid">
-          ${techContent.webDev.roadmap[0].projects.slice(0, 3).map(project => `
-            <div class="project-card">
-              <div class="project-header">
-                <h3>${project.name}</h3>
-                <span class="difficulty-badge ${project.difficulty}">${project.difficulty}</span>
-              </div>
-              <p>${project.description}</p>
-              <div class="project-tech">
-                ${project.tech.map(tech => `<span class="tech-badge">${tech}</span>`).join('')}
-              </div>
-              <div class="project-link">
-                <span class="pcm-link"><i class="fas fa-link"></i> ${project.pcmLink}</span>
-              </div>
-              <button class="btn-primary" onclick="showProject('${project.name}')">
-                <i class="fas fa-code"></i> View Project
-              </button>
-            </div>
-          `).join('')}
-        </div>
-      </div>
-
-      <!-- DSA -->
-      <div class="tech-section">
-        <h2><i class="fas fa-code"></i> Data Structures & Algorithms</h2>
-        <p>500+ Problems from Easy to Hard</p>
-        <button class="btn-primary" onclick="showSection('problems')">
-          <i class="fas fa-pen"></i> Start Solving DSA Problems
-        </button>
-      </div>
-    </div>
-  `;
+  return `<div class="coming-soon"><i class="fas fa-laptop-code"></i><h2>Technology - 100+ Projects</h2><p>Complete content coming soon!</p></div>`;
 }
 
-// ==================== PROBLEMS SECTION ====================
-
 function renderProblems() {
-  return `
-    <div class="problems-page">
-      <div class="page-header">
-        <h1><i class="fas fa-question-circle"></i> Practice Problems</h1>
-        <p>3000+ Problems across Physics, Chemistry, Maths & DSA</p>
-      </div>
-
-      <div class="problems-filter">
-        <select id="subject-filter" onchange="filterProblems()">
-          <option value="all">All Subjects</option>
-          <option value="physics">Physics</option>
-          <option value="chemistry">Chemistry</option>
-          <option value="maths">Mathematics</option>
-          <option value="dsa">DSA</option>
-        </select>
-        
-        <select id="difficulty-filter" onchange="filterProblems()">
-          <option value="all">All Difficulties</option>
-          <option value="easy">Easy</option>
-          <option value="medium">Medium</option>
-          <option value="hard">Hard</option>
-        </select>
-      </div>
-
-      <div class="problems-list" id="problems-list">
-        <p class="empty-state">Select filters to view problems</p>
-      </div>
-    </div>
-  `;
+  return `<div class="coming-soon"><i class="fas fa-question-circle"></i><h2>Practice Problems - 3000+</h2><p>Complete content coming soon!</p></div>`;
 }
 
 // ==================== INITIALIZE APP ====================
@@ -591,7 +488,6 @@ function handleSearch(event) {
   if (event.key === 'Enter') {
     const query = event.target.value.toLowerCase();
     showNotification(`Searching for: ${query}`, 'info');
-    // Search logic here
   }
 }
 
