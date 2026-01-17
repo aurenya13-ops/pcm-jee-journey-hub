@@ -195,7 +195,7 @@
       </div>
       <div class="player-body" id="player-body">
         <div class="player-embed" id="player-embed">
-          <!-- Audio player UI will be loaded here -->
+          <!-- YouTube player will be loaded here -->
         </div>
         <div class="player-controls">
           <button class="control-btn" onclick="prevTrack()" title="Previous Track">
@@ -246,13 +246,25 @@
     </div>
   </div>
 
-  <!-- Load JavaScript in correct order -->
+  <!-- Load JavaScript in CORRECT ORDER -->
+  <!-- 1. Load massive content FIRST -->
+  <script src="massive-pcm-content.js"></script>
+  <script src="tech-content.js"></script>
+  
+  <!-- 2. Load engines and tools -->
+  <script src="quiz-engine.js"></script>
   <script src="gamification.js"></script>
   <script src="study-tools.js"></script>
+  
+  <!-- 3. Load content renderer -->
   <script src="all-content.js"></script>
+  
+  <!-- 4. Load utilities -->
   <script src="search.js"></script>
   <script src="extra-features.js"></script>
   <script src="music-player.js"></script>
+  
+  <!-- 5. Load main app LAST -->
   <script src="app.js"></script>
 </body>
 </html>
