@@ -1,0 +1,18 @@
+{
+  "name": "PCM × Tech Ultimate Hub",
+  "short_name": "PCM Hub",
+  "description": "Ultimate PCM × Tech Learning Platform - Replace Coaching, Master Concepts, Build Projects",
+  "start_url": "/pcm-jee-journey-hub/",
+  "display": "standalone",
+  "background_color": "#0a0e27",
+  "theme_color": "#ff006e",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "https://nyc3.digitaloceanspaces.com/bhindi-drive/files/dd268986-2ece-4de2-81bb-7cb0174757e8/2026-01-17T03-32-51-180Z-109ae6b5-nano-banana-pro_1768620770948.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ]
+}
