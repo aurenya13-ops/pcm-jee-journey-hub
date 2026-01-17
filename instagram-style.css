@@ -1,6 +1,6 @@
 /* ==================== INSTAGRAM-LEVEL STYLING ==================== */
 
-/* Better Layout - Music/Pomodoro positioned properly */
+/* Music Player - HIDDEN BY DEFAULT, shows only when playing */
 .floating-music-player {
   position: fixed;
   bottom: 20px;
@@ -10,14 +10,57 @@
   overflow-y: auto;
   z-index: 999;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  display: none; /* HIDDEN BY DEFAULT */
+  background: var(--bg-secondary);
+  border-radius: var(--border-radius-lg);
+  border: 2px solid var(--primary);
 }
 
+.floating-music-player.active {
+  display: block; /* Show when music is playing */
+}
+
+/* Small music toggle button when player is hidden */
+.music-toggle-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(255, 0, 110, 0.4);
+  z-index: 998;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.music-toggle-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 24px rgba(255, 0, 110, 0.6);
+}
+
+.music-toggle-btn.hidden {
+  display: none;
+}
+
+/* Pomodoro - Better positioning */
 .floating-pomodoro {
   position: fixed;
   bottom: 20px;
   left: 280px; /* After sidebar */
   width: 200px;
   z-index: 998;
+  background: var(--bg-secondary);
+  border-radius: var(--border-radius);
+  border: 2px solid var(--primary);
+  padding: 1rem;
 }
 
 /* Dashboard Improvements */
@@ -521,6 +564,293 @@
   word-wrap: break-word;
 }
 
+/* Video Lectures Page */
+.video-lectures-page {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.video-lectures-page h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.playlists-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.playlist-card {
+  padding: 2rem;
+  background: var(--bg-secondary);
+  border-radius: var(--border-radius-lg);
+  border: 2px solid var(--primary);
+  transition: var(--transition);
+}
+
+.playlist-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 32px rgba(255, 0, 110, 0.4);
+}
+
+.playlist-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--primary);
+}
+
+.playlist-card p {
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+/* Practice Page */
+.practice-page {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.practice-page h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.practice-filters {
+  display: flex;
+  gap: 1rem;
+  margin: 2rem 0;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 0.75rem 1.5rem;
+  background: var(--bg-secondary);
+  border: 2px solid var(--primary);
+  border-radius: var(--border-radius);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.filter-btn:hover {
+  background: var(--primary);
+  transform: translateY(-2px);
+}
+
+.filter-btn.active {
+  background: var(--primary);
+  box-shadow: 0 4px 16px rgba(255, 0, 110, 0.4);
+}
+
+.practice-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.practice-set-card {
+  padding: 2rem;
+  background: var(--bg-secondary);
+  border-radius: var(--border-radius-lg);
+  border: 2px solid var(--primary);
+  transition: var(--transition);
+}
+
+.practice-set-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(255, 0, 110, 0.3);
+}
+
+.practice-set-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--primary);
+}
+
+.practice-set-card p {
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.difficulty-badges {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.badge {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+.badge.easy {
+  background: rgba(0, 255, 136, 0.2);
+  color: var(--success);
+  border: 1px solid var(--success);
+}
+
+.badge.medium {
+  background: rgba(255, 214, 10, 0.2);
+  color: var(--warning);
+  border: 1px solid var(--warning);
+}
+
+.badge.hard {
+  background: rgba(255, 0, 110, 0.2);
+  color: var(--danger);
+  border: 1px solid var(--danger);
+}
+
+/* Mock Tests Page */
+.mock-tests-page {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.mock-tests-page h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.tests-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.test-card {
+  padding: 2rem;
+  background: var(--bg-secondary);
+  border-radius: var(--border-radius-lg);
+  border: 2px solid var(--primary);
+  transition: var(--transition);
+}
+
+.test-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(255, 0, 110, 0.3);
+}
+
+.test-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.test-header h3 {
+  font-size: 1.5rem;
+  color: var(--primary);
+}
+
+.test-badge {
+  padding: 0.5rem 1rem;
+  background: rgba(0, 255, 136, 0.2);
+  color: var(--success);
+  border: 1px solid var(--success);
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+.test-badge.advanced {
+  background: rgba(255, 0, 110, 0.2);
+  color: var(--danger);
+  border: 1px solid var(--danger);
+}
+
+.test-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.test-info p {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+}
+
+.test-info i {
+  color: var(--primary);
+}
+
+/* Simulators & Calculators Pages */
+.simulators-page,
+.calculators-page {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.simulators-page h1,
+.calculators-page h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.simulators-grid,
+.calculators-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.simulator-card,
+.calculator-card {
+  padding: 2rem;
+  background: var(--bg-secondary);
+  border-radius: var(--border-radius-lg);
+  border: 2px solid var(--primary);
+  transition: var(--transition);
+}
+
+.simulator-card:hover,
+.calculator-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(255, 0, 110, 0.3);
+}
+
+.simulator-card h3,
+.calculator-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--primary);
+}
+
+.simulator-card p,
+.calculator-card p {
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
   .floating-music-player {
@@ -542,6 +872,11 @@
     width: calc(100% - 40px);
     left: 20px;
     right: 20px;
+  }
+  
+  .music-toggle-btn {
+    bottom: 10px;
+    right: 10px;
   }
   
   .floating-pomodoro {
