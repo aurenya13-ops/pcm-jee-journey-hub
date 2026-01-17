@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PCM × Tech Ocean - Complete Learning Ecosystem</title>
+  
+  <!-- Favicons -->
+  <link rel="icon" href="https://nyc3.digitaloceanspaces.com/bhindi-drive/files/dd268986-2ece-4de2-81bb-7cb0174757e8/2026-01-17T03-32-51-180Z-109ae6b5-nano-banana-pro_1768620770948.jpg">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- MathJax for formulas -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+  <div id="app">
+    <!-- Top Navigation -->
+    <nav class="navbar">
+      <div class="nav-brand">
+        <img src="https://nyc3.digitaloceanspaces.com/bhindi-drive/files/dd268986-2ece-4de2-81bb-7cb0174757e8/2026-01-17T03-32-51-180Z-109ae6b5-nano-banana-pro_1768620770948.jpg" alt="Logo">
+        <h1>PCM × Tech Ocean</h1>
+      </div>
+      
+      <div class="nav-search">
+        <i class="fas fa-search"></i>
+        <input type="text" id="global-search" placeholder="Search anything..." onkeyup="handleSearch(event)">
+      </div>
+      
+      <div class="nav-stats">
+        <span class="stat-badge"><i class="fas fa-star"></i> <span id="xp">0</span> XP</span>
+        <span class="stat-badge"><i class="fas fa-trophy"></i> Level <span id="level">1</span></span>
+        <span class="stat-badge"><i class="fas fa-fire"></i> <span id="streak">0</span> days</span>
+      </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <h3><i class="fas fa-home"></i> Main</h3>
+        <button class="sidebar-btn active" onclick="showSection('dashboard')">
+          <i class="fas fa-chart-line"></i> Dashboard
+        </button>
+      </div>
+
+      <div class="sidebar-section">
+        <h3><i class="fas fa-book"></i> Learn</h3>
+        <button class="sidebar-btn" onclick="showSection('physics')">
+          <i class="fas fa-atom"></i> Physics (52 chapters)
+        </button>
+        <button class="sidebar-btn" onclick="showSection('chemistry')">
+          <i class="fas fa-flask"></i> Chemistry (47 chapters)
+        </button>
+        <button class="sidebar-btn" onclick="showSection('maths')">
+          <i class="fas fa-square-root-alt"></i> Maths (62 chapters)
+        </button>
+        <button class="sidebar-btn" onclick="showSection('tech')">
+          <i class="fas fa-laptop-code"></i> Tech (100+ projects)
+        </button>
+      </div>
+
+      <div class="sidebar-section">
+        <h3><i class="fas fa-pen"></i> Practice</h3>
+        <button class="sidebar-btn" onclick="showSection('problems')">
+          <i class="fas fa-question-circle"></i> Problems (3000+)
+        </button>
+        <button class="sidebar-btn" onclick="showSection('mock-tests')">
+          <i class="fas fa-clipboard-check"></i> Mock Tests
+        </button>
+        <button class="sidebar-btn" onclick="showSection('flashcards')">
+          <i class="fas fa-layer-group"></i> Flashcards
+        </button>
+      </div>
+
+      <div class="sidebar-section">
+        <h3><i class="fas fa-tools"></i> Tools</h3>
+        <button class="sidebar-btn" onclick="showSection('music')">
+          <i class="fas fa-music"></i> Music Player
+        </button>
+        <button class="sidebar-btn" onclick="showSection('notes')">
+          <i class="fas fa-sticky-note"></i> My Notes
+        </button>
+        <button class="sidebar-btn" onclick="showSection('pomodoro')">
+          <i class="fas fa-clock"></i> Pomodoro
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content" id="main-content">
+      <!-- Content loaded dynamically -->
+    </main>
+
+    <!-- Floating Music Player -->
+    <div class="floating-player" id="music-player">
+      <div class="player-header">
+        <i class="fas fa-music"></i>
+        <span id="current-song">No song playing</span>
+        <button class="btn-icon" onclick="togglePlayer()">
+          <i class="fas fa-chevron-down"></i>
+        </button>
+      </div>
+      <div class="player-body">
+        <div id="youtube-player"></div>
+        <div class="player-controls">
+          <button onclick="prevSong()"><i class="fas fa-step-backward"></i></button>
+          <button onclick="togglePlay()" id="play-btn"><i class="fas fa-play"></i></button>
+          <button onclick="nextSong()"><i class="fas fa-step-forward"></i></button>
+        </div>
+        <select id="playlist-select" onchange="changePlaylist()">
+          <option value="lofi">☕ Lofi Beats</option>
+          <option value="focus">🎯 Deep Focus</option>
+          <option value="classical">🎹 Classical</option>
+          <option value="ambient">🌙 Ambient</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Pomodoro Timer -->
+    <div class="floating-pomodoro" id="pomodoro">
+      <div class="pomodoro-display">
+        <span id="timer">25:00</span>
+      </div>
+      <div class="pomodoro-controls">
+        <button onclick="startTimer()"><i class="fas fa-play"></i></button>
+        <button onclick="pauseTimer()"><i class="fas fa-pause"></i></button>
+        <button onclick="resetTimer()"><i class="fas fa-redo"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Load Content First -->
+  <script src="content/physics-complete.js"></script>
+  <script src="content/chemistry-complete.js"></script>
+  <script src="content/maths-complete.js"></script>
+  <script src="content/tech-complete.js"></script>
+  
+  <!-- Load App Logic -->
+  <script src="app.js"></script>
+  <script src="music-player.js"></script>
+  <script src="pomodoro.js"></script>
+</body>
+</html>
