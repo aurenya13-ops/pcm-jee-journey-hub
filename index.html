@@ -40,7 +40,7 @@
       <div class="nav-center">
         <div class="search-bar">
           <i class="fas fa-search"></i>
-          <input type="text" id="global-search" placeholder="Search anything..." onkeyup="globalSearch(event)">
+          <input type="text" id="global-search" placeholder="Search anything... (Ctrl+K)" onkeyup="globalSearch(event)">
         </div>
       </div>
       
@@ -62,7 +62,7 @@
             <i class="fas fa-chevron-left"></i>
           </button>
           <span id="theme-name">Neon Cyberpunk</span>
-          <button class="icon-btn" onclick="nextTheme()" title="Next Theme">
+          <button class="icon-btn" onclick="nextTheme()" title="Next Theme (Ctrl+T)">
             <i class="fas fa-chevron-right"></i>
           </button>
         </div>
@@ -182,7 +182,7 @@
       <div class="player-header">
         <i class="fas fa-music"></i>
         <span id="current-track-title">No track playing</span>
-        <button class="icon-btn" onclick="toggleMusicPlayer()">
+        <button class="icon-btn" onclick="toggleMusicPlayer()" title="Toggle Player (Ctrl+M)">
           <i class="fas fa-chevron-down" id="player-toggle-icon"></i>
         </button>
       </div>
@@ -226,7 +226,7 @@
         <span id="pomodoro-time">25:00</span>
       </div>
       <div class="pomodoro-controls">
-        <button class="icon-btn" onclick="startPomodoro()">
+        <button class="icon-btn" onclick="startPomodoro()" title="Start (Ctrl+P)">
           <i class="fas fa-play"></i>
         </button>
         <button class="icon-btn" onclick="pausePomodoro()">
@@ -244,6 +244,7 @@
   <script src="study-tools.js"></script>
   <script src="all-content.js"></script>
   <script src="search.js"></script>
+  <script src="extra-features.js"></script>
   <script src="music-player.js"></script>
   <script src="app.js"></script>
 </body>
