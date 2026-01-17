@@ -24,6 +24,28 @@ function loadUserData() {
     userData = JSON.parse(saved);
     updateStatsDisplay();
   }
+  
+  // Update streak
+  const lastVisit = localStorage.getItem('last_visit');
+  const today = new Date().toDateString();
+  
+  if (lastVisit !== today) {
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    
+    if (lastVisit === yesterday.toDateString()) {
+      userData.streak++;
+      addXP(50); // Bonus for maintaining streak
+      showNotification(`🔥 ${userData.streak} day streak! +50 XP`, 'success');
+    } else if (lastVisit) {
+      userData.streak = 1;
+    } else {
+      userData.streak = 1;
+    }
+    
+    localStorage.setItem('last_visit', today);
+    saveUserData();
+  }
 }
 
 // Save user data
@@ -131,7 +153,7 @@ function showSection(section) {
 // ==================== DASHBOARD ====================
 
 function renderDashboard() {
-  const totalChapters = 161; // 52 + 47 + 62
+  const totalChapters = 161;
   const completedChapters = userData.completedChapters.length;
   const progressPercent = Math.round((completedChapters / totalChapters) * 100);
   
@@ -255,10 +277,19 @@ function renderDashboard() {
             <div class="activity-item">
               <i class="fas fa-check-circle"></i>
               <span>Completed: ${chapter}</span>
-              <span class="activity-time">Today</span>
+              <span class="activity-time">Recently</span>
             </div>
           `).join('') || '<p class="empty-state">No recent activity. Start learning!</p>'}
         </div>
+      </div>
+
+      <!-- Motivational Quote -->
+      <div class="progress-card" style="text-align: center; margin-top: 30px;">
+        <h2>💪 Today's Motivation</h2>
+        <p style="font-size: 18px; font-style: italic; color: var(--text-secondary); margin-top: 15px;">
+          "Success is the sum of small efforts repeated day in and day out."
+        </p>
+        <p style="margin-top: 10px; color: var(--primary);">Keep going! You're doing great! 🚀</p>
       </div>
     </div>
   `;
@@ -314,12 +345,208 @@ function renderPhysics() {
   `;
 }
 
+// ==================== CHEMISTRY SECTION ====================
+
+function renderChemistry() {
+  if (typeof chemistryContent === 'undefined') {
+    return '<div class="loading">Loading Chemistry content...</div>';
+  }
+
+  const physical = chemistryContent.physical;
+  
+  return `
+    <div class="subject-page">
+      <div class="subject-header">
+        <h1><i class="fas fa-flask"></i> Chemistry - Complete JEE Syllabus</h1>
+        <div class="subject-meta">
+          <span class="badge"><i class="fas fa-book"></i> ${chemistryContent.metadata.totalChapters} Chapters</span>
+          <span class="badge"><i class="fas fa-list"></i> ${chemistryContent.metadata.totalTopics} Topics</span>
+          <span class="badge"><i class="fas fa-question"></i> ${chemistryContent.metadata.totalProblems} Problems</span>
+        </div>
+      </div>
+
+      <!-- Physical Chemistry -->
+      <div class="unit-section">
+        <h2><i class="fas fa-atom"></i> ${physical.name}</h2>
+        <div class="chapters-grid">
+          ${physical.chapters.map(chapter => `
+            <div class="chapter-card" onclick="showChapter('chemistry', '${chapter.id}')">
+              <div class="chapter-header">
+                <h3>${chapter.name}</h3>
+                <span class="difficulty-badge ${chapter.difficulty}">${chapter.difficulty}</span>
+              </div>
+              <div class="chapter-meta">
+                <span><i class="fas fa-list"></i> ${chapter.topics.length} topics</span>
+                <span><i class="fas fa-question"></i> ${chapter.problems.length} problems</span>
+              </div>
+              <div class="chapter-footer">
+                <button class="btn-small" onclick="event.stopPropagation(); startPractice('${chapter.id}')">
+                  <i class="fas fa-pen"></i> Practice
+                </button>
+                <button class="btn-small" onclick="event.stopPropagation(); openFlashcards('${chapter.id}')">
+                  <i class="fas fa-layer-group"></i> Flashcards
+                </button>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// ==================== MATHS SECTION ====================
+
+function renderMaths() {
+  if (typeof mathsContent === 'undefined') {
+    return '<div class="loading">Loading Mathematics content...</div>';
+  }
+
+  const algebra = mathsContent.algebra;
+  
+  return `
+    <div class="subject-page">
+      <div class="subject-header">
+        <h1><i class="fas fa-square-root-alt"></i> Mathematics - Complete JEE Syllabus</h1>
+        <div class="subject-meta">
+          <span class="badge"><i class="fas fa-book"></i> ${mathsContent.metadata.totalChapters} Chapters</span>
+          <span class="badge"><i class="fas fa-list"></i> ${mathsContent.metadata.totalTopics} Topics</span>
+          <span class="badge"><i class="fas fa-question"></i> ${mathsContent.metadata.totalProblems} Problems</span>
+        </div>
+      </div>
+
+      <!-- Algebra -->
+      <div class="unit-section">
+        <h2><i class="fas fa-calculator"></i> ${algebra.name}</h2>
+        <div class="chapters-grid">
+          ${algebra.chapters.map(chapter => `
+            <div class="chapter-card" onclick="showChapter('maths', '${chapter.id}')">
+              <div class="chapter-header">
+                <h3>${chapter.name}</h3>
+                <span class="difficulty-badge ${chapter.difficulty}">${chapter.difficulty}</span>
+              </div>
+              <div class="chapter-meta">
+                <span><i class="fas fa-list"></i> ${chapter.topics.length} topics</span>
+                <span><i class="fas fa-question"></i> ${chapter.problems.length} problems</span>
+              </div>
+              <div class="chapter-footer">
+                <button class="btn-small" onclick="event.stopPropagation(); startPractice('${chapter.id}')">
+                  <i class="fas fa-pen"></i> Practice
+                </button>
+                <button class="btn-small" onclick="event.stopPropagation(); openFlashcards('${chapter.id}')">
+                  <i class="fas fa-layer-group"></i> Flashcards
+                </button>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// ==================== TECH SECTION ====================
+
+function renderTech() {
+  if (typeof techContent === 'undefined') {
+    return '<div class="loading">Loading Tech content...</div>';
+  }
+
+  const webDev = techContent.webDev;
+  
+  return `
+    <div class="subject-page">
+      <div class="subject-header">
+        <h1><i class="fas fa-laptop-code"></i> Technology - Complete Roadmap</h1>
+        <div class="subject-meta">
+          <span class="badge"><i class="fas fa-project-diagram"></i> 100+ Projects</span>
+          <span class="badge"><i class="fas fa-code"></i> 500+ DSA Problems</span>
+          <span class="badge"><i class="fas fa-rocket"></i> 6 Domains</span>
+        </div>
+      </div>
+
+      <!-- Web Development -->
+      <div class="unit-section">
+        <h2><i class="fas fa-globe"></i> ${webDev.name}</h2>
+        <div class="chapters-grid">
+          ${webDev.projects.map(project => `
+            <div class="chapter-card">
+              <div class="chapter-header">
+                <h3>${project.name}</h3>
+                <span class="difficulty-badge ${project.difficulty}">${project.difficulty}</span>
+              </div>
+              <p style="font-size: 14px; color: var(--text-secondary); margin: 10px 0;">${project.description}</p>
+              <div class="chapter-meta">
+                <span><i class="fas fa-code"></i> ${project.tech.join(', ')}</span>
+              </div>
+              <div class="chapter-footer">
+                <button class="btn-small" onclick="showNotification('Project details coming soon!', 'info')">
+                  <i class="fas fa-eye"></i> View
+                </button>
+                <button class="btn-small" onclick="showNotification('Code repository coming soon!', 'info')">
+                  <i class="fab fa-github"></i> Code
+                </button>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// ==================== PROBLEMS SECTION ====================
+
+function renderProblems() {
+  return `
+    <div class="subject-page">
+      <div class="subject-header">
+        <h1><i class="fas fa-question-circle"></i> Practice Problems</h1>
+        <p>3000+ curated problems across Physics, Chemistry & Mathematics</p>
+      </div>
+
+      <div class="subjects-grid">
+        <div class="subject-card" onclick="showSection('physics')">
+          <div class="subject-icon"><i class="fas fa-atom"></i></div>
+          <h3>Physics Problems</h3>
+          <p style="color: var(--text-secondary); margin: 10px 0;">1000+ problems with detailed solutions</p>
+          <button class="btn-primary" style="margin-top: 15px;">
+            <i class="fas fa-arrow-right"></i> Start Practicing
+          </button>
+        </div>
+
+        <div class="subject-card" onclick="showSection('chemistry')">
+          <div class="subject-icon"><i class="fas fa-flask"></i></div>
+          <h3>Chemistry Problems</h3>
+          <p style="color: var(--text-secondary); margin: 10px 0;">900+ problems with detailed solutions</p>
+          <button class="btn-primary" style="margin-top: 15px;">
+            <i class="fas fa-arrow-right"></i> Start Practicing
+          </button>
+        </div>
+
+        <div class="subject-card" onclick="showSection('maths')">
+          <div class="subject-icon"><i class="fas fa-square-root-alt"></i></div>
+          <h3>Maths Problems</h3>
+          <p style="color: var(--text-secondary); margin: 10px 0;">1200+ problems with detailed solutions</p>
+          <button class="btn-primary" style="margin-top: 15px;">
+            <i class="fas fa-arrow-right"></i> Start Practicing
+          </button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
 // Show Chapter Details
 function showChapter(subject, chapterId) {
   let chapter = null;
   
   if (subject === 'physics' && typeof physicsContent !== 'undefined') {
     chapter = physicsContent.mechanics.chapters.find(ch => ch.id === chapterId);
+  } else if (subject === 'chemistry' && typeof chemistryContent !== 'undefined') {
+    chapter = chemistryContent.physical.chapters.find(ch => ch.id === chapterId);
+  } else if (subject === 'maths' && typeof mathsContent !== 'undefined') {
+    chapter = mathsContent.algebra.chapters.find(ch => ch.id === chapterId);
   }
   
   if (!chapter) {
@@ -391,34 +618,10 @@ function showChapter(subject, chapterId) {
         </div>
       </div>
 
-      <!-- Videos -->
-      ${chapter.videos ? `
-        <div class="content-section">
-          <h2><i class="fas fa-video"></i> Video Lectures</h2>
-          <div class="videos-grid">
-            ${chapter.videos.map(video => `
-              <div class="video-card" onclick="window.open('${video.url}', '_blank')">
-                <i class="fab fa-youtube"></i>
-                <h3>${video.title}</h3>
-                <span class="video-duration">${video.duration}</span>
-              </div>
-            `).join('')}
-          </div>
-        </div>
-      ` : ''}
-
-      <!-- Flashcards -->
-      <div class="content-section">
-        <h2><i class="fas fa-layer-group"></i> Flashcards</h2>
-        <button class="btn-primary" onclick="openFlashcards('${chapterId}')">
-          <i class="fas fa-cards-blank"></i> Study Flashcards
-        </button>
-      </div>
-
       <!-- Mark as Complete -->
       <div class="content-section">
         <button class="btn-success btn-large" onclick="markChapterComplete('${chapterId}', '${chapter.name}')">
-          <i class="fas fa-check"></i> Mark Chapter as Complete
+          <i class="fas fa-check"></i> Mark Chapter as Complete (+100 XP)
         </button>
       </div>
     </div>
@@ -457,22 +660,9 @@ function copyToClipboard(text) {
   showNotification('Copied to clipboard!', 'success');
 }
 
-// ==================== OTHER SECTIONS ====================
-
-function renderChemistry() {
-  return `<div class="coming-soon"><i class="fas fa-flask"></i><h2>Chemistry - 47 Chapters</h2><p>Complete content coming soon!</p></div>`;
-}
-
-function renderMaths() {
-  return `<div class="coming-soon"><i class="fas fa-square-root-alt"></i><h2>Mathematics - 62 Chapters</h2><p>Complete content coming soon!</p></div>`;
-}
-
-function renderTech() {
-  return `<div class="coming-soon"><i class="fas fa-laptop-code"></i><h2>Technology - 100+ Projects</h2><p>Complete content coming soon!</p></div>`;
-}
-
-function renderProblems() {
-  return `<div class="coming-soon"><i class="fas fa-question-circle"></i><h2>Practice Problems - 3000+</h2><p>Complete content coming soon!</p></div>`;
+// Start practice (placeholder)
+function startPractice(chapterId) {
+  showNotification('Practice mode coming soon!', 'info');
 }
 
 // ==================== INITIALIZE APP ====================
@@ -481,6 +671,8 @@ window.addEventListener('DOMContentLoaded', () => {
   loadUserData();
   showSection('dashboard');
   console.log('✅ PCM × Tech Ocean App Loaded!');
+  console.log('📚 161 Chapters | 3000+ Problems | 100+ Projects');
+  console.log('🚀 Ready to learn!');
 });
 
 // Global search
