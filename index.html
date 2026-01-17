@@ -20,6 +20,7 @@
   
   <!-- Styles -->
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="audio-player-styles.css">
   
   <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -153,7 +154,7 @@
         <button class="sidebar-btn" onclick="showSection('resume')">
           <i class="fas fa-file-alt"></i> Resume
         </button>
-        <button class="sidebar-btn" onclick="showSection('contact')">
+        <button class="sidebar button-btn" onclick="showSection('contact')">
           <i class="fas fa-envelope"></i> Contact
         </button>
       </div>
@@ -177,44 +178,44 @@
       <!-- Content will be dynamically loaded here -->
     </main>
 
-    <!-- Floating Music Player (Always Visible) -->
+    <!-- Floating Music Player (Always Visible) - AD-FREE -->
     <div class="floating-music-player" id="floating-player">
-      <div class="player-header">
+      <div class="player-header" onclick="toggleMusicPlayer()">
         <i class="fas fa-music"></i>
         <span id="current-track-title">No track playing</span>
-        <button class="icon-btn" onclick="toggleMusicPlayer()" title="Toggle Player (Ctrl+M)">
+        <button class="icon-btn" title="Toggle Player (Ctrl+M)">
           <i class="fas fa-chevron-down" id="player-toggle-icon"></i>
         </button>
       </div>
       <div class="player-body" id="player-body">
         <div class="player-embed" id="player-embed">
-          <!-- YouTube/Spotify embed will go here -->
+          <!-- Audio player UI will be loaded here -->
         </div>
         <div class="player-controls">
-          <button class="control-btn" onclick="prevTrack()">
+          <button class="control-btn" onclick="prevTrack()" title="Previous Track">
             <i class="fas fa-step-backward"></i>
           </button>
-          <button class="control-btn play-btn" onclick="togglePlay()" id="play-btn">
+          <button class="control-btn play-btn" onclick="togglePlay()" id="play-btn" title="Play/Pause">
             <i class="fas fa-play"></i>
           </button>
-          <button class="control-btn" onclick="nextTrack()">
+          <button class="control-btn" onclick="nextTrack()" title="Next Track">
             <i class="fas fa-step-forward"></i>
           </button>
-          <button class="control-btn" onclick="toggleShuffle()" id="shuffle-btn">
+          <button class="control-btn" onclick="toggleShuffle()" id="shuffle-btn" title="Shuffle">
             <i class="fas fa-random"></i>
           </button>
-          <button class="control-btn" onclick="toggleRepeat()" id="repeat-btn">
+          <button class="control-btn" onclick="toggleRepeat()" id="repeat-btn" title="Repeat">
             <i class="fas fa-redo"></i>
           </button>
         </div>
         <div class="playlist-selector">
           <select id="playlist-select" onchange="changePlaylist()">
-            <option value="lofi">Lofi Beats</option>
-            <option value="focus">Deep Focus</option>
-            <option value="classical">Classical</option>
-            <option value="ambient">Ambient</option>
-            <option value="motivation">Motivation</option>
-            <option value="edm">EDM Study</option>
+            <option value="lofi">☕ Lofi Beats</option>
+            <option value="focus">🎯 Deep Focus</option>
+            <option value="classical">🎹 Classical</option>
+            <option value="ambient">🌙 Ambient</option>
+            <option value="motivation">🔥 Motivation</option>
+            <option value="edm">⚡ EDM Study</option>
           </select>
         </div>
       </div>
