@@ -21,6 +21,7 @@
   <!-- Styles -->
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="audio-player-styles.css">
+  <link rel="stylesheet" href="instagram-style.css">
   
   <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -154,7 +155,7 @@
         <button class="sidebar-btn" onclick="showSection('resume')">
           <i class="fas fa-file-alt"></i> Resume
         </button>
-        <button class="sidebar button-btn" onclick="showSection('contact')">
+        <button class="sidebar-btn" onclick="showSection('contact')">
           <i class="fas fa-envelope"></i> Contact
         </button>
       </div>
@@ -178,11 +179,11 @@
       <!-- Content will be dynamically loaded here -->
     </main>
 
-    <!-- Floating Music Player (Always Visible) - AD-FREE -->
+    <!-- Floating Music Player (Bottom-Right, Smaller) -->
     <div class="floating-music-player" id="floating-player">
       <div class="player-header" onclick="toggleMusicPlayer()">
         <i class="fas fa-music"></i>
-        <span id="current-track-title">No track playing</span>
+        <span id="current-track-title">Music Player</span>
         <button class="icon-btn" title="Toggle Player (Ctrl+M)">
           <i class="fas fa-chevron-down" id="player-toggle-icon"></i>
         </button>
@@ -221,7 +222,7 @@
       </div>
     </div>
 
-    <!-- Pomodoro Timer (Floating) -->
+    <!-- Pomodoro Timer (Bottom-Left, After Sidebar) -->
     <div class="floating-pomodoro" id="floating-pomodoro">
       <div class="pomodoro-display">
         <span id="pomodoro-time">25:00</span>
