@@ -1,184 +1,119 @@
-// ==================== ACTUALLY WORKING MUSIC PLAYER (YOUTUBE EMBED) ====================
+// ==================== WORKING MUSIC PLAYER - YOUTUBE API ====================
 
-// Music playlists with REAL YouTube embeds
+// Music playlists with real YouTube videos
 const musicPlaylists = {
   lofi: {
     name: "☕ Lofi Beats",
-    videos: [
+    songs: [
       { id: "jfKfPfyJRdk", title: "Lofi Hip Hop Radio - Beats to Study/Relax" },
-      { id: "5qap5aO4i9A", title: "Lofi Hip Hop Mix" },
-      { id: "lTRiuFIWV54", title: "Chill Lofi Study Beats" }
+      { id: "5qap5aO4i9A", title: "Lofi Hip Hop Mix - Beats to Relax/Study" },
+      { id: "lTRiuFIWV54", title: "Chill Lofi Study Beats" },
+      { id: "DWcJFNfaw9c", title: "Lofi Hip Hop Radio 24/7" }
     ]
   },
   focus: {
     name: "🎯 Deep Focus",
-    videos: [
-      { id: "DWcJFNfaw9c", title: "Deep Focus Music" },
-      { id: "5yx6BWlEVcY", title: "Study Music - Focus" },
-      { id: "2OEL4P1Rz04", title: "Concentration Music" }
+    songs: [
+      { id: "5yx6BWlEVcY", title: "Deep Focus Music - Study Music" },
+      { id: "2OEL4P1Rz04", title: "Concentration Music for Studying" },
+      { id: "WPni755-Krg", title: "Focus Music for Work" },
+      { id: "1ZYbU82GVz4", title: "Deep Focus Playlist" }
     ]
   },
   classical: {
     name: "🎹 Classical",
-    videos: [
-      { id: "jgpJVI3tDbY", title: "Classical Music for Studying" },
-      { id: "PJL_mVgT0Ao", title: "Mozart for Studying" },
-      { id: "Rb0UmrCXxVA", title: "Bach Study Music" }
+    songs: [
+      { id: "jgpJVI3tDbY", title: "Classical Music for Studying & Brain Power" },
+      { id: "PJL_mVgT0Ao", title: "Mozart for Studying and Concentration" },
+      { id: "Rb0UmrCXxVA", title: "Bach Study Music" },
+      { id: "O6txOvK-mAk", title: "Beethoven Classical Music" }
     ]
   },
   ambient: {
     name: "🌙 Ambient",
-    videos: [
-      { id: "1ZYbU82GVz4", title: "Ambient Study Music" },
+    songs: [
       { id: "lP26UCnoH9s", title: "Relaxing Ambient Music" },
-      { id: "kJQP7kiw5Fk", title: "Ambient Music for Studying" }
-    ]
-  },
-  motivation: {
-    name: "🔥 Motivation",
-    videos: [
-      { id: "09839DpTctU", title: "Epic Motivational Music" },
-      { id: "g6zN2kqh1vc", title: "Workout Motivation Music" },
-      { id: "fEvM-OUbaKs", title: "Study Motivation Mix" }
-    ]
-  },
-  edm: {
-    name: "⚡ EDM Study",
-    videos: [
-      { id: "bM7SZ5SBzyY", title: "EDM Study Music" },
-      { id: "yJg-Y5byMMw", title: "Electronic Study Mix" },
-      { id: "n61ULEU7CO0", title: "Gaming Music Mix" }
+      { id: "kJQP7kiw5Fk", title: "Ambient Music for Studying" },
+      { id: "hHW1oY26kxQ", title: "Space Ambient Music" },
+      { id: "UfcAVejslrU", title: "Calm Ambient Soundscape" }
     ]
   }
 };
 
 // Player state
 let currentPlaylist = 'lofi';
-let currentTrackIndex = 0;
+let currentSongIndex = 0;
 let player = null;
-let playerReady = false;
+let isPlayerReady = false;
 
-// Initialize YouTube API
-function initYouTubePlayer() {
-  // Load YouTube IFrame API
-  if (!window.YT) {
-    const tag = document.createElement('script');
-    tag.src = 'https://www.youtube.com/iframe_api';
-    const firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-  }
-  
-  // Wait for API to load
-  window.onYouTubeIframeAPIReady = function() {
-    playerReady = true;
-    console.log('✅ YouTube player API ready');
-  };
-}
-
-// Show music player
-function showMusicPlayer() {
-  const playerDiv = document.getElementById('floating-player');
-  const toggleBtn = document.querySelector('.music-toggle-btn');
-  
-  if (playerDiv) {
-    playerDiv.classList.add('active');
-  }
-  if (toggleBtn) {
-    toggleBtn.classList.add('hidden');
-  }
-}
-
-// Hide music player
-function hideMusicPlayer() {
-  const playerDiv = document.getElementById('floating-player');
-  const toggleBtn = document.querySelector('.music-toggle-btn');
-  
-  if (playerDiv) {
-    playerDiv.classList.remove('active');
-  }
-  if (toggleBtn) {
-    toggleBtn.classList.remove('hidden');
-  }
-}
-
-// Toggle music player
-function toggleMusicPlayer() {
-  const playerDiv = document.getElementById('floating-player');
-  if (playerDiv.classList.contains('active')) {
-    hideMusicPlayer();
-  } else {
-    showMusicPlayer();
-    if (!player) {
-      loadPlayer();
-    }
-  }
-}
-
-// Load YouTube player
-function loadPlayer() {
-  const track = getCurrentTrack();
-  const embedDiv = document.getElementById('player-embed');
-  
-  if (!embedDiv) return;
-  
-  // Create player container if doesn't exist
-  if (!document.getElementById('youtube-player')) {
-    embedDiv.innerHTML = '<div id="youtube-player"></div>';
-  }
-  
-  // Wait for API
-  if (!window.YT || !window.YT.Player) {
-    setTimeout(loadPlayer, 500);
+// Load YouTube IFrame API
+function loadYouTubeAPI() {
+  if (window.YT) {
+    initPlayer();
     return;
   }
   
-  // Create player
+  const tag = document.createElement('script');
+  tag.src = 'https://www.youtube.com/iframe_api';
+  const firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+}
+
+// YouTube API ready callback
+window.onYouTubeIframeAPIReady = function() {
+  console.log('✅ YouTube API Ready');
+  initPlayer();
+};
+
+// Initialize player
+function initPlayer() {
+  const currentSong = getCurrentSong();
+  
   player = new YT.Player('youtube-player', {
     height: '200',
     width: '100%',
-    videoId: track.id,
+    videoId: currentSong.id,
     playerVars: {
       autoplay: 0,
       controls: 1,
       modestbranding: 1,
-      rel: 0
+      rel: 0,
+      showinfo: 0
     },
     events: {
       onReady: onPlayerReady,
       onStateChange: onPlayerStateChange
     }
   });
-  
-  updateTrackDisplay();
 }
 
 // Player ready
 function onPlayerReady(event) {
-  console.log('✅ YouTube player ready');
-  updatePlayButton();
+  isPlayerReady = true;
+  console.log('✅ Music Player Ready');
+  updateSongDisplay();
 }
 
 // Player state change
 function onPlayerStateChange(event) {
   if (event.data === YT.PlayerState.ENDED) {
-    nextTrack();
+    nextSong();
   }
   updatePlayButton();
 }
 
-// Get current track
-function getCurrentTrack() {
+// Get current song
+function getCurrentSong() {
   const playlist = musicPlaylists[currentPlaylist];
-  return playlist.videos[currentTrackIndex];
+  return playlist.songs[currentSongIndex];
 }
 
-// Update track display
-function updateTrackDisplay() {
-  const track = getCurrentTrack();
-  const titleElement = document.getElementById('current-track-title');
-  
-  if (titleElement) {
-    titleElement.textContent = track.title;
+// Update song display
+function updateSongDisplay() {
+  const song = getCurrentSong();
+  const display = document.getElementById('current-song');
+  if (display) {
+    display.textContent = song.title;
   }
 }
 
@@ -187,22 +122,21 @@ function updatePlayButton() {
   const playBtn = document.getElementById('play-btn');
   if (!playBtn || !player) return;
   
-  const icon = playBtn.querySelector('i');
-  if (!icon) return;
-  
   try {
     const state = player.getPlayerState();
-    icon.className = state === YT.PlayerState.PLAYING ? 'fas fa-pause' : 'fas fa-play';
+    const icon = playBtn.querySelector('i');
+    if (icon) {
+      icon.className = state === YT.PlayerState.PLAYING ? 'fas fa-pause' : 'fas fa-play';
+    }
   } catch (e) {
-    icon.className = 'fas fa-play';
+    console.log('Player not ready');
   }
 }
 
 // Toggle play/pause
 function togglePlay() {
-  if (!player) {
-    showMusicPlayer();
-    loadPlayer();
+  if (!player || !isPlayerReady) {
+    console.log('Player not ready yet');
     return;
   }
   
@@ -214,31 +148,31 @@ function togglePlay() {
       player.playVideo();
     }
   } catch (e) {
-    console.log('Player not ready yet');
+    console.log('Error toggling play:', e);
   }
 }
 
-// Next track
-function nextTrack() {
+// Next song
+function nextSong() {
   const playlist = musicPlaylists[currentPlaylist];
-  currentTrackIndex = (currentTrackIndex + 1) % playlist.videos.length;
+  currentSongIndex = (currentSongIndex + 1) % playlist.songs.length;
   
-  if (player) {
-    const track = getCurrentTrack();
-    player.loadVideoById(track.id);
-    updateTrackDisplay();
+  if (player && isPlayerReady) {
+    const song = getCurrentSong();
+    player.loadVideoById(song.id);
+    updateSongDisplay();
   }
 }
 
-// Previous track
-function prevTrack() {
+// Previous song
+function prevSong() {
   const playlist = musicPlaylists[currentPlaylist];
-  currentTrackIndex = (currentTrackIndex - 1 + playlist.videos.length) % playlist.videos.length;
+  currentSongIndex = (currentSongIndex - 1 + playlist.songs.length) % playlist.songs.length;
   
-  if (player) {
-    const track = getCurrentTrack();
-    player.loadVideoById(track.id);
-    updateTrackDisplay();
+  if (player && isPlayerReady) {
+    const song = getCurrentSong();
+    player.loadVideoById(song.id);
+    updateSongDisplay();
   }
 }
 
@@ -246,66 +180,31 @@ function prevTrack() {
 function changePlaylist() {
   const select = document.getElementById('playlist-select');
   currentPlaylist = select.value;
-  currentTrackIndex = 0;
+  currentSongIndex = 0;
   
-  if (player) {
-    const track = getCurrentTrack();
-    player.loadVideoById(track.id);
-    updateTrackDisplay();
+  if (player && isPlayerReady) {
+    const song = getCurrentSong();
+    player.loadVideoById(song.id);
+    updateSongDisplay();
   }
 }
 
-// Shuffle (just go to random track)
-function toggleShuffle() {
-  const playlist = musicPlaylists[currentPlaylist];
-  currentTrackIndex = Math.floor(Math.random() * playlist.videos.length);
+// Toggle player visibility
+function togglePlayer() {
+  const playerDiv = document.getElementById('music-player');
+  const body = playerDiv.querySelector('.player-body');
   
-  if (player) {
-    const track = getCurrentTrack();
-    player.loadVideoById(track.id);
-    updateTrackDisplay();
+  if (body.style.display === 'none') {
+    body.style.display = 'block';
+  } else {
+    body.style.display = 'none';
   }
-  
-  showNotification('🔀 Shuffled to random track', 'success');
 }
-
-// Repeat (replay current)
-function toggleRepeat() {
-  if (player) {
-    player.seekTo(0);
-    player.playVideo();
-  }
-  
-  showNotification('🔁 Replaying current track', 'success');
-}
-
-// Show notification
-function showNotification(message, type = 'info') {
-  const notification = document.createElement('div');
-  notification.className = `notification notification-${type}`;
-  notification.textContent = message;
-  document.body.appendChild(notification);
-  
-  setTimeout(() => notification.classList.add('show'), 100);
-  setTimeout(() => {
-    notification.classList.remove('show');
-    setTimeout(() => notification.remove(), 300);
-  }, 3000);
-}
-
-// Make functions global
-window.toggleMusicPlayer = toggleMusicPlayer;
-window.togglePlay = togglePlay;
-window.nextTrack = nextTrack;
-window.prevTrack = prevTrack;
-window.changePlaylist = changePlaylist;
-window.toggleShuffle = toggleShuffle;
-window.toggleRepeat = toggleRepeat;
 
 // Initialize on load
 window.addEventListener('load', () => {
-  initYouTubePlayer();
-  console.log('✅ Music player initialized (YouTube embed)');
+  loadYouTubeAPI();
+  console.log('✅ Music player initialized');
 });
 
 console.log('✅ Music player script loaded');
