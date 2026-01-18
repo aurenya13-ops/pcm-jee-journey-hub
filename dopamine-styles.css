@@ -1,0 +1,382 @@
+/* ==================== DOPAMINE STYLES - ADDICTION DESIGN ==================== */
+
+/* XP Popup Animation */
+.xp-popup {
+  position: fixed;
+  font-size: 24px;
+  font-weight: 700;
+  color: #4ecdc4;
+  pointer-events: none;
+  z-index: 10000;
+  text-shadow: 0 0 10px rgba(78, 205, 196, 0.8);
+  opacity: 0;
+  transform: translateY(0);
+  transition: all 1.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.xp-popup.animate {
+  opacity: 1;
+  transform: translateY(-100px) scale(1.5);
+}
+
+/* Combo Popup */
+.combo-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+  padding: 30px 50px;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(255, 107, 107, 0.6);
+  z-index: 10001;
+  text-align: center;
+  transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.combo-popup.show {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.combo-text {
+  font-size: 36px;
+  font-weight: 900;
+  color: white;
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  margin-bottom: 10px;
+}
+
+.combo-bonus {
+  font-size: 20px;
+  color: #ffe66d;
+  font-weight: 700;
+}
+
+/* Level Up Explosion */
+.level-up-explosion {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10002;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.level-up-explosion.show {
+  opacity: 1;
+}
+
+.explosion-content {
+  text-align: center;
+  transform: scale(0);
+  transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.level-up-explosion.show .explosion-content {
+  transform: scale(1);
+}
+
+.explosion-icon {
+  font-size: 120px;
+  margin-bottom: 20px;
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+.explosion-text {
+  font-size: 64px;
+  font-weight: 900;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 10px;
+}
+
+.explosion-level {
+  font-size: 48px;
+  color: white;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.explosion-subtitle {
+  font-size: 24px;
+  color: #4ecdc4;
+  font-weight: 600;
+}
+
+/* Confetti */
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #ff6b6b;
+  animation: confetti-fall 3s linear infinite;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* Daily Reward Notification */
+.daily-reward-notification {
+  position: fixed;
+  top: 100px;
+  right: -400px;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  padding: 20px 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 40px rgba(240, 147, 251, 0.5);
+  z-index: 9999;
+  transition: right 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.daily-reward-notification.show {
+  right: 30px;
+}
+
+.daily-reward-content {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: white;
+}
+
+.daily-reward-icon {
+  font-size: 40px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.daily-reward-text {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.daily-reward-btn {
+  background: white;
+  color: #f5576c;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.daily-reward-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Reward Popup */
+.reward-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10003;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.reward-popup.show {
+  opacity: 1;
+}
+
+.reward-popup-content {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 50px;
+  border-radius: 25px;
+  text-align: center;
+  color: white;
+  transform: scale(0);
+  transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  box-shadow: 0 20px 60px rgba(102, 126, 234, 0.6);
+}
+
+.reward-popup.show .reward-popup-content {
+  transform: scale(1);
+}
+
+.reward-icon {
+  font-size: 80px;
+  margin-bottom: 20px;
+  animation: bounce 1s infinite;
+}
+
+.reward-title {
+  font-size: 36px;
+  font-weight: 900;
+  margin-bottom: 20px;
+}
+
+.reward-amount {
+  font-size: 48px;
+  font-weight: 700;
+  color: #4ecdc4;
+  margin-bottom: 15px;
+}
+
+.reward-streak {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.reward-bonus {
+  font-size: 20px;
+  color: #ffe66d;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.reward-claim-btn {
+  background: white;
+  color: #667eea;
+  border: none;
+  padding: 15px 40px;
+  border-radius: 15px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 20px;
+}
+
+.reward-claim-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Achievement Popup */
+.achievement-popup {
+  position: fixed;
+  top: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  padding: 25px 35px;
+  border-radius: 20px;
+  box-shadow: 0 15px 50px rgba(240, 147, 251, 0.6);
+  z-index: 10000;
+  transition: top 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  min-width: 400px;
+}
+
+.achievement-popup.show {
+  top: 30px;
+}
+
+.achievement-popup-content {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: white;
+}
+
+.achievement-badge {
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+}
+
+.achievement-icon {
+  font-size: 40px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.achievement-info {
+  flex: 1;
+}
+
+.achievement-unlocked {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  opacity: 0.9;
+  margin-bottom: 5px;
+}
+
+.achievement-name {
+  font-size: 24px;
+  font-weight: 900;
+  margin-bottom: 5px;
+}
+
+.achievement-desc {
+  font-size: 14px;
+  opacity: 0.9;
+  margin-bottom: 8px;
+}
+
+.achievement-xp {
+  font-size: 18px;
+  color: #ffe66d;
+  font-weight: 700;
+}
+
+/* Pulse Animation */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .achievement-popup {
+    min-width: 90%;
+    left: 5%;
+    transform: none;
+  }
+  
+  .achievement-popup.show {
+    left: 5%;
+  }
+  
+  .combo-popup {
+    padding: 20px 30px;
+  }
+  
+  .combo-text {
+    font-size: 28px;
+  }
+  
+  .explosion-text {
+    font-size: 48px;
+  }
+  
+  .explosion-level {
+    font-size: 36px;
+  }
+}
