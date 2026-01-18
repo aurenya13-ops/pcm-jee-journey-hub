@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PCM × Tech Ocean - Addictive Learning Ecosystem 🌊</title>
+  <title>PCM × Tech Ocean - Your Personal Learning Journey 🌊</title>
   
   <!-- Meta Tags -->
-  <meta name="description" content="The most addictive learning platform ever! Complete JEE preparation with dopamine-driven gamification, 161 chapters, 3000+ problems, instant rewards, achievements, and study tools.">
-  <meta name="keywords" content="JEE, Physics, Chemistry, Mathematics, Tech, Learning, Mock Tests, Flashcards, Study, Gamification, Dopamine">
+  <meta name="description" content="Your personal learning platform! Complete JEE preparation with 150+ songs, PCM × Tech game levels, 161 chapters, 3000+ problems, and peaceful study environment.">
+  <meta name="keywords" content="JEE, Physics, Chemistry, Mathematics, Tech, Learning, Music, Games, Study">
   <meta name="author" content="Aurenya">
   
   <!-- Favicons -->
@@ -87,7 +87,7 @@
       <div class="sidebar-section">
         <h3><i class="fas fa-tools"></i> Tools</h3>
         <button class="sidebar-btn" onclick="showSection('music')">
-          <i class="fas fa-music"></i> Music Player
+          <i class="fas fa-music"></i> Music (150+ songs)
         </button>
         <button class="sidebar-btn" onclick="showSection('notes')">
           <i class="fas fa-sticky-note"></i> My Notes
@@ -125,6 +125,9 @@
   <script src="content/maths-complete.js"></script>
   <script src="content/tech-complete.js"></script>
   
+  <!-- Load Music Data BEFORE Music Player -->
+  <script src="music-data.js"></script>
+  
   <!-- Load Dopamine Engine BEFORE App -->
   <script src="dopamine-engine.js"></script>
   
@@ -140,12 +143,13 @@
   <script src="app.js"></script>
   
   <script>
-    console.log('🌊 PCM × Tech Ocean - DOPAMINE-DRIVEN Learning!');
+    console.log('🌊 PCM × Tech Ocean - YOUR Personal Learning Journey!');
+    console.log('🎵 Music: 150+ songs (Chill, Motivational, Growing Up)');
     console.log('📚 Content: 161 chapters, 3000+ problems, 100+ projects');
-    console.log('🎯 Features: Notes, Flashcards, Mock Tests, Music, Pomodoro');
-    console.log('🏆 Gamification: XP, Levels, Streaks, Achievements, Daily Rewards');
-    console.log('⚡ Dopamine Engine: Instant rewards, combos, explosions!');
-    console.log('🚀 Ready to get ADDICTED to learning!');
+    console.log('🎮 Game: PCM × Tech levels (11th → 12th → Grand Finale)');
+    console.log('🎯 Features: Notes, Flashcards, Mock Tests, Pomodoro');
+    console.log('🏆 Gamification: XP, Levels, Streaks, Achievements');
+    console.log('🚀 Ready for your JEE journey!');
   </script>
 </body>
 </html>
