@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PCM × Tech Ocean - Complete Learning Ecosystem</title>
+  <title>PCM × Tech Ocean - Addictive Learning Ecosystem 🌊</title>
   
   <!-- Meta Tags -->
-  <meta name="description" content="Complete JEE preparation platform with 161 chapters, 3000+ problems, mock tests, flashcards, and study tools. Your all-in-one learning ecosystem.">
-  <meta name="keywords" content="JEE, Physics, Chemistry, Mathematics, Tech, Learning, Mock Tests, Flashcards, Study">
+  <meta name="description" content="The most addictive learning platform ever! Complete JEE preparation with dopamine-driven gamification, 161 chapters, 3000+ problems, instant rewards, achievements, and study tools.">
+  <meta name="keywords" content="JEE, Physics, Chemistry, Mathematics, Tech, Learning, Mock Tests, Flashcards, Study, Gamification, Dopamine">
   <meta name="author" content="Aurenya">
   
   <!-- Favicons -->
@@ -18,6 +18,8 @@
   
   <!-- Styles -->
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="audio-player-styles.css">
+  <link rel="stylesheet" href="dopamine-styles.css">
   
   <!-- MathJax for formulas -->
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -101,30 +103,8 @@
       <!-- Content loaded dynamically -->
     </main>
 
-    <!-- Floating Music Player -->
-    <div class="floating-player" id="music-player">
-      <div class="player-header" onclick="togglePlayer()">
-        <i class="fas fa-music"></i>
-        <span id="current-song">No song playing</span>
-        <button class="btn-icon">
-          <i class="fas fa-chevron-down"></i>
-        </button>
-      </div>
-      <div class="player-body">
-        <div id="youtube-player"></div>
-        <div class="player-controls">
-          <button onclick="prevSong()"><i class="fas fa-step-backward"></i></button>
-          <button onclick="togglePlay()" id="play-btn"><i class="fas fa-play"></i></button>
-          <button onclick="nextSong()"><i class="fas fa-step-forward"></i></button>
-        </div>
-        <select id="playlist-select" onchange="changePlaylist()">
-          <option value="lofi">☕ Lofi Beats</option>
-          <option value="focus">🎯 Deep Focus</option>
-          <option value="classical">🎹 Classical</option>
-          <option value="ambient">🌙 Ambient</option>
-        </select>
-      </div>
-    </div>
+    <!-- Music Player Container (for music section) -->
+    <div id="music-player-content" style="display: none;"></div>
 
     <!-- Pomodoro Timer -->
     <div class="floating-pomodoro" id="pomodoro">
@@ -145,6 +125,9 @@
   <script src="content/maths-complete.js"></script>
   <script src="content/tech-complete.js"></script>
   
+  <!-- Load Dopamine Engine BEFORE App -->
+  <script src="dopamine-engine.js"></script>
+  
   <!-- Load Systems -->
   <script src="notes-system.js"></script>
   <script src="flashcards-system.js"></script>
@@ -157,11 +140,12 @@
   <script src="app.js"></script>
   
   <script>
-    console.log('🌊 PCM × Tech Ocean - Complete Learning Ecosystem');
+    console.log('🌊 PCM × Tech Ocean - DOPAMINE-DRIVEN Learning!');
     console.log('📚 Content: 161 chapters, 3000+ problems, 100+ projects');
     console.log('🎯 Features: Notes, Flashcards, Mock Tests, Music, Pomodoro');
-    console.log('🏆 Gamification: XP, Levels, Streaks, Achievements');
-    console.log('🚀 Ready to learn! Let\'s ace JEE!');
+    console.log('🏆 Gamification: XP, Levels, Streaks, Achievements, Daily Rewards');
+    console.log('⚡ Dopamine Engine: Instant rewards, combos, explosions!');
+    console.log('🚀 Ready to get ADDICTED to learning!');
   </script>
 </body>
 </html>
