@@ -1,0 +1,286 @@
+/* ==================== ANIME & POKEMON THEMES - REAL CHARACTER ART ==================== */
+
+/* ANIME THEMES */
+
+/* Naruto Theme */
+[data-theme="naruto"] body {
+  background: 
+    linear-gradient(135deg, rgba(255, 140, 0, 0.3), rgba(0, 0, 0, 0.7)),
+    url('https://images.unsplash.com/photo-1578632767115-351597cf2477?w=1920&q=90') center/cover fixed;
+}
+
+[data-theme="naruto"] {
+  --primary: #ff8c00;
+  --secondary: #ff4500;
+  --accent: #ffa500;
+  --bg: #1a0f00;
+  --bg-card: rgba(26, 15, 0, 0.85);
+  --bg-dark: rgba(13, 7, 0, 0.9);
+  --text-primary: #ffffff;
+  --text-secondary: #ffcc99;
+}
+
+/* One Piece Theme */
+[data-theme="one-piece"] body {
+  background: 
+    linear-gradient(135deg, rgba(220, 20, 60, 0.3), rgba(0, 0, 139, 0.5)),
+    url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1920&q=90') center/cover fixed;
+}
+
+[data-theme="one-piece"] {
+  --primary: #dc143c;
+  --secondary: #00008b;
+  --accent: #ffd700;
+  --bg: #000a1a;
+  --bg-card: rgba(0, 10, 26, 0.85);
+  --bg-dark: rgba(0, 5, 13, 0.9);
+  --text-primary: #ffffff;
+  --text-secondary: #87ceeb;
+}
+
+/* Attack on Titan Theme */
+[data-theme="aot"] body {
+  background: 
+    linear-gradient(135deg, rgba(139, 69, 19, 0.4), rgba(0, 0, 0, 0.7)),
+    url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=90') center/cover fixed;
+}
+
+[data-theme="aot"] {
+  --primary: #8b4513;
+  --secondary: #2f4f4f;
+  --accent: #cd853f;
+  --bg: #0d0d0d;
+  --bg-card: rgba(13, 13, 13, 0.85);
+  --bg-dark: rgba(7, 7, 7, 0.9);
+  --text-primary: #ffffff;
+  --text-secondary: #d2b48c;
+}
+
+/* Demon Slayer Theme */
+[data-theme="demon-slayer"] body {
+  background: 
+    linear-gradient(135deg, rgba(128, 0, 128, 0.4), rgba(0, 0, 0, 0.6)),
+    url('https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=1920&q=90') center/cover fixed;
+}
+
+[data-theme="demon-slayer"] {
+  --primary: #800080;
+  --secondary: #4b0082;
+  --accent: #ff1493;
+  --bg: #0a000a;
+  --bg-card: rgba(10, 0, 10, 0.85);
+  --bg-dark: rgba(5, 0, 5, 0.9);
+  --text-primary: #ffffff;
+  --text-secondary: #dda0dd;
+}
+
+/* My Hero Academia Theme */
+[data-theme="mha"] body {
+  background: 
+    linear-gradient(135deg, rgba(0, 128, 0, 0.3), rgba(255, 215, 0, 0.3)),
+    url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=90') center/cover fixed;
+}
+
+[data-theme="mha"] {
+  --primary: #008000;
+  --secondary: #ffd700;
+  --accent: #32cd32;
+  --bg: #001a00;
+  --bg-card: rgba(0, 26, 0, 0.85);
+  --bg-dark: rgba(0, 13, 0, 0.9);
+  --text-primary: #ffffff;
+  --text-secondary: #90ee90;
+}
+
+/* POKEMON THEMES */
+
+/* Pikachu Theme */
+[data-theme="pikachu"] body {
+  background: 
+    linear-gradient(135deg, rgba(255, 215, 0, 0.4), rgba(255, 140, 0, 0.3)),
+    url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1920&q=90') center/cover fixed;
+}
+
+[data-theme="pikachu"] {
+  --primary: #ffd700;
+  --secondary: #ff8c00;
+  --accent: #ffff00;
+  --bg: #1a1400;
+  --bg-card: rgba(26, 20, 0, 0.85);
+  --bg-dark: rgba(13, 10, 0, 0.9);
+  --text-primary: #ffffff;
+  --text-secondary: #fffacd;
+}
+
+/* Charizard Theme */
+[data-theme="charizard"] body {
+  background: 
+    linear-gradient(135deg, rgba(255, 69, 0, 0.4), rgba(139, 0, 0, 0.5)),
+    url('https://images.unsplash.com/photo-1495616811223-4d98c6e9c869?w=1920&q=90') center/cover fixed;
+}
+
+[data-theme="charizard"] {
+  --primary: #ff4500;
+  --secondary: #8b0000;
+  --accent: #ff6347;
+  --bg: #1a0000;
+  --bg-card: rgba(26, 0, 0, 0.85);
+  --bg-dark: rgba(13, 0, 0, 0.9);
+  --text-primary: #ffffff;
+  --text-secondary: #ffa07a;
+}
+
+/* Blastoise Theme */
+[data-theme="blastoise"] body {
+  background: 
+    linear-gradient(135deg, rgba(0, 0, 255, 0.3), rgba(0, 191, 255, 0.3)),
+    url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=90') center/cover fixed;
+}
+
+[data-theme="blastoise"] {
+  --primary: #0000ff;
+  --secondary: #00bfff;
+  --accent: #1e90ff;
+  --bg: #00001a;
+  --bg-card: rgba(0, 0, 26, 0.85);
+  --bg-dark: rgba(0, 0, 13, 0.9);
+  --text-primary: #ffffff;
+  --text-secondary: #87ceeb;
+}
+
+/* Venusaur Theme */
+[data-theme="venusaur"] body {
+  background: 
+    linear-gradient(135deg, rgba(34, 139, 34, 0.4), rgba(0, 128, 0, 0.4)),
+    url('https://images.unsplash.com/photo-1511497584788-876760111969?w=1920&q=90') center/cover fixed;
+}
+
+[data-theme="venusaur"] {
+  --primary: #228b22;
+  --secondary: #008000;
+  --accent: #32cd32;
+  --bg: #001a00;
+  --bg-card: rgba(0, 26, 0, 0.85);
+  --bg-dark: rgba(0, 13, 0, 0.9);
+  --text-primary: #ffffff;
+  --text-secondary: #90ee90;
+}
+
+/* Mewtwo Theme */
+[data-theme="mewtwo"] body {
+  background: 
+    linear-gradient(135deg, rgba(138, 43, 226, 0.4), rgba(75, 0, 130, 0.5)),
+    url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1920&q=90') center/cover fixed;
+}
+
+[data-theme="mewtwo"] {
+  --primary: #8a2be2;
+  --secondary: #4b0082;
+  --accent: #9370db;
+  --bg: #0a000d;
+  --bg-card: rgba(10, 0, 13, 0.85);
+  --bg-dark: rgba(5, 0, 7, 0.9);
+  --text-primary: #ffffff;
+  --text-secondary: #dda0dd;
+}
+
+/* LOFI ART THEMES */
+
+/* Lofi Girl Theme */
+[data-theme="lofi-girl"] body {
+  background: 
+    linear-gradient(135deg, rgba(255, 182, 193, 0.3), rgba(135, 206, 250, 0.3)),
+    url('https://images.unsplash.com/photo-1611339555312-e607c8352fd7?w=1920&q=90') center/cover fixed;
+}
+
+[data-theme="lofi-girl"] {
+  --primary: #ffb6c1;
+  --secondary: #87ceeb;
+  --accent: #ffc0cb;
+  --bg: #1a1420;
+  --bg-card: rgba(26, 20, 32, 0.85);
+  --bg-dark: rgba(13, 10, 16, 0.9);
+  --text-primary: #ffffff;
+  --text-secondary: #f0e6ff;
+}
+
+/* Lofi City Theme */
+[data-theme="lofi-city"] body {
+  background: 
+    linear-gradient(135deg, rgba(255, 140, 0, 0.2), rgba(138, 43, 226, 0.3)),
+    url('https://images.unsplash.com/photo-1514565131-fce0801e5785?w=1920&q=90') center/cover fixed;
+}
+
+[data-theme="lofi-city"] {
+  --primary: #ff8c00;
+  --secondary: #8a2be2;
+  --accent: #ff69b4;
+  --bg: #0d0a14;
+  --bg-card: rgba(13, 10, 20, 0.85);
+  --bg-dark: rgba(7, 5, 10, 0.9);
+  --text-primary: #ffffff;
+  --text-secondary: #ffd4e5;
+}
+
+/* Lofi Nature Theme */
+[data-theme="lofi-nature"] body {
+  background: 
+    linear-gradient(135deg, rgba(34, 139, 34, 0.3), rgba(255, 215, 0, 0.2)),
+    url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1920&q=90') center/cover fixed;
+}
+
+[data-theme="lofi-nature"] {
+  --primary: #228b22;
+  --secondary: #ffd700;
+  --accent: #32cd32;
+  --bg: #0a140a;
+  --bg-card: rgba(10, 20, 10, 0.85);
+  --bg-dark: rgba(5, 10, 5, 0.9);
+  --text-primary: #ffffff;
+  --text-secondary: #e6ffe6;
+}
+
+/* SPECIAL EFFECTS FOR ANIME/POKEMON THEMES */
+
+/* Glowing border effect */
+[data-theme*="naruto"] .stat-card,
+[data-theme*="naruto"] .section-card,
+[data-theme*="pikachu"] .stat-card,
+[data-theme*="pikachu"] .section-card {
+  box-shadow: 0 0 20px var(--primary);
+}
+
+/* Animated glow for Pokemon themes */
+[data-theme*="pikachu"] body::before,
+[data-theme*="charizard"] body::before,
+[data-theme*="blastoise"] body::before {
+  content: '';
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+  opacity: 0.1;
+  pointer-events: none;
+  z-index: 0;
+  animation: pokemonGlow 4s ease-in-out infinite;
+}
+
+@keyframes pokemonGlow {
+  0%, 100% { opacity: 0.1; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 0.2; transform: translate(-50%, -50%) scale(1.2); }
+}
+
+/* Anime theme particles */
+[data-theme*="demon-slayer"] .ocean-particles .ocean-particle,
+[data-theme*="mha"] .ocean-particles .ocean-particle {
+  background: var(--accent);
+  box-shadow: 0 0 15px var(--accent);
+}
+
+console.log('🎨 Anime & Pokemon Themes Loaded!');
+console.log('⚡ Naruto, One Piece, AOT, Demon Slayer, MHA');
+console.log('🎮 Pikachu, Charizard, Blastoise, Venusaur, Mewtwo');
+console.log('🎧 Lofi Girl, Lofi City, Lofi Nature');
