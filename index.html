@@ -11,8 +11,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <!-- Styles -->
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="themes.css">
   <link rel="stylesheet" href="anime-pokemon-themes.css">
   
   <style>
@@ -22,268 +20,23 @@
       box-sizing: border-box;
     }
 
+    :root {
+      --primary: #667eea;
+      --secondary: #764ba2;
+      --accent: #06ffa5;
+      --bg: #0d1b2a;
+      --bg-card: rgba(26, 26, 26, 0.9);
+      --bg-dark: #1a1a1a;
+      --text-primary: #ffffff;
+      --text-secondary: #888;
+      --border: #333;
+    }
+
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: var(--bg, #0d1b2a);
-      color: var(--text-primary, #ffffff);
+      background: var(--bg);
+      color: var(--text-primary);
       min-height: 100vh;
-    }
-
-    /* REAL AUDIO PLAYER STYLES */
-    .real-audio-player {
-      padding: 40px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .player-title {
-      font-size: 48px;
-      text-align: center;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 10px;
-    }
-
-    .player-subtitle {
-      text-align: center;
-      color: #888;
-      margin-bottom: 40px;
-      font-size: 18px;
-    }
-
-    .playlist-tabs-real {
-      display: flex;
-      gap: 15px;
-      margin-bottom: 40px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .playlist-tab-real {
-      padding: 15px 30px;
-      border: 2px solid #333;
-      border-radius: 25px;
-      background: #1a1a1a;
-      color: white;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-size: 16px;
-      font-weight: 600;
-    }
-
-    .playlist-tab-real.active {
-      color: white;
-      border-color: transparent;
-      transform: scale(1.05);
-    }
-
-    .playlist-tab-real:hover {
-      transform: translateY(-3px);
-    }
-
-    .now-playing-card-real {
-      background: rgba(26, 26, 26, 0.9);
-      border: 2px solid #333;
-      border-radius: 20px;
-      padding: 30px;
-      margin-bottom: 40px;
-      backdrop-filter: blur(20px);
-    }
-
-    .now-playing-real {
-      display: flex;
-      gap: 25px;
-      align-items: center;
-      margin-bottom: 25px;
-    }
-
-    .now-playing-real img {
-      width: 120px;
-      height: 120px;
-      border-radius: 15px;
-      object-fit: cover;
-    }
-
-    .song-details h3 {
-      font-size: 24px;
-      margin-bottom: 8px;
-    }
-
-    .song-details p {
-      color: #888;
-      font-size: 16px;
-    }
-
-    .progress-container-real {
-      margin-bottom: 25px;
-    }
-
-    .progress-bar-real {
-      width: 100%;
-      height: 8px;
-      background: #333;
-      border-radius: 10px;
-      overflow: hidden;
-      cursor: pointer;
-      margin-bottom: 10px;
-    }
-
-    .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #667eea, #764ba2);
-      width: 0%;
-      transition: width 0.1s linear;
-    }
-
-    .time-display-real {
-      display: flex;
-      justify-content: space-between;
-      color: #888;
-      font-size: 14px;
-    }
-
-    .controls-real {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 25px;
-    }
-
-    .control-btn-real {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: #333;
-      border: none;
-      color: white;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-    }
-
-    .play-btn-real {
-      width: 70px;
-      height: 70px;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      font-size: 24px;
-    }
-
-    .control-btn-real:hover {
-      transform: scale(1.1);
-    }
-
-    .control-btn-real.active {
-      background: linear-gradient(135deg, #667eea, #764ba2);
-    }
-
-    .volume-control-real {
-      display: flex;
-      gap: 15px;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .volume-control-real i {
-      color: #888;
-    }
-
-    .volume-control-real input[type="range"] {
-      width: 150px;
-    }
-
-    .song-list-container-real {
-      background: rgba(26, 26, 26, 0.9);
-      border: 2px solid #333;
-      border-radius: 20px;
-      padding: 30px;
-      backdrop-filter: blur(20px);
-    }
-
-    .song-list-container-real h3 {
-      font-size: 28px;
-      margin-bottom: 10px;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .playlist-desc-real {
-      color: #888;
-      margin-bottom: 25px;
-    }
-
-    .song-list-real {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    .song-item-real {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      padding: 15px;
-      background: #1a1a1a;
-      border: 2px solid #333;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .song-item-real:hover {
-      border-color: #667eea;
-      transform: translateX(5px);
-    }
-
-    .song-item-real.active {
-      border-color: #764ba2;
-      background: rgba(102, 126, 234, 0.1);
-    }
-
-    .song-item-real img {
-      width: 60px;
-      height: 60px;
-      border-radius: 8px;
-      object-fit: cover;
-    }
-
-    .song-info-real {
-      flex: 1;
-    }
-
-    .song-info-real h4 {
-      font-size: 16px;
-      margin-bottom: 5px;
-    }
-
-    .song-info-real p {
-      color: #888;
-      font-size: 14px;
-    }
-
-    .duration {
-      color: #888;
-      font-size: 14px;
-      margin-right: 10px;
-    }
-
-    .playing-icon {
-      color: #667eea;
-      animation: pulse 1s infinite;
-    }
-
-    .play-icon {
-      color: #888;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
     }
 
     /* Navbar */
@@ -293,8 +46,13 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 2px solid #333;
+      border-bottom: 2px solid var(--border);
       backdrop-filter: blur(10px);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
     }
 
     .nav-brand {
@@ -313,6 +71,22 @@
       font-size: 24px;
     }
 
+    .theme-toggle-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--bg-dark);
+      border: 2px solid var(--border);
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle-btn:hover {
+      border-color: var(--primary);
+      transform: scale(1.1);
+    }
+
     /* Sidebar */
     .sidebar {
       position: fixed;
@@ -321,10 +95,11 @@
       width: 250px;
       height: calc(100vh - 70px);
       background: rgba(13, 27, 42, 0.95);
-      border-right: 2px solid #333;
+      border-right: 2px solid var(--border);
       padding: 20px;
       overflow-y: auto;
       backdrop-filter: blur(10px);
+      z-index: 50;
     }
 
     .sidebar-section {
@@ -333,7 +108,7 @@
 
     .sidebar-section h3 {
       font-size: 14px;
-      color: #888;
+      color: var(--text-secondary);
       margin-bottom: 15px;
       text-transform: uppercase;
     }
@@ -352,6 +127,7 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      font-size: 15px;
     }
 
     .sidebar-btn:hover {
@@ -360,7 +136,7 @@
     }
 
     .sidebar-btn.active {
-      background: linear-gradient(135deg, #667eea, #764ba2);
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
       color: white;
     }
 
@@ -372,21 +148,113 @@
       padding: 20px;
     }
 
-    /* Theme Button */
-    .theme-toggle-btn {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: #1a1a1a;
-      border: 2px solid #333;
+    /* Content Sections */
+    .content-section {
+      padding: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: 48px;
+      text-align: center;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+      font-size: 18px;
+    }
+
+    /* Chapter Cards */
+    .chapters-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 25px;
+      margin-bottom: 40px;
+    }
+
+    .chapter-card {
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      border-radius: 20px;
+      padding: 30px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .chapter-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+    }
+
+    .chapter-card h3 {
+      font-size: 24px;
+      margin-bottom: 15px;
+      color: var(--accent);
+    }
+
+    .chapter-topics {
+      margin: 15px 0;
+    }
+
+    .chapter-topics span {
+      display: inline-block;
+      padding: 6px 12px;
+      background: rgba(102, 126, 234, 0.2);
+      border-radius: 15px;
+      margin: 5px;
+      font-size: 13px;
+    }
+
+    .tech-badge {
+      display: inline-block;
+      padding: 8px 16px;
+      background: linear-gradient(135deg, #06ffa5, #00d4ff);
+      color: #000;
+      border-radius: 20px;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+
+    /* Theme Grid */
+    .theme-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .theme-btn {
+      padding: 30px;
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      border-radius: 15px;
       color: white;
       cursor: pointer;
       transition: all 0.3s ease;
+      font-size: 18px;
+      text-transform: capitalize;
     }
 
-    .theme-toggle-btn:hover {
-      border-color: #667eea;
-      transform: scale(1.1);
+    .theme-btn:hover {
+      border-color: var(--primary);
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        transform: translateX(-100%);
+      }
+      
+      .main-content {
+        margin-left: 0;
+      }
     }
   </style>
 </head>
@@ -407,9 +275,25 @@
     <!-- Sidebar -->
     <aside class="sidebar">
       <div class="sidebar-section">
-        <h3><i class="fas fa-music"></i> Music</h3>
-        <button class="sidebar-btn active" onclick="showSection('music')">
-          <i class="fas fa-headphones"></i> Real Audio Player
+        <h3><i class="fas fa-book"></i> Subjects</h3>
+        <button class="sidebar-btn" onclick="showSection('physics')">
+          <i class="fas fa-atom"></i> Physics
+        </button>
+        <button class="sidebar-btn" onclick="showSection('chemistry')">
+          <i class="fas fa-flask"></i> Chemistry
+        </button>
+        <button class="sidebar-btn" onclick="showSection('maths')">
+          <i class="fas fa-square-root-alt"></i> Maths
+        </button>
+      </div>
+
+      <div class="sidebar-section">
+        <h3><i class="fas fa-tools"></i> Tools</h3>
+        <button class="sidebar-btn" onclick="showSection('music')">
+          <i class="fas fa-headphones"></i> Music Player
+        </button>
+        <button class="sidebar-btn" onclick="showSection('pomodoro')">
+          <i class="fas fa-clock"></i> Pomodoro
         </button>
       </div>
 
@@ -423,12 +307,17 @@
 
     <!-- Main Content -->
     <main class="main-content" id="main-content">
-      <!-- Content loads here -->
+      <div class="content-section">
+        <h1 class="section-title">🌊 Welcome to PCM × Tech Ocean</h1>
+        <p class="section-subtitle">Choose a section from the sidebar to start learning!</p>
+      </div>
     </main>
   </div>
 
-  <!-- Load Real Audio Player Script -->
+  <!-- Load Scripts -->
   <script src="real-audio-player.js"></script>
+  <script src="pomodoro-timer.js"></script>
+  <script src="pcm-content.js"></script>
   
   <script>
     function showSection(section) {
@@ -436,51 +325,152 @@
       
       // Update active button
       document.querySelectorAll('.sidebar-btn').forEach(btn => btn.classList.remove('active'));
-      event?.target?.classList.add('active');
+      if(event?.target) event.target.classList.add('active');
       
       if (section === 'music') {
         content.innerHTML = realAudioPlayer.render();
         realAudioPlayer.renderSongList();
         realAudioPlayer.loadSong();
-      } else if (section === 'themes') {
+      } 
+      else if (section === 'pomodoro') {
+        content.innerHTML = pomodoroTimer.render();
+        pomodoroTimer.renderTasks();
+        pomodoroTimer.updateDisplay();
+        pomodoroTimer.updateStats();
+      }
+      else if (section === 'physics') {
+        renderSubject('physics');
+      }
+      else if (section === 'chemistry') {
+        renderSubject('chemistry');
+      }
+      else if (section === 'maths') {
+        renderSubject('maths');
+      }
+      else if (section === 'themes') {
         content.innerHTML = `
-          <div style="padding: 40px;">
-            <h1 style="font-size: 48px; text-align: center; margin-bottom: 40px;">
-              🎨 Anime & Pokemon Themes
-            </h1>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+          <div class="content-section">
+            <h1 class="section-title">🎨 Anime & Pokemon Themes</h1>
+            <p class="section-subtitle">Choose your favorite theme!</p>
+            <div class="theme-grid">
               ${['naruto', 'one-piece', 'aot', 'demon-slayer', 'mha', 'pikachu', 'charizard', 'blastoise', 'venusaur', 'mewtwo', 'lofi-girl', 'lofi-city', 'lofi-nature'].map(theme => `
-                <button onclick="changeTheme('${theme}')" style="
-                  padding: 30px;
-                  background: rgba(26, 26, 26, 0.9);
-                  border: 2px solid #333;
-                  border-radius: 15px;
-                  color: white;
-                  cursor: pointer;
-                  transition: all 0.3s ease;
-                  font-size: 18px;
-                  text-transform: capitalize;
-                " onmouseover="this.style.borderColor='#667eea'" onmouseout="this.style.borderColor='#333'">
-                  ${theme.replace('-', ' ')}
+                <button class="theme-btn" onclick="changeTheme('${theme}')">
+                  ${theme.replace(/-/g, ' ')}
                 </button>
               `).join('')}
             </div>
           </div>
         `;
       }
+      
+      content.scrollTop = 0;
+    }
+
+    function renderSubject(subject) {
+      const data = PCM_CONTENT[subject];
+      const content = document.getElementById('main-content');
+      
+      content.innerHTML = `
+        <div class="content-section">
+          <h1 class="section-title">${data.icon} ${data.name}</h1>
+          <p class="section-subtitle">${data.chapters.length} chapters with formulas, problems & tech projects</p>
+          
+          <div class="chapters-grid">
+            ${data.chapters.map(chapter => `
+              <div class="chapter-card" onclick="showChapter('${subject}', ${chapter.id})">
+                <h3>${chapter.title}</h3>
+                <div class="chapter-topics">
+                  ${chapter.topics.map(topic => `<span>${topic}</span>`).join('')}
+                </div>
+                ${chapter.techProject ? '<div class="tech-badge">💻 Tech Project Included</div>' : ''}
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function showChapter(subject, chapterId) {
+      const data = PCM_CONTENT[subject];
+      const chapter = data.chapters.find(c => c.id === chapterId);
+      const content = document.getElementById('main-content');
+      
+      content.innerHTML = `
+        <div class="content-section">
+          <button onclick="showSection('${subject}')" style="margin-bottom: 20px; padding: 10px 20px; background: var(--bg-card); border: 2px solid var(--border); border-radius: 8px; color: white; cursor: pointer;">
+            ← Back to ${data.name}
+          </button>
+          
+          <h1 class="section-title">${chapter.title}</h1>
+          
+          <div style="background: var(--bg-card); border: 2px solid var(--border); border-radius: 20px; padding: 30px; margin-bottom: 30px;">
+            <h2 style="color: var(--accent); margin-bottom: 20px;">📚 Topics</h2>
+            <div class="chapter-topics">
+              ${chapter.topics.map(topic => `<span>${topic}</span>`).join('')}
+            </div>
+          </div>
+
+          ${chapter.formulas ? `
+            <div style="background: var(--bg-card); border: 2px solid var(--border); border-radius: 20px; padding: 30px; margin-bottom: 30px;">
+              <h2 style="color: var(--accent); margin-bottom: 20px;">📐 Formulas</h2>
+              ${chapter.formulas.map(f => `
+                <div style="padding: 15px; background: var(--bg-dark); border-radius: 10px; margin-bottom: 15px;">
+                  <strong>${f.name}:</strong> <code style="color: var(--accent); font-size: 18px;">${f.formula}</code>
+                  ${f.vars ? `<br><small style="color: var(--text-secondary);">${f.vars}</small>` : ''}
+                </div>
+              `).join('')}
+            </div>
+          ` : ''}
+
+          ${chapter.techProject ? `
+            <div style="background: linear-gradient(135deg, rgba(6, 255, 165, 0.1), rgba(0, 212, 255, 0.1)); border: 2px solid var(--accent); border-radius: 20px; padding: 30px; margin-bottom: 30px;">
+              <h2 style="color: var(--accent); margin-bottom: 15px;">💻 ${chapter.techProject.title}</h2>
+              <p style="margin-bottom: 20px;">${chapter.techProject.description}</p>
+              <pre style="background: #000; padding: 20px; border-radius: 10px; overflow-x: auto; color: #0f0; font-size: 14px;"><code>${chapter.techProject.code}</code></pre>
+            </div>
+          ` : ''}
+
+          ${chapter.problems ? `
+            <div style="background: var(--bg-card); border: 2px solid var(--border); border-radius: 20px; padding: 30px;">
+              <h2 style="color: var(--accent); margin-bottom: 20px;">🎯 Practice Problems</h2>
+              ${chapter.problems.map((p, i) => `
+                <div style="padding: 20px; background: var(--bg-dark); border-radius: 10px; margin-bottom: 15px;">
+                  <strong>Q${i+1}:</strong> ${p.q}
+                  <details style="margin-top: 10px;">
+                    <summary style="cursor: pointer; color: var(--accent);">Show Solution</summary>
+                    <div style="margin-top: 10px; padding: 15px; background: rgba(6, 255, 165, 0.1); border-radius: 8px;">
+                      <p><strong>Solution:</strong> ${p.solution}</p>
+                      <p><strong>Answer:</strong> <code style="color: var(--accent);">${p.answer}</code></p>
+                    </div>
+                  </details>
+                </div>
+              `).join('')}
+            </div>
+          ` : ''}
+        </div>
+      `;
     }
 
     function changeTheme(theme) {
       document.documentElement.setAttribute('data-theme', theme);
       localStorage.setItem('selected-theme', theme);
-      alert('Theme changed to: ' + theme.replace('-', ' '));
+      alert('✅ Theme changed to: ' + theme.replace(/-/g, ' '));
     }
 
-    // Initialize
-    setTimeout(() => showSection('music'), 100);
+    // Load saved theme
+    const savedTheme = localStorage.getItem('selected-theme');
+    if(savedTheme) {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    }
 
-    console.log('🎵 REAL MP3 AUDIO PLAYER LOADED!');
-    console.log('✅ NO YOUTUBE - Pure HTML5 Audio!');
+    // Initialize - show physics by default
+    setTimeout(() => showSection('physics'), 100);
+
+    console.log('🌊 PCM × Tech Ocean Loaded!');
+    console.log('✅ Music Player Ready');
+    console.log('✅ Pomodoro Timer Ready');
+    console.log('✅ PCM Content Ready');
+    console.log('✅ Themes Ready');
   </script>
 </body>
 </html>
