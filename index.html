@@ -53,6 +53,9 @@
         <button class="sidebar-btn active" onclick="showSection('dashboard')">
           <i class="fas fa-chart-line"></i> Dashboard
         </button>
+        <button class="sidebar-btn" onclick="showSection('game')">
+          <i class="fas fa-gamepad"></i> PCM × Tech Game
+        </button>
       </div>
 
       <div class="sidebar-section">
@@ -128,6 +131,10 @@
   <!-- Load Music Data BEFORE Music Player -->
   <script src="music-data.js"></script>
   
+  <!-- Load PCM × Tech Game Data -->
+  <script src="pcm-tech-game.js"></script>
+  <script src="pcm-tech-game-ui.js"></script>
+  
   <!-- Load Dopamine Engine BEFORE App -->
   <script src="dopamine-engine.js"></script>
   
@@ -142,7 +149,28 @@
   <!-- Load Main App Last -->
   <script src="app.js"></script>
   
+  <!-- Add game section to app -->
   <script>
+    // Extend showSection to include game
+    const originalShowSection = showSection;
+    showSection = function(section) {
+      if (section === 'game') {
+        currentSection = 'game';
+        document.querySelectorAll('.sidebar-btn').forEach(btn => btn.classList.remove('active'));
+        event && event.target && event.target.classList.add('active');
+        
+        const content = document.getElementById('main-content');
+        const musicPlayerContent = document.getElementById('music-player-content');
+        if (musicPlayerContent) musicPlayerContent.style.display = 'none';
+        
+        content.innerHTML = renderPCMTechGame();
+        content.style.display = 'block';
+        content.scrollTop = 0;
+      } else {
+        originalShowSection(section);
+      }
+    };
+    
     console.log('🌊 PCM × Tech Ocean - YOUR Personal Learning Journey!');
     console.log('🎵 Music: 150+ songs (Chill, Motivational, Growing Up)');
     console.log('📚 Content: 161 chapters, 3000+ problems, 100+ projects');
