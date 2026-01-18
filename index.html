@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PCM × Tech Ocean - Your Complete JEE Journey 🌊</title>
+  <title>PCM × Tech Ocean - Deep Learning Journey 🌊</title>
   
   <!-- Meta Tags -->
-  <meta name="description" content="Complete JEE preparation platform with 15 auto-rotating themes, 45+ working songs, 161 chapters, 3000+ problems, smart dashboard, and gamification!">
-  <meta name="keywords" content="JEE, Physics, Chemistry, Mathematics, Tech, Learning, Music, Study, Dashboard">
+  <meta name="description" content="Complete JEE preparation with Deep Learning System, 150+ songs, 15 beautiful themes, 161 chapters, and gamification!">
+  <meta name="keywords" content="JEE, Deep Learning, Feynman Technique, Spaced Repetition, Active Recall, Study Music, Anime OST, Pokemon">
   <meta name="author" content="Aurenya">
   
   <!-- Favicons -->
@@ -19,6 +19,7 @@
   <!-- Styles - Load in correct order -->
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="themes.css">
+  <link rel="stylesheet" href="beautiful-backgrounds.css">
   <link rel="stylesheet" href="dashboard-styles.css">
   <link rel="stylesheet" href="music-player-styles.css">
   <link rel="stylesheet" href="complete-sections-styles.css">
@@ -27,8 +28,253 @@
   <!-- MathJax for formulas -->
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  
+  <style>
+    /* Deep Learning System Styles */
+    .deep-learning-page {
+      padding: 30px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .learning-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .learning-header h1 {
+      font-size: 36px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+    
+    .techniques-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin-bottom: 40px;
+    }
+    
+    .technique-card {
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      border-radius: 20px;
+      padding: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: var(--card-shadow);
+    }
+    
+    .technique-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    }
+    
+    .technique-icon {
+      width: 70px;
+      height: 70px;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      color: white;
+      margin-bottom: 20px;
+    }
+    
+    .technique-card h3 {
+      font-size: 22px;
+      margin-bottom: 10px;
+      color: var(--text-primary);
+    }
+    
+    .technique-card p {
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    
+    .learn-btn {
+      padding: 10px 20px;
+      background: var(--primary);
+      border: none;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .learn-btn:hover {
+      transform: translateX(5px);
+    }
+    
+    .active-learning-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    
+    .learning-stat {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      padding: 20px;
+      background: var(--bg-dark);
+      border-radius: 12px;
+    }
+    
+    .study-planner {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 25px;
+    }
+    
+    .planner-card {
+      background: var(--bg-dark);
+      padding: 25px;
+      border-radius: 15px;
+    }
+    
+    .planner-task {
+      display: flex;
+      gap: 15px;
+      padding: 15px;
+      background: var(--bg-card);
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+    
+    .review-item {
+      padding: 15px;
+      background: var(--bg-card);
+      border-radius: 10px;
+      margin-bottom: 15px;
+      border-left: 4px solid var(--primary);
+    }
+    
+    .review-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      background: var(--primary);
+      color: white;
+      border-radius: 12px;
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+    
+    .quick-actions-bar {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+    
+    .action-btn {
+      padding: 15px 30px;
+      background: var(--primary);
+      border: none;
+      border-radius: 12px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .action-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--card-shadow);
+    }
+    
+    /* Technique Modal */
+    .technique-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .technique-modal.show {
+      opacity: 1;
+    }
+    
+    .modal-content {
+      background: var(--bg-card);
+      border-radius: 20px;
+      max-width: 600px;
+      max-height: 80vh;
+      overflow-y: auto;
+      position: relative;
+    }
+    
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.3);
+      border: none;
+      color: white;
+      cursor: pointer;
+      z-index: 1;
+    }
+    
+    .modal-header {
+      padding: 40px;
+      color: white;
+      border-radius: 20px 20px 0 0;
+      text-align: center;
+    }
+    
+    .modal-header i {
+      font-size: 48px;
+      margin-bottom: 15px;
+    }
+    
+    .modal-body {
+      padding: 30px;
+    }
+    
+    .technique-steps,
+    .technique-methods,
+    .technique-benefits,
+    .technique-questions {
+      margin: 20px 0;
+    }
+    
+    .start-technique-btn {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
+  <!-- Background Elements -->
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
   <div id="app">
     <!-- Top Navigation -->
     <nav class="navbar">
@@ -58,6 +304,9 @@
         <h3><i class="fas fa-home"></i> Main</h3>
         <button class="sidebar-btn active" onclick="showSection('dashboard')">
           <i class="fas fa-chart-line"></i> Dashboard
+        </button>
+        <button class="sidebar-btn" onclick="showSection('deep-learning')">
+          <i class="fas fa-brain"></i> Deep Learning
         </button>
         <button class="sidebar-btn" onclick="showSection('game')">
           <i class="fas fa-gamepad"></i> PCM × Tech Game
@@ -96,7 +345,7 @@
       <div class="sidebar-section">
         <h3><i class="fas fa-tools"></i> Tools</h3>
         <button class="sidebar-btn" onclick="showSection('music')">
-          <i class="fas fa-music"></i> Music (45+ songs)
+          <i class="fas fa-music"></i> Music (150+)
         </button>
         <button class="sidebar-btn" onclick="showSection('notes')">
           <i class="fas fa-sticky-note"></i> My Notes
@@ -133,15 +382,16 @@
   <script src="content/chemistry-complete.js"></script>
   <script src="content/maths-complete.js"></script>
   <script src="content/tech-complete.js"></script>
-  <script src="music-data-real.js"></script>
+  <script src="music-library-complete.js"></script>
   <script src="pcm-tech-game.js"></script>
   
   <!-- Load Theme Manager FIRST -->
   <script src="theme-manager.js"></script>
   
   <!-- Load Systems -->
+  <script src="deep-learning-system.js"></script>
   <script src="dashboard-complete.js"></script>
-  <script src="music-player-fixed.js"></script>
+  <script src="youtube-music-player.js"></script>
   <script src="app-complete-render.js"></script>
   <script src="pcm-tech-game-ui.js"></script>
   <script src="dopamine-engine.js"></script>
@@ -154,28 +404,16 @@
   <!-- Load Main App Last -->
   <script src="app.js"></script>
   
-  <!-- Integration & Override Script -->
+  <!-- Integration Script -->
   <script>
-    // Override render functions to use complete versions
-    if (typeof renderPhysicsComplete !== 'undefined') {
-      renderPhysics = renderPhysicsComplete;
-    }
-    if (typeof renderChemistryComplete !== 'undefined') {
-      renderChemistry = renderChemistryComplete;
-    }
-    if (typeof renderMathsComplete !== 'undefined') {
-      renderMaths = renderMathsComplete;
-    }
-    if (typeof renderTechComplete !== 'undefined') {
-      renderTech = renderTechComplete;
-    }
+    // Override render functions
+    if (typeof renderPhysicsComplete !== 'undefined') renderPhysics = renderPhysicsComplete;
+    if (typeof renderChemistryComplete !== 'undefined') renderChemistry = renderChemistryComplete;
+    if (typeof renderMathsComplete !== 'undefined') renderMaths = renderMathsComplete;
+    if (typeof renderTechComplete !== 'undefined') renderTech = renderTechComplete;
+    if (typeof renderDashboardComplete !== 'undefined') renderDashboard = renderDashboardComplete;
     
-    // Override dashboard render
-    if (typeof renderDashboardComplete !== 'undefined') {
-      renderDashboard = renderDashboardComplete;
-    }
-    
-    // Extend showSection to include all sections
+    // Extend showSection
     const originalShowSection = showSection;
     showSection = function(section) {
       const content = document.getElementById('main-content');
@@ -188,55 +426,40 @@
       // Route to correct render function
       if (section === 'dashboard') {
         content.innerHTML = renderDashboardComplete();
-        content.style.display = 'block';
-        content.scrollTop = 0;
+      } else if (section === 'deep-learning') {
+        content.innerHTML = renderDeepLearningSystem();
       } else if (section === 'game') {
         content.innerHTML = renderPCMTechGame();
-        content.style.display = 'block';
-        content.scrollTop = 0;
       } else if (section === 'music') {
-        content.innerHTML = musicPlayer.render();
-        content.style.display = 'block';
-        content.scrollTop = 0;
+        content.innerHTML = youtubeMusicPlayer.render();
       } else if (section === 'themes') {
         content.innerHTML = themeManager.renderThemeSelector();
-        content.style.display = 'block';
-        content.scrollTop = 0;
       } else {
         originalShowSection(section);
       }
+      
+      content.style.display = 'block';
+      content.scrollTop = 0;
     };
     
     // Initialize with dashboard
-    setTimeout(() => {
-      showSection('dashboard');
-    }, 100);
+    setTimeout(() => showSection('dashboard'), 100);
     
-    // Console welcome message
-    console.log('🌊 PCM × Tech Ocean - COMPLETE & WORKING!');
+    // Console welcome
+    console.log('🌊 PCM × Tech Ocean - COMPLETE REBUILD!');
     console.log('');
-    console.log('✅ FEATURES:');
-    console.log('  🎨 15 Premium Themes (auto-rotate every 48 hours)');
-    console.log('  🎵 45+ Working Songs (royalty-free, real MP3s)');
-    console.log('  📊 Smart Dashboard (stats, goals, recommendations)');
+    console.log('✅ NEW FEATURES:');
+    console.log('  🧠 Deep Learning System (Feynman, Spaced Repetition, Active Recall)');
+    console.log('  🎵 150+ Songs (Lofi, Motivation, Bollywood, English, Anime, Pokemon, Classical, EDM)');
+    console.log('  🎨 15 Beautiful Themes with Calm Aesthetic + Anime/Pokemon Backgrounds');
+    console.log('  📊 Smart Dashboard with Analytics');
     console.log('  📚 161 Chapters (Physics 52, Chemistry 47, Maths 62)');
-    console.log('  💻 100+ Tech Projects (Web, DSA, Mobile, AI/ML)');
-    console.log('  🎮 PCM × Tech Game (adventure mode)');
-    console.log('  🎯 3000+ Problems');
-    console.log('  📝 Notes, Flashcards, Mock Tests');
-    console.log('  ⏰ Pomodoro Timer');
-    console.log('  🏆 XP, Levels, Streaks, Achievements');
+    console.log('  💻 100+ Tech Projects');
+    console.log('  🎮 PCM × Tech Game');
     console.log('');
-    console.log('⌨️ KEYBOARD SHORTCUTS:');
-    console.log('  Space = Play/Pause Music');
-    console.log('  ← = Previous Song');
-    console.log('  → = Next Song');
-    console.log('');
-    console.log('🚀 EVERYTHING IS 100% WORKING!');
-    console.log('🎉 No placeholders, no broken features!');
+    console.log('🚀 EVERYTHING WORKING - NO PLACEHOLDERS!');
   </script>
   
-  <!-- Additional Styles -->
   <style>
     .theme-toggle-btn {
       width: 40px;
@@ -258,31 +481,6 @@
       border-color: var(--primary);
       transform: scale(1.1);
       box-shadow: var(--card-shadow);
-    }
-    
-    /* Ensure smooth loading */
-    #main-content {
-      min-height: calc(100vh - 70px);
-    }
-    
-    /* Loading state */
-    .loading-state {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 400px;
-      font-size: 18px;
-      color: var(--text-secondary);
-    }
-    
-    .loading-state i {
-      margin-right: 10px;
-      animation: spin 1s linear infinite;
-    }
-    
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
     }
   </style>
 </body>
