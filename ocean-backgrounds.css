@@ -1,0 +1,426 @@
+/* ==================== OCEAN BACKGROUNDS - STUNNING VISUALS ==================== */
+/* Lofi Art + Anime/Pokemon Aesthetic */
+
+/* BASE: All themes get beautiful high-res backgrounds */
+
+/* CALM AESTHETIC - LOFI ART STYLE */
+
+[data-theme="ocean-blue"] body {
+  background: 
+    linear-gradient(135deg, rgba(13, 27, 42, 0.85), rgba(27, 38, 59, 0.8)),
+    url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=90') center/cover fixed;
+  background-blend-mode: overlay;
+}
+
+[data-theme="ocean-blue"] body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 20% 50%, rgba(58, 134, 255, 0.15) 0%, transparent 50%),
+              radial-gradient(circle at 80% 80%, rgba(0, 217, 255, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+  animation: oceanPulse 8s ease-in-out infinite;
+}
+
+@keyframes oceanPulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.8; }
+}
+
+[data-theme="sunset-orange"] body {
+  background: 
+    linear-gradient(135deg, rgba(74, 35, 0, 0.85), rgba(120, 60, 0, 0.8)),
+    url('https://images.unsplash.com/photo-1495616811223-4d98c6e9c869?w=1920&q=90') center/cover fixed;
+}
+
+[data-theme="sunset-orange"] body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at top, rgba(255, 190, 11, 0.2) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+[data-theme="forest-green"] body {
+  background: 
+    linear-gradient(135deg, rgba(27, 67, 50, 0.88), rgba(46, 125, 50, 0.85)),
+    url('https://images.unsplash.com/photo-1511497584788-876760111969?w=1920&q=90') center/cover fixed;
+}
+
+[data-theme="cherry-blossom"] body {
+  background: 
+    linear-gradient(135deg, rgba(74, 21, 51, 0.85), rgba(136, 14, 79, 0.8)),
+    url('https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=1920&q=90') center/cover fixed;
+}
+
+[data-theme="cherry-blossom"] body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 30% 20%, rgba(255, 105, 180, 0.15) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+  animation: petalFloat 10s ease-in-out infinite;
+}
+
+@keyframes petalFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+[data-theme="arctic-ice"] body {
+  background: 
+    linear-gradient(135deg, rgba(27, 38, 59, 0.9), rgba(65, 88, 208, 0.85)),
+    url('https://images.unsplash.com/photo-1483347756197-71ef80e95f73?w=1920&q=90') center/cover fixed;
+}
+
+[data-theme="minimal-white"] body {
+  background: 
+    linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(240, 242, 245, 0.9)),
+    url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1920&q=90') center/cover fixed;
+}
+
+/* POWERFUL - ANIME/POKEMON AESTHETIC */
+
+[data-theme="purple-galaxy"] body {
+  background: 
+    linear-gradient(135deg, rgba(36, 0, 70, 0.9), rgba(74, 0, 224, 0.85)),
+    url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1920&q=90') center/cover fixed;
+}
+
+[data-theme="purple-galaxy"] body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(138, 43, 226, 0.3) 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(75, 0, 130, 0.25) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: 0;
+  animation: galaxyShimmer 6s ease-in-out infinite;
+}
+
+@keyframes galaxyShimmer {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* Stars effect for galaxy theme */
+[data-theme="purple-galaxy"] .stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+[data-theme="neon-cyberpunk"] body {
+  background: 
+    linear-gradient(135deg, rgba(10, 0, 20, 0.95), rgba(26, 0, 40, 0.9)),
+    url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1920&q=90') center/cover fixed;
+}
+
+[data-theme="neon-cyberpunk"] body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(90deg, transparent 0%, rgba(255, 0, 255, 0.05) 50%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+  animation: neonScan 3s linear infinite;
+}
+
+@keyframes neonScan {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Grid overlay for cyberpunk */
+[data-theme="neon-cyberpunk"] body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(255, 0, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 0, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+[data-theme="retro-synthwave"] body {
+  background: 
+    linear-gradient(180deg, rgba(10, 14, 39, 0.95) 0%, rgba(26, 31, 58, 0.9) 50%, rgba(74, 0, 224, 0.85) 100%),
+    url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=90') center/cover fixed;
+}
+
+/* Synthwave sun */
+[data-theme="retro-synthwave"] body::before {
+  content: '';
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(255, 0, 110, 0.4) 0%, rgba(131, 56, 236, 0.2) 50%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Synthwave grid */
+[data-theme="retro-synthwave"] body::after {
+  content: '';
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 400px;
+  background-image: 
+    linear-gradient(rgba(255, 0, 110, 0.15) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(131, 56, 236, 0.15) 2px, transparent 2px);
+  background-size: 60px 60px;
+  transform: perspective(500px) rotateX(60deg);
+  transform-origin: bottom;
+  pointer-events: none;
+  z-index: 0;
+}
+
+[data-theme="northern-lights"] body {
+  background: 
+    linear-gradient(135deg, rgba(0, 38, 38, 0.9), rgba(0, 77, 64, 0.85)),
+    url('https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=1920&q=90') center/cover fixed;
+}
+
+/* Aurora effect */
+[data-theme="northern-lights"] body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(ellipse at 30% 20%, rgba(0, 255, 136, 0.2) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 40%, rgba(0, 217, 255, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 60%, rgba(138, 43, 226, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+  animation: auroraWave 12s ease-in-out infinite;
+}
+
+@keyframes auroraWave {
+  0%, 100% { 
+    opacity: 0.5;
+    transform: translateY(0);
+  }
+  50% { 
+    opacity: 0.8;
+    transform: translateY(-30px);
+  }
+}
+
+[data-theme="tropical-paradise"] body {
+  background: 
+    linear-gradient(135deg, rgba(0, 105, 92, 0.85), rgba(0, 150, 136, 0.8)),
+    url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1920&q=90') center/cover fixed;
+}
+
+[data-theme="midnight-dark"] body {
+  background: 
+    linear-gradient(135deg, rgba(0, 0, 0, 0.95), rgba(18, 18, 18, 0.9)),
+    url('https://images.unsplash.com/photo-1514539079130-25950c84af65?w=1920&q=90') center/cover fixed;
+}
+
+[data-theme="autumn-gold"] body {
+  background: 
+    linear-gradient(135deg, rgba(61, 42, 26, 0.9), rgba(120, 81, 45, 0.85)),
+    url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1920&q=90') center/cover fixed;
+}
+
+[data-theme="desert-sand"] body {
+  background: 
+    linear-gradient(135deg, rgba(61, 36, 24, 0.88), rgba(120, 81, 45, 0.85)),
+    url('https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=1920&q=90') center/cover fixed;
+}
+
+[data-theme="monochrome"] body {
+  background: 
+    linear-gradient(135deg, rgba(0, 0, 0, 0.95), rgba(33, 33, 33, 0.9)),
+    url('https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=1920&q=90') center/cover fixed;
+}
+
+/* FLOATING PARTICLES - POKEMON STYLE */
+.ocean-particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.ocean-particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  opacity: 0;
+  animation: particleFloat 15s infinite ease-in-out;
+  box-shadow: 0 0 10px var(--accent);
+}
+
+@keyframes particleFloat {
+  0% {
+    transform: translateY(100vh) translateX(0) scale(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-100px) translateX(100px) scale(1);
+    opacity: 0;
+  }
+}
+
+/* Stagger particle animations */
+.ocean-particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+.ocean-particle:nth-child(2) { left: 20%; animation-delay: 2s; }
+.ocean-particle:nth-child(3) { left: 30%; animation-delay: 4s; }
+.ocean-particle:nth-child(4) { left: 40%; animation-delay: 6s; }
+.ocean-particle:nth-child(5) { left: 50%; animation-delay: 8s; }
+.ocean-particle:nth-child(6) { left: 60%; animation-delay: 10s; }
+.ocean-particle:nth-child(7) { left: 70%; animation-delay: 12s; }
+.ocean-particle:nth-child(8) { left: 80%; animation-delay: 14s; }
+.ocean-particle:nth-child(9) { left: 90%; animation-delay: 1s; }
+.ocean-particle:nth-child(10) { left: 15%; animation-delay: 3s; }
+
+/* GRADIENT ORBS - ANIME STYLE */
+.ocean-orbs {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.ocean-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.2;
+  animation: orbDrift 25s infinite ease-in-out;
+}
+
+.ocean-orb-1 {
+  width: 500px;
+  height: 500px;
+  background: var(--primary);
+  top: 10%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.ocean-orb-2 {
+  width: 400px;
+  height: 400px;
+  background: var(--secondary);
+  top: 60%;
+  right: 10%;
+  animation-delay: 8s;
+}
+
+.ocean-orb-3 {
+  width: 450px;
+  height: 450px;
+  background: var(--accent);
+  bottom: 10%;
+  left: 50%;
+  animation-delay: 16s;
+}
+
+@keyframes orbDrift {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(80px, -80px) scale(1.2);
+  }
+  50% {
+    transform: translate(-60px, 60px) scale(0.9);
+  }
+  75% {
+    transform: translate(60px, 80px) scale(1.1);
+  }
+}
+
+/* GLASSMORPHISM - Make cards float above background */
+.stat-card,
+.section-card,
+.chapter-card,
+.technique-card,
+.ocean-music-page > *,
+.dashboard-page > * {
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  background: rgba(var(--bg-card-rgb), 0.75) !important;
+  border: 1px solid rgba(255, 255, 255, 0.125);
+}
+
+/* NOISE TEXTURE OVERLAY */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" /></filter><rect width="300" height="300" filter="url(%23noise)" opacity="0.05" /></svg>');
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.4;
+  mix-blend-mode: overlay;
+}
+
+/* Ensure content is above all backgrounds */
+#app {
+  position: relative;
+  z-index: 2;
+}
+
+console.log('🌊 Ocean Backgrounds Loaded!');
+console.log('🎨 Stunning Lofi Art + Anime/Pokemon Aesthetic!');
