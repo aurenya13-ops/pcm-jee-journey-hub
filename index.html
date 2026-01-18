@@ -135,6 +135,9 @@
   <script src="pcm-tech-game.js"></script>
   <script src="pcm-tech-game-ui.js"></script>
   
+  <!-- Load Complete Render Functions -->
+  <script src="app-complete-render.js"></script>
+  
   <!-- Load Dopamine Engine BEFORE App -->
   <script src="dopamine-engine.js"></script>
   
@@ -149,8 +152,22 @@
   <!-- Load Main App Last -->
   <script src="app.js"></script>
   
-  <!-- Add game section to app -->
+  <!-- Override render functions and add game section -->
   <script>
+    // Override render functions to use complete versions
+    if (typeof renderPhysicsComplete !== 'undefined') {
+      renderPhysics = renderPhysicsComplete;
+    }
+    if (typeof renderChemistryComplete !== 'undefined') {
+      renderChemistry = renderChemistryComplete;
+    }
+    if (typeof renderMathsComplete !== 'undefined') {
+      renderMaths = renderMathsComplete;
+    }
+    if (typeof renderTechComplete !== 'undefined') {
+      renderTech = renderTechComplete;
+    }
+    
     // Extend showSection to include game
     const originalShowSection = showSection;
     showSection = function(section) {
@@ -177,6 +194,7 @@
     console.log('🎮 Game: PCM × Tech levels (11th → 12th → Grand Finale)');
     console.log('🎯 Features: Notes, Flashcards, Mock Tests, Pomodoro');
     console.log('🏆 Gamification: XP, Levels, Streaks, Achievements');
+    console.log('✅ ALL SECTIONS COMPLETE: Physics (52), Chemistry (47), Maths (62), Tech (100+)');
     console.log('🚀 Ready for your JEE journey!');
   </script>
 </body>
