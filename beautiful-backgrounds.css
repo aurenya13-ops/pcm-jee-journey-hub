@@ -1,0 +1,347 @@
+/* ==================== BEAUTIFUL BACKGROUNDS ==================== */
+/* Calm Aesthetic + Powerful Anime/Pokemon Style */
+
+/* CALM AESTHETIC BACKGROUNDS */
+
+/* Lofi Study Room */
+[data-theme="ocean-blue"] body {
+  background: 
+    linear-gradient(135deg, rgba(0, 31, 63, 0.95), rgba(0, 61, 92, 0.9)),
+    url('https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1920&q=80') center/cover fixed;
+}
+
+/* Sunset Calm */
+[data-theme="sunset-orange"] body {
+  background: 
+    linear-gradient(135deg, rgba(45, 27, 0, 0.9), rgba(74, 44, 0, 0.85)),
+    url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80') center/cover fixed;
+}
+
+/* Forest Serenity */
+[data-theme="forest-green"] body {
+  background: 
+    linear-gradient(135deg, rgba(8, 28, 21, 0.92), rgba(27, 67, 50, 0.88)),
+    url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1920&q=80') center/cover fixed;
+}
+
+/* Space Galaxy */
+[data-theme="purple-galaxy"] body {
+  background: 
+    linear-gradient(135deg, rgba(16, 0, 43, 0.9), rgba(36, 0, 70, 0.85)),
+    url('https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=1920&q=80') center/cover fixed;
+}
+
+/* Midnight City */
+[data-theme="midnight-dark"] body {
+  background: 
+    linear-gradient(135deg, rgba(0, 0, 0, 0.95), rgba(10, 10, 10, 0.9)),
+    url('https://images.unsplash.com/photo-1514539079130-25950c84af65?w=1920&q=80') center/cover fixed;
+}
+
+/* Cherry Blossom Garden */
+[data-theme="cherry-blossom"] body {
+  background: 
+    linear-gradient(135deg, rgba(45, 10, 31, 0.88), rgba(74, 21, 51, 0.85)),
+    url('https://images.unsplash.com/photo-1522383225653-ed111181a951?w=1920&q=80') center/cover fixed;
+}
+
+/* Arctic Aurora */
+[data-theme="arctic-ice"] body {
+  background: 
+    linear-gradient(135deg, rgba(13, 27, 42, 0.9), rgba(27, 38, 59, 0.85)),
+    url('https://images.unsplash.com/photo-1483347756197-71ef80e95f73?w=1920&q=80') center/cover fixed;
+}
+
+/* Autumn Forest */
+[data-theme="autumn-gold"] body {
+  background: 
+    linear-gradient(135deg, rgba(43, 29, 14, 0.9), rgba(61, 42, 26, 0.85)),
+    url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1920&q=80') center/cover fixed;
+}
+
+/* POWERFUL ANIME/POKEMON STYLE BACKGROUNDS */
+
+/* Neon Cyberpunk City */
+[data-theme="neon-cyberpunk"] body {
+  background: 
+    linear-gradient(135deg, rgba(10, 0, 20, 0.85), rgba(26, 0, 40, 0.8)),
+    url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1920&q=80') center/cover fixed;
+  position: relative;
+}
+
+[data-theme="neon-cyberpunk"] body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 0, 255, 0.03) 0px,
+      transparent 1px,
+      transparent 2px,
+      rgba(255, 0, 255, 0.03) 3px
+    );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Minimal Clean */
+[data-theme="minimal-white"] body {
+  background: 
+    linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(249, 250, 251, 0.95)),
+    url('https://images.unsplash.com/photo-1557683316-973673baf926?w=1920&q=80') center/cover fixed;
+}
+
+/* Retro Synthwave (Pokemon Vibes) */
+[data-theme="retro-synthwave"] body {
+  background: 
+    linear-gradient(135deg, rgba(10, 14, 39, 0.9), rgba(26, 31, 58, 0.85)),
+    url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=80') center/cover fixed;
+  position: relative;
+}
+
+[data-theme="retro-synthwave"] body::after {
+  content: '';
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 300px;
+  background: linear-gradient(
+    to top,
+    rgba(255, 0, 110, 0.2) 0%,
+    rgba(131, 56, 236, 0.15) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Desert Dunes */
+[data-theme="desert-sand"] body {
+  background: 
+    linear-gradient(135deg, rgba(44, 24, 16, 0.88), rgba(61, 36, 24, 0.85)),
+    url('https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=1920&q=80') center/cover fixed;
+}
+
+/* Northern Lights (Pokemon Aurora) */
+[data-theme="northern-lights"] body {
+  background: 
+    linear-gradient(135deg, rgba(0, 26, 26, 0.9), rgba(0, 38, 38, 0.85)),
+    url('https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=1920&q=80') center/cover fixed;
+  position: relative;
+}
+
+[data-theme="northern-lights"] body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 400px;
+  background: radial-gradient(
+    ellipse at top,
+    rgba(0, 255, 136, 0.15) 0%,
+    rgba(0, 217, 255, 0.1) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+  animation: aurora 8s ease-in-out infinite;
+}
+
+@keyframes aurora {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+/* Tropical Paradise (Pokemon Island) */
+[data-theme="tropical-paradise"] body {
+  background: 
+    linear-gradient(135deg, rgba(0, 77, 64, 0.88), rgba(0, 105, 92, 0.85)),
+    url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1920&q=80') center/cover fixed;
+}
+
+/* Monochrome Minimal */
+[data-theme="monochrome"] body {
+  background: 
+    linear-gradient(135deg, rgba(0, 0, 0, 0.95), rgba(33, 33, 33, 0.9)),
+    url('https://images.unsplash.com/photo-1557682250-33bd709cbe85?w=1920&q=80') center/cover fixed;
+}
+
+/* ANIMATED BACKGROUND ELEMENTS */
+
+/* Floating Particles (Pokemon-style) */
+.bg-particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--accent);
+  border-radius: 50%;
+  opacity: 0.3;
+  animation: float 20s infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(100vh) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.3;
+  }
+  90% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(-100px) translateX(100px);
+    opacity: 0;
+  }
+}
+
+/* Gradient Orbs (Anime-style) */
+.bg-orbs {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.15;
+  animation: drift 30s infinite ease-in-out;
+}
+
+.orb-1 {
+  width: 400px;
+  height: 400px;
+  background: var(--primary);
+  top: 10%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.orb-2 {
+  width: 300px;
+  height: 300px;
+  background: var(--secondary);
+  top: 60%;
+  right: 10%;
+  animation-delay: 5s;
+}
+
+.orb-3 {
+  width: 350px;
+  height: 350px;
+  background: var(--accent);
+  bottom: 10%;
+  left: 50%;
+  animation-delay: 10s;
+}
+
+@keyframes drift {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(50px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-50px, 50px) scale(0.9);
+  }
+}
+
+/* Scan Lines (Cyberpunk effect) */
+[data-theme="neon-cyberpunk"] .scanlines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15) 0px,
+    transparent 1px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.15) 3px
+  );
+  animation: scan 8s linear infinite;
+}
+
+@keyframes scan {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(10px); }
+}
+
+/* Grid Lines (Retro Synthwave) */
+[data-theme="retro-synthwave"] .grid-lines {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 300px;
+  pointer-events: none;
+  z-index: 1;
+  background-image: 
+    linear-gradient(rgba(255, 0, 110, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 0, 110, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+  transform: perspective(500px) rotateX(60deg);
+  transform-origin: bottom;
+}
+
+/* Ensure content is above backgrounds */
+#app {
+  position: relative;
+  z-index: 2;
+}
+
+/* Glassmorphism effect for cards */
+.stat-card,
+.section-card,
+.chapter-card,
+.music-player-page,
+.dashboard-page > * {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Add subtle texture overlay */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" /></filter><rect width="100" height="100" filter="url(%23noise)" opacity="0.05" /></svg>');
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.3;
+}
+
+console.log('✅ Beautiful Backgrounds Loaded!');
+console.log('🎨 Calm Aesthetic + Powerful Anime/Pokemon Style');
