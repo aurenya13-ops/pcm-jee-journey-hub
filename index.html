@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="ocean-blue">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PCM × Tech Ocean - Your Personal Learning Journey 🌊</title>
   
   <!-- Meta Tags -->
-  <meta name="description" content="Your personal learning platform! Complete JEE preparation with 150+ songs, PCM × Tech game levels, 161 chapters, 3000+ problems, and peaceful study environment.">
+  <meta name="description" content="Your personal learning platform! Complete JEE preparation with 150+ songs, 15 auto-rotating themes, 161 chapters, 3000+ problems, and peaceful study environment.">
   <meta name="keywords" content="JEE, Physics, Chemistry, Mathematics, Tech, Learning, Music, Games, Study">
   <meta name="author" content="Aurenya">
   
@@ -16,14 +16,15 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-  <!-- Styles -->
+  <!-- Styles - Load in correct order -->
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="audio-player-styles.css">
-  <link rel="stylesheet" href="dopamine-styles.css">
+  <link rel="stylesheet" href="themes.css">
+  <link rel="stylesheet" href="music-player-styles.css">
   <link rel="stylesheet" href="complete-sections-styles.css">
+  <link rel="stylesheet" href="dopamine-styles.css">
   
   <!-- MathJax for formulas -->
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6\"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
@@ -44,6 +45,9 @@
         <span class="stat-badge"><i class="fas fa-star"></i> <span id="xp">0</span> XP</span>
         <span class="stat-badge"><i class="fas fa-trophy"></i> Level <span id="level">1</span></span>
         <span class="stat-badge"><i class="fas fa-fire"></i> <span id="streak">0</span> days</span>
+        <button class="theme-toggle-btn" onclick="showThemeSelector()" title="Change Theme">
+          <i class="fas fa-palette"></i>
+        </button>
       </div>
     </nav>
 
@@ -99,6 +103,9 @@
         <button class="sidebar-btn" onclick="showSection('pomodoro')">
           <i class="fas fa-clock"></i> Pomodoro
         </button>
+        <button class="sidebar-btn" onclick="showSection('themes')">
+          <i class="fas fa-palette"></i> Themes (15)
+        </button>
       </div>
     </aside>
 
@@ -106,9 +113,6 @@
     <main class="main-content" id="main-content">
       <!-- Content loaded dynamically -->
     </main>
-
-    <!-- Music Player Container (for music section) -->
-    <div id="music-player-content" style="display: none;"></div>
 
     <!-- Pomodoro Timer -->
     <div class="floating-pomodoro" id="pomodoro">
@@ -123,37 +127,32 @@
     </div>
   </div>
 
-  <!-- Load Content Files First -->
+  <!-- Load Data Files First -->
   <script src="content/physics-complete.js"></script>
   <script src="content/chemistry-complete.js"></script>
   <script src="content/maths-complete.js"></script>
   <script src="content/tech-complete.js"></script>
-  
-  <!-- Load Music Data BEFORE Music Player -->
   <script src="music-data.js"></script>
-  
-  <!-- Load PCM × Tech Game Data -->
   <script src="pcm-tech-game.js"></script>
-  <script src="pcm-tech-game-ui.js"></script>
   
-  <!-- Load Complete Render Functions -->
-  <script src="app-complete-render.js"></script>
-  
-  <!-- Load Dopamine Engine BEFORE App -->
-  <script src="dopamine-engine.js"></script>
+  <!-- Load Theme Manager FIRST (before any UI) -->
+  <script src="theme-manager.js"></script>
   
   <!-- Load Systems -->
+  <script src="music-player-fixed.js"></script>
+  <script src="app-complete-render.js"></script>
+  <script src="pcm-tech-game-ui.js"></script>
+  <script src="dopamine-engine.js"></script>
   <script src="notes-system.js"></script>
   <script src="flashcards-system.js"></script>
   <script src="mock-tests.js"></script>
-  <script src="music-player.js"></script>
   <script src="pomodoro.js"></script>
   <script src="welcome.js"></script>
   
   <!-- Load Main App Last -->
   <script src="app.js"></script>
   
-  <!-- Override render functions and add game section -->
+  <!-- Integration Script -->
   <script>
     // Override render functions to use complete versions
     if (typeof renderPhysicsComplete !== 'undefined') {
@@ -169,19 +168,31 @@
       renderTech = renderTechComplete;
     }
     
-    // Extend showSection to include game
+    // Add theme selector function
+    function showThemeSelector() {
+      showSection('themes');
+    }
+    
+    // Extend showSection to include game, music, and themes
     const originalShowSection = showSection;
     showSection = function(section) {
+      const content = document.getElementById('main-content');
+      
+      // Update active button
+      document.querySelectorAll('.sidebar-btn').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = document.querySelector(`[onclick="showSection('${section}')"]`);
+      if (activeBtn) activeBtn.classList.add('active');
+      
       if (section === 'game') {
-        currentSection = 'game';
-        document.querySelectorAll('.sidebar-btn').forEach(btn => btn.classList.remove('active'));
-        event && event.target && event.target.classList.add('active');
-        
-        const content = document.getElementById('main-content');
-        const musicPlayerContent = document.getElementById('music-player-content');
-        if (musicPlayerContent) musicPlayerContent.style.display = 'none';
-        
         content.innerHTML = renderPCMTechGame();
+        content.style.display = 'block';
+        content.scrollTop = 0;
+      } else if (section === 'music') {
+        content.innerHTML = musicPlayer.render();
+        content.style.display = 'block';
+        content.scrollTop = 0;
+      } else if (section === 'themes') {
+        content.innerHTML = themeManager.renderThemeSelector();
         content.style.display = 'block';
         content.scrollTop = 0;
       } else {
@@ -189,14 +200,41 @@
       }
     };
     
+    // Console welcome message
     console.log('🌊 PCM × Tech Ocean - YOUR Personal Learning Journey!');
+    console.log('🎨 Themes: 15 beautiful themes (auto-rotate every 48 hours)');
     console.log('🎵 Music: 150+ songs (Chill, Motivational, Growing Up)');
     console.log('📚 Content: 161 chapters, 3000+ problems, 100+ projects');
     console.log('🎮 Game: PCM × Tech levels (11th → 12th → Grand Finale)');
     console.log('🎯 Features: Notes, Flashcards, Mock Tests, Pomodoro');
     console.log('🏆 Gamification: XP, Levels, Streaks, Achievements');
-    console.log('✅ ALL SECTIONS COMPLETE: Physics (52), Chemistry (47), Maths (62), Tech (100+)');
+    console.log('✅ EVERYTHING WORKING: Themes, Music, Structure, UI');
     console.log('🚀 Ready for your JEE journey!');
   </script>
+  
+  <!-- Add theme toggle button styles -->
+  <style>
+    .theme-toggle-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      color: var(--text-primary);
+      font-size: 18px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 15px;
+    }
+    
+    .theme-toggle-btn:hover {
+      border-color: var(--primary);
+      transform: scale(1.1);
+      box-shadow: var(--card-shadow);
+    }
+  </style>
 </body>
 </html>
