@@ -37,7 +37,11 @@ function loadUserData() {
     if (lastVisit === yesterday.toDateString()) {
       // Consecutive day - increase streak and give bonus
       userData.streak++;
-      addXP(50);
+      if (typeof addXPWithAnimation !== 'undefined') {
+        addXPWithAnimation(50, 'daily_streak');
+      } else {
+        addXP(50);
+      }
       showNotification(`🔥 ${userData.streak} day streak! +50 XP`, 'success');
     } else {
       // Missed days - reset streak
@@ -68,7 +72,7 @@ function updateStatsDisplay() {
   document.getElementById('streak').textContent = userData.streak;
 }
 
-// Add XP
+// Add XP (fallback if dopamine engine not loaded)
 function addXP(amount) {
   userData.xp += amount;
   
@@ -115,47 +119,73 @@ function showSection(section) {
   
   // Render section
   const content = document.getElementById('main-content');
+  const musicPlayerContent = document.getElementById('music-player-content');
+  
+  // Hide music player content by default
+  if (musicPlayerContent) {
+    musicPlayerContent.style.display = 'none';
+  }
   
   switch(section) {
     case 'dashboard':
       content.innerHTML = renderDashboard();
+      content.style.display = 'block';
       break;
     case 'physics':
       content.innerHTML = renderPhysics();
+      content.style.display = 'block';
       break;
     case 'chemistry':
       content.innerHTML = renderChemistry();
+      content.style.display = 'block';
       break;
     case 'maths':
       content.innerHTML = renderMaths();
+      content.style.display = 'block';
       break;
     case 'tech':
       content.innerHTML = renderTech();
+      content.style.display = 'block';
       break;
     case 'problems':
       content.innerHTML = renderProblems();
+      content.style.display = 'block';
       break;
     case 'mock-tests':
       content.innerHTML = renderMockTests();
+      content.style.display = 'block';
       break;
     case 'flashcards':
       content.innerHTML = renderFlashcards();
+      content.style.display = 'block';
       break;
     case 'music':
-      content.innerHTML = '<div class="coming-soon"><i class="fas fa-music"></i><h2>Music Player</h2><p>Use the floating player on the right!</p></div>';
+      // Show music player in main content
+      content.style.display = 'none';
+      if (musicPlayerContent) {
+        musicPlayerContent.style.display = 'block';
+        if (typeof renderMusicPlayer === 'function') {
+          renderMusicPlayer();
+        }
+      }
       break;
     case 'notes':
       content.innerHTML = renderNotes();
+      content.style.display = 'block';
       break;
     case 'pomodoro':
       content.innerHTML = renderPomodoroPage();
+      content.style.display = 'block';
       break;
     default:
       content.innerHTML = renderDashboard();
+      content.style.display = 'block';
   }
   
   // Scroll to top
-  content.scrollTop = 0;
+  if (content.style.display !== 'none') {
+    content.scrollTop = 0;
+  }
 }
 
 // ==================== DASHBOARD ====================
@@ -654,9 +684,21 @@ function toggleAnswer(index) {
 function markChapterComplete(chapterId, chapterName) {
   if (!userData.completedChapters.includes(chapterId)) {
     userData.completedChapters.push(chapterId);
-    addXP(100);
+    
+    // Use dopamine engine if available
+    if (typeof addXPWithAnimation !== 'undefined') {
+      addXPWithAnimation(100, 'chapter_complete');
+    } else {
+      addXP(100);
+    }
+    
     showNotification(`✅ Chapter "${chapterName}" completed! +100 XP`, 'success');
     saveUserData();
+    
+    // Check achievements
+    if (typeof checkAchievements === 'function') {
+      checkAchievements();
+    }
   } else {
     showNotification('⚠️ Chapter already completed!', 'warning');
   }
